@@ -146,6 +146,10 @@
       font-weight: bold;
     }
   </style>
+  <meta name="theme-color" content="#087f58">
+  <meta name="description" content="منصة رعاية منزلية للمسنين والمرضى ومقدمي الرعاية والممرضين.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="./manifest.webmanifest">
 </head>
 
 <body>
@@ -649,33 +653,50 @@ function showSection(id) {
   }
 }
 
-function submitForm(event, type) {
-
-  event.preventDefault();
-
-  const form = event.target;
-
-  let result = form.parentElement.querySelector("#cvResult");
-
+function getResultElement(form) {
+  let result = form.querySelector(".form-result");
   if (!result) {
     result = document.createElement("p");
-    result.id = "result";
-    form.after(result);
+    result.className = "form-result";
+    result.setAttribute("role", "status");
+    result.setAttribute("aria-live", "polite");
+    form.appendChild(result);
   }
+  return result;
+}
 
+function validateFiles(form) {
+  const maxSize = 10 * 1024 * 1024;
+  const allowed = ["application/pdf","image/jpeg","image/png","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+  for (const input of form.querySelectorAll('input[type="file"]')) {
+    for (const file of input.files) {
+      if (file.size > maxSize) return `الملف "${file.name}" أكبر من 10 MB.`;
+      if (file.type && !allowed.includes(file.type)) return `نوع الملف "${file.name}" غير مدعوم.`;
+    }
+  }
+  return null;
+}
+
+function submitForm(event, type) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const result = getResultElement(form);
+  const button = form.querySelector('button[type="submit"]');
+  const error = validateFiles(form);
+  if (error) { result.style.color = "#a33"; result.textContent = error; return; }
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+  if (button) button.disabled = true;
   result.style.color = "#087f58";
+  result.textContent = `تم تجهيز طلب ${type}. سيتم حفظه فعليًا بعد ربط Supabase.`;
+  setTimeout(() => {
+    form.reset();
+    result.textContent = `تم استلام طلب ${type} مبدئيًا. النسخة الحالية لا تحفظ البيانات عن بُعد بعد. بعد ربط Supabase سيتم إنشاء رقم الطلب وحفظ البيانات والمرفقات بأمان.`;
+    if (button) button.disabled = false;
+  }, 350);
+}
 
-  result.innerHTML =
-    "تم استلام طلبك مبدئيًا.<br>" +
-    "رقم الطلب سيتم إنشاؤه عند تشغيل الخادم.<br>" +
-    "سيتم التواصل معك بعد مراجعة المسؤول.";
-
-  form.reset();
-
-  window.scrollTo({
-    top: result.offsetTop - 100,
-    behavior: "smooth"
-  });
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(console.warn));
 }
 
 </script>
