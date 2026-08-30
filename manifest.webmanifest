@@ -1,0 +1,11 @@
+{
+  "name": "رعاية منزلية متألقة",
+  "short_name": "رعاية منزلية",
+  "description": "منصة رعاية منزلية للمسنين والمرضى ومقدمي الرعاية والممرضين.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f8f6",
+  "theme_color": "#087f58"
+}
