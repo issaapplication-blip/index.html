@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="رعاية منزلية متألقة">
+<rect width="192" height="192" rx="42" fill="#f4f8f6"/>
+<path d="M96 148c-5-20-42-34-42-66 0-20 15-34 34-34 11 0 20 5 28 15 8-10 17-15 28-15 19 0 34 14 34 34 0 32-37 46-42 66-7 7-33 7-40 0z" fill="#087f58" opacity=".95"/>
+<path d="M96 128c-7-15-27-25-27-43 0-10 7-17 17-17 6 0 11 3 15 9 4-6 9-9 15-9 10 0 17 7 17 17 0 18-20 28-27 43-2 2-8 2-10 0z" fill="#fff"/>
+<path d="M96 80v32M80 96h32" stroke="#087f58" stroke-width="7" stroke-linecap="round"/>
+</svg>
