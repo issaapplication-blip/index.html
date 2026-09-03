@@ -1,0 +1,58 @@
+name: Security Checks
+
+on:
+  push:
+    branches: [main, security-hardening-v1]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '23 3 * * 1'
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  codeql:
+    name: CodeQL JavaScript analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+
+  dependency-review:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Dependency review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+  secret-pattern-audit:
+    name: Basic repository secret-pattern audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan tracked text for high-risk secret patterns
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git grep -nEI '(service[_-]?role|private[_-]?key|sk-proj-|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|xox[baprs]-|AKIA[0-9A-Z]{16})' -- ':!SECURITY.md'; then
+            echo 'Potential secret pattern detected. Review the matching line before release.'
+            exit 1
+          fi
+          echo 'No high-risk secret pattern found by this basic audit.'
