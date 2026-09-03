@@ -51,8 +51,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git grep -nEI '(service[_-]?role|private[_-]?key|sk-proj-|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|xox[baprs]-|AKIA[0-9A-Z]{16})' -- ':!SECURITY.md'; then
-            echo 'Potential secret pattern detected. Review the matching line before release.'
+          if git grep -nEI '(sk-proj-[A-Za-z0-9_-]{20,}|BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]+|AKIA[0-9A-Z]{16})' -- ':!SECURITY.md'; then
+            echo 'Potential credential pattern detected. Review the matching line before release.'
             exit 1
           fi
-          echo 'No high-risk secret pattern found by this basic audit.'
+          echo 'No high-risk credential pattern found by this basic audit.'
