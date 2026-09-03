@@ -49,1531 +49,217 @@ footer{text-align:center;padding:30px;color:#666}
 <section class="card" id="authCard">
 <h2>🔐 تسجيل الدخول</h2>
 <p>أنشئ حسابًا أو سجّل الدخول لإرسال الطلبات وحفظ المستندات بأمان.</p>
-
 <form id="authForm">
-
-<label>
-البريد الإلكتروني
-<input id="authEmail" type="email" required autocomplete="email">
-</label>
-
-<label>
-كلمة المرور
-<input id="authPassword" type="password" minlength="6" required autocomplete="current-password">
-</label>
-
-<label>
-نوع الحساب عند التسجيل
-<select id="authRole">
-<option value="family">عائلة</option>
-<option value="caregiver">مقدم/ة رعاية</option>
-<option value="nurse">ممرض/ة</option>
-</select>
-</label>
-
-<div class="buttons" style="margin-top:15px">
-<button type="submit">تسجيل الدخول</button>
-<button type="button" id="signupBtn">إنشاء حساب</button>
-</div>
-
+<label>البريد الإلكتروني<input id="authEmail" type="email" required autocomplete="email"></label>
+<label>كلمة المرور<input id="authPassword" type="password" minlength="6" required autocomplete="current-password"></label>
+<label>نوع الحساب عند التسجيل<select id="authRole"><option value="family">عائلة</option><option value="caregiver">مقدم/ة رعاية</option><option value="nurse">ممرض/ة</option></select></label>
+<div class="buttons" style="margin-top:15px"><button type="submit">تسجيل الدخول</button><button type="button" id="signupBtn">إنشاء حساب</button></div>
 </form>
-
 <div id="authResult"></div>
 </section>
-
 
 <section class="card hidden" id="accountCard">
 <h2>👤 حسابي</h2>
 <div id="accountStatus" class="status"></div>
-<button type="button" id="signoutBtn" style="margin-top:12px">
-تسجيل الخروج
-</button>
+<button type="button" id="signoutBtn" style="margin-top:12px">تسجيل الخروج</button>
 </section>
-
 
 <section class="card">
 <h2>مرحبًا بكم</h2>
-
-<p>
-منصة متخصصة في خدمات الرعاية المنزلية للمسنين والمرضى،
-واستقبال طلبات مقدمي ومقدمات الرعاية والممرضين والممرضات،
-بالإضافة إلى إعداد السير الذاتية الاحترافية بنظام ATS.
-</p>
-
-<div class="notice">
-يتم التعامل مع الطلبات باهتمام واحترام وسرية،
-وتتم مراجعة الطلبات من قبل المسؤول قبل اعتمادها.
-</div>
+<p>منصة متخصصة في خدمات الرعاية المنزلية للمسنين والمرضى، واستقبال طلبات مقدمي ومقدمات الرعاية والممرضين والممرضات، بالإضافة إلى إعداد السير الذاتية الاحترافية بنظام ATS.</p>
+<div class="notice">يتم التعامل مع الطلبات باهتمام واحترام وسرية، وتتم مراجعة الطلبات من قبل المسؤول قبل اعتمادها.</div>
 </section>
-
 
 <section class="card">
 <h2>ماذا تريد؟</h2>
-
 <div class="buttons">
 <button onclick="showSection('cv')">📄 إعداد CV احترافي</button>
 <button onclick="showSection('caregiver')">👤 التقديم كمقدم/ة رعاية</button>
 <button onclick="showSection('nurse')">👩‍⚕️ التقديم كممرض/ة</button>
 <button onclick="showSection('patient')">🏠 طلب رعاية لمسن أو مريض</button>
+<button onclick="showSection('medicalServices')">🩻 الخدمات الطبية المنزلية</button>
 </div>
 </section>
 
+<section class="card">
+<h2>🩻 الأشعة لعندك… خدمة تصوير شعاعي منزلية باحتراف طبي</h2>
+<p>يسرّنا الإعلان عن توفير <strong>خدمة التصوير الشعاعي الرقمي النقال (Portable X-Ray)</strong> في المنزل أو العيادة، بواسطة <strong>مختص في التصوير الشعاعي يحمل شهادة معترفًا بها ورخصة مزاولة سارية</strong>.</p>
+<div class="notice">
+<strong>🔹 الخدمة تشمل:</strong>
+<ul>
+<li>تصوير شعاعي في المنازل والعيادات.</li>
+<li>نتائج وصور رقمية عالية الجودة وسريعة المعالجة.</li>
+<li>مناسب للحالات التي يصعب نقلها.</li>
+<li>جهاز حديث مع نظام رقمي مباشر <strong>DR</strong>.</li>
+<li>تنفيذ الخدمة بواسطة مختص مؤهل ومرخّص.</li>
+<li>الالتزام بإجراءات السلامة والحماية من الإشعاع.</li>
+<li>تغطية كافة المناطق ضمن نطاق الخدمة.</li>
+</ul>
+</div>
+<p><strong>📞 للحجز والاستعلام:</strong><br>الرقم موجود داخل الصفحة.</p>
+<p>✅ <strong>راحتك وسلامتك أولويتنا… اتصل الآن واحصل على خدمة احترافية.</strong></p>
+<p class="small">خدمة المنصة تقتصر على تنسيق التصوير. قراءة الصور وإصدار التقرير والتشخيص تتم من قبل الطبيب أو أخصائي الأشعة المختص وفق الأنظمة والإجراءات المعتمدة.</p>
+</section>
+
+<section id="medicalServices" class="card hidden">
+<h2>🏥 الخدمات الطبية المنزلية</h2>
+<p>تنسيق الخدمات الطبية المنزلية المتاحة مع مختصين ومقدمي خدمات مؤهلين، وفق الحاجة والموعد والمنطقة.</p>
+<div class="price"><strong>🩻 Portable X-Ray</strong><br>تصوير شعاعي رقمي نقال في المنزل أو العيادة بواسطة مختص مؤهل ومرخّص.</div>
+<div class="price"><strong>🧪 تحاليل منزلية</strong><br>تنسيق سحب العينات والفحوصات المنزلية مع الجهة المختصة.</div>
+<div class="price"><strong>❤️ ECG</strong><br>تنسيق تخطيط القلب عند حجز الخدمة وبحسب المتاح والحاجة الطبية.</div>
+<div class="price"><strong>🧠 EMG / Nerve Conduction</strong><br>تنسيق مواعيد تخطيط العضلات وتوصيل الأعصاب مع المختص.</div>
+<div class="price"><strong>🧑‍⚕️ العلاج الفيزيائي</strong><br>تنسيق جلسات العلاج الفيزيائي المنزلي مع المختص المناسب.</div>
+<div class="price"><strong>🛏️ المعدات الطبية</strong><br>تنسيق احتياجات المعدات الطبية مع العائلة والعاملين والمسؤول المختص.</div>
+</section>
 
 <section class="card">
 <h2>📄 خدمة إعداد CV</h2>
-
-<div class="price">
-<strong>CV فقط — 20$</strong><br>
-CV احترافي بنظام ATS.
-</div>
-
-<div class="price">
-<strong>CV + Cover Letter — 40$</strong><br>
-CV احترافي + رسالة Cover Letter.
-</div>
-
-<div class="price">
-<strong>عرض المتقدمين للعمل عبر المنصة — 30$</strong><br>
-CV + Cover Letter بمعايير احترافية.
-</div>
-
-<p>
-يمكن إعداد الملف باللغة العربية والإنكليزية،
-وبصيغة PDF وWord.
-</p>
-
-<p>
-يبدأ العمل بعد تأكيد الدفع، ويتم إرسال الملف خلال مدة لا تتجاوز 24 ساعة،
-مع مراجعة المسؤول قبل التسليم النهائي.
-</p>
-
-<div class="important">
-<strong>الدفع عبر Whish Money</strong><br>
-رقم المنصة: <strong>0096170600157</strong>
-</div>
+<div class="notice"><strong>🎁 عرض خاص لمتابعي الصفحة والمشتركين في المنصة</strong><br>والأشخاص الراغبين بالتقدم للعمل من خلال منصتنا.</div>
+<div class="price"><strong>CV احترافي — 25$</strong><br>نموذج مصمم وفق ممارسات مناسبة لأكثر الأنظمة التي تعمل بنظام ATS وقابل للقراءة الآلية، مع تخصيص المحتوى حسب الوظيفة.</div>
+<div class="price"><strong>Cover Letter — 10$</strong><br>رسالة تقديم احترافية مخصصة حسب الوظيفة.</div>
+<div class="price"><strong>CV + Cover Letter — 35$</strong><br>ضمن العرض.</div>
+<div class="price"><strong>CV بلغة إضافية — +20$</strong><br>ضمن العرض لكل لغة إضافية غير العربية والإنجليزية، مثل الفرنسية أو الإيطالية.</div>
+<p><strong>اللغات الأساسية:</strong> العربية + الإنجليزية.</p>
+<p><strong>الصيغ:</strong> PDF + Word.</p>
+<hr>
+<p><strong>خارج العرض:</strong></p>
+<div class="price"><strong>CV احترافي — 35$</strong></div>
+<div class="price"><strong>Cover Letter — 16$</strong></div>
+<div class="price"><strong>CV + Cover Letter — 51$</strong><br>العربية + الإنجليزية، PDF + Word.</div>
+<div class="price"><strong>كل CV بلغة إضافية — +28$</strong><br>فرنسي أو إيطالي أو أي لغة إضافية، PDF + Word.</div>
+<p class="small">يبدأ العمل بعد تأكيد الدفع، مع مراجعة المسؤول قبل التسليم النهائي.</p>
+<div class="important"><strong>الدفع عبر Whish Money</strong><br>رقم المنصة: <strong>0096170600157</strong></div>
 </section>
-
 
 <section id="cv" class="card hidden">
 <h2>طلب إعداد CV</h2>
-
 <form id="cvForm">
-
-<label>الاسم
-<input name="firstName" required>
-</label>
-
-<label>اسم العائلة
-<input name="lastName" required>
-</label>
-
-<label>اسم الأب
-<input name="fatherName">
-</label>
-
-<label>تاريخ الميلاد
-<input type="date" name="birthDate">
-</label>
-
-<label>عنوان السكن
-<input name="address">
-</label>
-
-<label>رقم الهاتف الخلوي
-<input name="mobile" required>
-</label>
-
-<label>رقم الهاتف الأرضي
-<input name="landline">
-</label>
-
-<label>البريد الإلكتروني
-<input type="email" name="email">
-</label>
-
-<label>أرفق CV الحالي
-<input type="file" name="cv" accept=".pdf,.doc,.docx">
-</label>
-
-<label>نوع الخدمة
-<select name="service">
-<option>CV فقط — 20$</option>
-<option>CV + Cover Letter — 40$</option>
-<option>عرض المتقدم للعمل عبر المنصة — 30$</option>
-</select>
-</label>
-
-<label>إيصال الدفع
-<input type="file" name="payment" accept=".pdf,.jpg,.jpeg,.png">
-</label>
-
+<label>الاسم<input name="firstName" required></label>
+<label>اسم العائلة<input name="lastName" required></label>
+<label>اسم الأب<input name="fatherName"></label>
+<label>تاريخ الميلاد<input type="date" name="birthDate"></label>
+<label>عنوان السكن<input name="address"></label>
+<label>رقم الهاتف الخلوي<input name="mobile" required></label>
+<label>رقم الهاتف الأرضي<input name="landline"></label>
+<label>البريد الإلكتروني<input type="email" name="email"></label>
+<label>أرفق CV الحالي<input type="file" name="cv" accept=".pdf,.doc,.docx"></label>
+<label>نوع الخدمة<select name="service"><option>CV احترافي — 25$ ضمن العرض</option><option>Cover Letter — 10$ ضمن العرض</option><option>CV + Cover Letter — 35$ ضمن العرض</option><option>CV بلغة إضافية — +20$ ضمن العرض</option><option>CV احترافي — 35$ خارج العرض</option><option>Cover Letter — 16$ خارج العرض</option><option>CV + Cover Letter — 51$ خارج العرض</option><option>CV بلغة إضافية — +28$ خارج العرض</option></select></label>
+<label>إيصال الدفع<input type="file" name="payment" accept=".pdf,.jpg,.jpeg,.png"></label>
 <button type="submit">إرسال طلب CV</button>
-
 </form>
-
 <div id="cvResult"></div>
 </section>
 
-
 <section id="caregiver" class="card hidden">
 <h2>👤 التقديم كمقدم/ة رعاية</h2>
-
 <form id="caregiverForm">
-
-<label>الاسم
-<input name="firstName" required>
-</label>
-
-<label>اسم العائلة
-<input name="lastName" required>
-</label>
-
-<label>اسم الأب
-<input name="fatherName">
-</label>
-
-<label>تاريخ الميلاد
-<input type="date" name="birthDate">
-</label>
-
-<label>عنوان السكن
-<input name="address">
-</label>
-
-<label>رقم الهاتف الخلوي
-<input name="mobile" required>
-</label>
-
-<label>رقم الهاتف الأرضي
-<input name="landline">
-</label>
-
-<label>CV
-<input type="file" name="cv" accept=".pdf,.doc,.docx">
-</label>
-
-<label>صورة الهوية — الوجه
-<input type="file" name="idFront" accept="image/jpeg,image/png" required>
-</label>
-
-<label>صورة الهوية — الخلفية
-<input type="file" name="idBack" accept="image/jpeg,image/png" required>
-</label>
-
-<label>الصورة الشخصية
-<input type="file" name="portrait" accept="image/jpeg,image/png" required>
-</label>
-
-<label>شهادات أخرى إن وجدت
-<input type="file" name="certificates" accept=".pdf,.jpg,.jpeg,.png" multiple>
-</label>
-
-<label>اللغات
-<input name="languages">
-</label>
-
-<label>الخبرة
-<textarea name="experience"></textarea>
-</label>
-
-<label>الخدمات التي تستطيع تقديمها
-<textarea name="services"></textarea>
-</label>
-
-<label>هل تملك سيارة
-<select name="car">
-<option value="false">لا</option>
-<option value="true">نعم</option>
-</select>
-</label>
-
-<label>نوع السيارة
-<input name="carType">
-</label>
-
-<label>سنة صنع السيارة
-<input type="number" name="carYear">
-</label>
-
+<label>الاسم<input name="firstName" required></label>
+<label>اسم العائلة<input name="lastName" required></label>
+<label>اسم الأب<input name="fatherName"></label>
+<label>تاريخ الميلاد<input type="date" name="birthDate"></label>
+<label>عنوان السكن<input name="address"></label>
+<label>رقم الهاتف الخلوي<input name="mobile" required></label>
+<label>رقم الهاتف الأرضي<input name="landline"></label>
+<label>CV<input type="file" name="cv" accept=".pdf,.doc,.docx"></label>
+<label>صورة الهوية — الوجه<input type="file" name="idFront" accept="image/jpeg,image/png" required></label>
+<label>صورة الهوية — الخلفية<input type="file" name="idBack" accept="image/jpeg,image/png" required></label>
+<label>الصورة الشخصية<input type="file" name="portrait" accept="image/jpeg,image/png" required></label>
+<label>شهادات أخرى إن وجدت<input type="file" name="certificates" accept=".pdf,.jpg,.jpeg,.png" multiple></label>
+<label>اللغات<input name="languages"></label>
+<label>الخبرة<textarea name="experience"></textarea></label>
+<label>الخدمات التي تستطيع تقديمها<textarea name="services"></textarea></label>
+<label>هل تملك سيارة<select name="car"><option value="false">لا</option><option value="true">نعم</option></select></label>
+<label>نوع السيارة<input name="carType"></label>
+<label>سنة صنع السيارة<input type="number" name="carYear"></label>
 <button type="submit">إرسال طلب العمل</button>
-
 </form>
-
 <div id="caregiverResult"></div>
 </section>
 
-
 <section id="nurse" class="card hidden">
 <h2>👩‍⚕️ التقديم كممرض/ة</h2>
-
 <form id="nurseForm">
-
-<label>الاسم
-<input name="firstName" required>
-</label>
-
-<label>اسم العائلة
-<input name="lastName" required>
-</label>
-
-<label>اسم الأب
-<input name="fatherName">
-</label>
-
-<label>تاريخ الميلاد
-<input type="date" name="birthDate">
-</label>
-
-<label>عنوان السكن
-<input name="address">
-</label>
-
-<label>رقم الهاتف الخلوي
-<input name="mobile" required>
-</label>
-
-<label>التخصص
-<input name="specialty">
-</label>
-
-<label>CV
-<input type="file" name="cv" accept=".pdf,.doc,.docx">
-</label>
-
-<label>صورة الهوية — الوجه
-<input type="file" name="idFront" accept="image/jpeg,image/png" required>
-</label>
-
-<label>صورة الهوية — الخلفية
-<input type="file" name="idBack" accept="image/jpeg,image/png" required>
-</label>
-
-<label>الصورة الشخصية
-<input type="file" name="portrait" accept="image/jpeg,image/png" required>
-</label>
-
-<label>بطاقة مزاولة المهنة — إلزامي
-<input type="file" name="professionalLicense" accept=".pdf,.jpg,.jpeg,.png" required>
-</label>
-
-<label>الشهادة التمريضية
-<input type="file" name="nursingCertificate" accept=".pdf,.jpg,.jpeg,.png" required>
-</label>
-
-<label>شهادات أخرى
-<input type="file" name="otherCertificates" accept=".pdf,.jpg,.jpeg,.png" multiple>
-</label>
-
-<label>التخصص والخبرات
-<textarea name="experience"></textarea>
-</label>
-
-<label>الخدمات التمريضية
-<textarea name="services"></textarea>
-</label>
-
-<label>اللغات
-<input name="languages">
-</label>
-
+<label>الاسم<input name="firstName" required></label>
+<label>اسم العائلة<input name="lastName" required></label>
+<label>اسم الأب<input name="fatherName"></label>
+<label>تاريخ الميلاد<input type="date" name="birthDate"></label>
+<label>عنوان السكن<input name="address"></label>
+<label>رقم الهاتف الخلوي<input name="mobile" required></label>
+<label>التخصص<input name="specialty"></label>
+<label>CV<input type="file" name="cv" accept=".pdf,.doc,.docx"></label>
+<label>صورة الهوية — الوجه<input type="file" name="idFront" accept="image/jpeg,image/png" required></label>
+<label>صورة الهوية — الخلفية<input type="file" name="idBack" accept="image/jpeg,image/png" required></label>
+<label>الصورة الشخصية<input type="file" name="portrait" accept="image/jpeg,image/png" required></label>
+<label>بطاقة مزاولة المهنة — إلزامي<input type="file" name="professionalLicense" accept=".pdf,.jpg,.jpeg,.png" required></label>
+<label>الشهادة التمريضية<input type="file" name="nursingCertificate" accept=".pdf,.jpg,.jpeg,.png" required></label>
+<label>شهادات أخرى<input type="file" name="otherCertificates" accept=".pdf,.jpg,.jpeg,.png" multiple></label>
+<label>التخصص والخبرات<textarea name="experience"></textarea></label>
+<label>الخدمات التمريضية<textarea name="services"></textarea></label>
+<label>اللغات<input name="languages"></label>
 <button type="submit">إرسال طلب التقديم</button>
-
 </form>
-
 <div id="nurseResult"></div>
 </section>
 
-
 <section id="patient" class="card hidden">
 <h2>🏠 طلب رعاية لمسن أو مريض</h2>
-
 <form id="patientForm">
-
-<label>اسم الحالة
-<input name="patientName" required>
-</label>
-
-<label>عمر الحالة
-<input type="number" name="age" min="0">
-</label>
-
-<label>نوع الحالة
-<select name="caseType">
-<option>مسن</option>
-<option>مريض</option>
-</select>
-</label>
-
-<label>عنوان مكان الرعاية
-<input name="location">
-</label>
-
-<label>رقم هاتف العائلة
-<input name="familyPhone" required>
-</label>
-
-<label>اسم الطبيب المختص والمتابع
-<input name="doctorName">
-</label>
-
-<label>رقم هاتف الطبيب
-<input name="doctorPhone">
-</label>
-
-<label>تفاصيل الحالة والاحتياجات
-<textarea name="details"></textarea>
-</label>
-
+<label>اسم الحالة<input name="patientName" required></label>
+<label>عمر الحالة<input type="number" name="age" min="0"></label>
+<label>نوع الحالة<select name="caseType"><option>مسن</option><option>مريض</option></select></label>
+<label>عنوان مكان الرعاية<input name="location"></label>
+<label>رقم هاتف العائلة<input name="familyPhone" required></label>
+<label>اسم الطبيب المختص والمتابع<input name="doctorName"></label>
+<label>رقم هاتف الطبيب<input name="doctorPhone"></label>
+<label>تفاصيل الحالة والاحتياجات<textarea name="details"></textarea></label>
 <button type="submit">إرسال طلب الرعاية</button>
-
 </form>
-
 <div id="patientResult"></div>
 </section>
 
-
 <section class="card">
 <h2>📞 التواصل</h2>
-
 <div class="buttons">
-
-<a class="button"
-href="https://wa.me/message/OWOHGPAYJJBQB1"
-target="_blank"
-rel="noopener">
-WhatsApp
-</a>
-
-<a class="button"
-href="https://www.instagram.com/issaapplication?igsi=M2ttcjc3N2Mzbmpu"
-target="_blank"
-rel="noopener">
-Instagram
-</a>
-
-<a class="button"
-href="https://www.facebook.com/share/1DZ4CG7hbn/"
-target="_blank"
-rel="noopener">
-Facebook
-</a>
-
+<a class="button" href="https://wa.me/message/OWOHGPAYJJBQB1" target="_blank" rel="noopener">WhatsApp</a>
+<a class="button" href="https://www.instagram.com/issaapplication?igsi=M2ttcjc3N2Mzbmpu" target="_blank" rel="noopener">Instagram</a>
+<a class="button" href="https://www.facebook.com/share/1DZ4CG7hbn/" target="_blank" rel="noopener">Facebook</a>
 </div>
 </section>
 
-
 <section class="card">
 <h3>🔒 الخصوصية</h3>
-
-<p>
-تستخدم المنصة Supabase Authentication وقاعدة بيانات مع RLS
-وتخزينًا خاصًا للمستندات.
-لا يتم وضع Service Role Key أو أي Secret Key في الواجهة.
-</p>
-
-<p class="small">
-المستندات الخاصة ترفع إلى private_documents ضمن مسار مرتبط بحساب المستخدم،
-والوصول إليها محكوم بسياسات Storage.
-</p>
+<p>تستخدم المنصة Supabase Authentication وقاعدة بيانات مع RLS وتخزينًا خاصًا للمستندات. لا يتم وضع Service Role Key أو أي Secret Key في الواجهة.</p>
+<p class="small">المستندات الخاصة ترفع إلى private_documents ضمن مسار مرتبط بحساب المستخدم، والوصول إليها محكوم بسياسات Storage.</p>
 </section>
 
 </main>
-
-<footer>
-رعاية منزلية متألقة © 2026
-</footer>
-
+<footer>رعاية منزلية متألقة © 2026</footer>
 
 <script type="module">
-
-import {
-createClient
-} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-
-const SUPABASE_URL =
-'https://qmuxaehrahfsnabyjens.supabase.co';
-
-const SUPABASE_PUBLISHABLE_KEY =
-'sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD';
-
-
-const supabase =
-createClient(
-SUPABASE_URL,
-SUPABASE_PUBLISHABLE_KEY
-);
-
-
-const $ = id => document.getElementById(id);
-
-let currentUser = null;
-let currentProfile = null;
-
-
-const esc = value =>
-String(value ?? '')
-.replace(/[&<>"']/g, char => ({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#39;'
-}[char]));
-
-
-const msg = (id,text,type='success') => {
-
-const element = $(id);
-
-if(!element) return;
-
-element.className = type;
-
-element.textContent = text;
-
-};
-
-
-const needUser = () => {
-
-if(!currentUser){
-
-msg(
-'authResult',
-'يرجى تسجيل الدخول أولًا.',
-'error'
-);
-
-$('authCard')
-?.scrollIntoView({
-behavior:'smooth'
-});
-
-return false;
-}
-
-return true;
-};
-
-
-window.showSection = id => {
-
-document
-.querySelectorAll('.card[id]')
-.forEach(section =>
-section.classList.add('hidden')
-);
-
-const target = $(id);
-
-if(target){
-
-target.classList.remove('hidden');
-
-target.scrollIntoView({
-behavior:'smooth',
-block:'start'
-});
-
-}
-
-};
-
-
-async function loadProfile(user){
-
-if(!user){
-
-$('authCard')?.classList.remove('hidden');
-
-$('accountCard')?.classList.add('hidden');
-
-currentProfile = null;
-
-return;
-}
-
-
-const {
-data,
-error
-} = await supabase
-.from('profiles')
-.select(
-'id,first_name,last_name,email,phone,address,role,status'
-)
-.eq('id',user.id)
-.maybeSingle();
-
-
-if(error){
-
-throw error;
-
-}
-
-
-currentProfile = data;
-
-
-$('authCard')?.classList.add('hidden');
-
-$('accountCard')?.classList.remove('hidden');
-
-
-const accountStatus =
-$('accountStatus');
-
-if(accountStatus){
-
-accountStatus.innerHTML =
-`الحساب: <strong>${esc(
-data?.email || user.email
-)}</strong><br>
-الدور: <strong>${esc(
-data?.role || 'غير محدد'
-)}</strong><br>
-الحالة: <strong>${esc(
-data?.status || 'غير محددة'
-)}</strong>`;
-
-}
-
-}
-
-
-$('authForm')
-?.addEventListener('submit',async event => {
-
-event.preventDefault();
-
-const email =
-$('authEmail').value.trim();
-
-const password =
-$('authPassword').value;
-
-
-const {
-data,
-error
-} =
-await supabase.auth.signInWithPassword({
-email,
-password
-});
-
-
-if(error){
-
-msg(
-'authResult',
-error.message,
-'error'
-);
-
-return;
-
-}
-
-
-if(data?.user){
-
-currentUser = data.user;
-
-try{
-
-await loadProfile(currentUser);
-
-msg(
-'authResult',
-'تم تسجيل الدخول بنجاح.'
-);
-
-}catch(profileError){
-
-msg(
-'authResult',
-'تم تسجيل الدخول، لكن تعذر تحميل ملف الحساب: ' +
-profileError.message,
-'error'
-);
-
-}
-
-}
-
-});
-
-
-$('signupBtn')
-?.addEventListener('click',async()=>{
-
-const email =
-$('authEmail').value.trim();
-
-const password =
-$('authPassword').value;
-
-const requested_role =
-$('authRole').value;
-
-
-if(!email){
-
-msg(
-'authResult',
-'أدخل البريد الإلكتروني.',
-'error'
-);
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-msg(
-'authResult',
-'كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.',
-'error'
-);
-
-return;
-
-}
-
-
-const {
-data,
-error
-} =
-await supabase.auth.signUp({
-
-email,
-
-password,
-
-options:{
-data:{
-requested_role
-},
-
-emailRedirectTo:
-'https://issaapplication-blip.github.io/index.html'
-}
-
-});
-
-
-if(error){
-
-msg(
-'authResult',
-error.message,
-'error'
-);
-
-return;
-
-}
-
-
-if(data?.session){
-
-currentUser = data.user;
-
-await loadProfile(currentUser);
-
-msg(
-'authResult',
-'تم إنشاء الحساب وتسجيل الدخول.'
-);
-
-}else{
-
-msg(
-'authResult',
-'تم إنشاء الحساب. تحقق من بريدك الإلكتروني ثم سجّل الدخول.'
-);
-
-}
-
-});
-
-
-$('signoutBtn')
-?.addEventListener('click',async()=>{
-
-await supabase.auth.signOut();
-
-currentUser = null;
-
-currentProfile = null;
-
-await loadProfile(null);
-
-});
-
-
-async function uploadDoc(uid,file,type){
-
-if(!file || !(file instanceof File) || file.size === 0){
-
-return null;
-
-}
-
-
-if(file.size > 10 * 1024 * 1024){
-
-throw new Error(
-'حجم الملف يتجاوز 10MB.'
-);
-
-}
-
-
-const safeName =
-file.name.replace(
-/[^a-zA-Z0-9._-]/g,
-'_'
-);
-
-
-const path =
-`${uid}/${type}/${crypto.randomUUID()}-${safeName}`;
-
-
-const {
-error: uploadError
-} =
-await supabase
-.storage
-.from('private_documents')
-.upload(
-path,
-file,
-{
-upsert:false,
-contentType:file.type || undefined
-}
-);
-
-
-if(uploadError){
-
-throw uploadError;
-
-}
-
-
-const {
-error: documentError
-} =
-await supabase
-.from('documents')
-.insert({
-
-user_id:uid,
-
-document_type:type,
-
-storage_path:path,
-
-file_name:file.name,
-
-mime_type:file.type || null,
-
-file_size:file.size,
-
-verification_status:'pending'
-
-});
-
-
-if(documentError){
-
-throw documentError;
-
-}
-
-
-return path;
-
-}
-
-
-async function uploadMany(uid,files,type){
-
-for(const file of Array.from(files || [])){
-
-await uploadDoc(
-uid,
-file,
-type
-);
-
-}
-
-}
-
-
-$('cvForm')
-?.addEventListener('submit',async event=>{
-
-event.preventDefault();
-
-if(!needUser()) return;
-
-
-const form = event.target;
-
-const formData =
-new FormData(form);
-
-const button =
-form.querySelector('button');
-
-button.disabled = true;
-
-
-try{
-
-const {
-error:profileError
-} =
-await supabase
-.from('profiles')
-.update({
-
-first_name:formData.get('firstName'),
-
-last_name:formData.get('lastName'),
-
-phone:formData.get('mobile'),
-
-address:formData.get('address')
-
-})
-.eq(
-'id',
-currentUser.id
-);
-
-
-if(profileError){
-
-throw profileError;
-
-}
-
-
-await uploadDoc(
-currentUser.id,
-formData.get('cv'),
-'cv'
-);
-
-
-await uploadDoc(
-currentUser.id,
-formData.get('payment'),
-'payment_receipt'
-);
-
-
-const {
-error:applicationError
-} =
-await supabase
-.from('applications')
-.insert({
-
-user_id:currentUser.id,
-
-application_type:'CV',
-
-status:'pending',
-
-notes:String(
-formData.get('service') || ''
-)
-
-});
-
-
-if(applicationError){
-
-throw applicationError;
-
-}
-
-
-msg(
-'cvResult',
-'تم إرسال طلب CV وحفظ المستندات. سيتم التواصل معك بعد المراجعة.'
-);
-
-form.reset();
-
-
-}catch(error){
-
-msg(
-'cvResult',
-error.message || 'حدث خطأ غير معروف.',
-'error'
-);
-
-}finally{
-
-button.disabled = false;
-
-}
-
-});
-
-
-async function submitProfessional(
-formId,
-role,
-resultId
-){
-
-if(!needUser()) return;
-
-
-const form = $(formId);
-
-const formData =
-new FormData(form);
-
-const button =
-form.querySelector('button');
-
-button.disabled = true;
-
-
-try{
-
-if(currentProfile?.role !== role){
-
-throw new Error(
-'هذا الحساب مسجل بدور مختلف. اختر الدور الصحيح عند إنشاء الحساب.'
-);
-
-}
-
-
-const {
-error:profileError
-} =
-await supabase
-.from('profiles')
-.update({
-
-first_name:formData.get('firstName'),
-
-last_name:formData.get('lastName'),
-
-phone:formData.get('mobile'),
-
-address:formData.get('address')
-
-})
-.eq(
-'id',
-currentUser.id
-);
-
-
-if(profileError){
-
-throw profileError;
-
-}
-
-
-const table =
-role === 'caregiver'
-? 'caregivers'
-: 'nurses';
-
-
-let payload = {
-
-user_id:currentUser.id,
-
-father_name:
-formData.get('fatherName') || null,
-
-birth_date:
-formData.get('birthDate') || null,
-
-languages:
-formData.get('languages') || null,
-
-experience:
-formData.get('experience') || null,
-
-services:
-formData.get('services') || null
-
-};
-
-
-if(role === 'caregiver'){
-
-payload = {
-
-...payload,
-
-has_car:
-formData.get('car') === 'true',
-
-car_type:
-formData.get('carType') || null,
-
-car_year:
-formData.get('carYear')
-? Number(formData.get('carYear'))
-: null
-
-};
-
-}else{
-
-payload = {
-
-...payload,
-
-specialty:
-formData.get('specialty') || null
-
-};
-
-}
-
-
-const {
-error:professionalError
-} =
-await supabase
-.from(table)
-.upsert(
-payload,
-{
-onConflict:'user_id'
-}
-);
-
-
-if(professionalError){
-
-throw professionalError;
-
-}
-
-
-await uploadDoc(
-currentUser.id,
-formData.get('cv'),
-'cv'
-);
-
-
-await uploadDoc(
-currentUser.id,
-formData.get('idFront'),
-'id_front'
-);
-
-
-await uploadDoc(
-currentUser.id,
-formData.get('idBack'),
-'id_back'
-);
-
-
-await uploadDoc(
-currentUser.id,
-formData.get('portrait'),
-'portrait'
-);
-
-
-if(role === 'caregiver'){
-
-await uploadMany(
-currentUser.id,
-formData.getAll('certificates'),
-'certificate'
-);
-
-}else{
-
-await uploadDoc(
-currentUser.id,
-formData.get('professionalLicense'),
-'professional_license'
-);
-
-
-await uploadDoc(
-currentUser.id,
-formData.get('nursingCertificate'),
-'nursing_certificate'
-);
-
-
-await uploadMany(
-currentUser.id,
-formData.getAll('otherCertificates'),
-'certificate'
-);
-
-}
-
-
-const {
-error:applicationError
-} =
-await supabase
-.from('applications')
-.insert({
-
-user_id:currentUser.id,
-
-application_type:role,
-
-status:'pending'
-
-});
-
-
-if(applicationError){
-
-throw applicationError;
-
-}
-
-
-msg(
-resultId,
-'تم إرسال طلب التقديم وحفظ المستندات بشكل خاص. سيتم التواصل معك بعد مراجعة المسؤول.'
-);
-
-
-form.reset();
-
-
-}catch(error){
-
-msg(
-resultId,
-error.message || 'حدث خطأ غير معروف.',
-'error'
-);
-
-}finally{
-
-button.disabled = false;
-
-}
-
-}
-
-
-$('caregiverForm')
-?.addEventListener(
-'submit',
-event=>{
-
-event.preventDefault();
-
-submitProfessional(
-'caregiverForm',
-'caregiver',
-'caregiverResult'
-);
-
-});
-
-
-$('nurseForm')
-?.addEventListener(
-'submit',
-event=>{
-
-event.preventDefault();
-
-submitProfessional(
-'nurseForm',
-'nurse',
-'nurseResult'
-);
-
-});
-
-
-$('patientForm')
-?.addEventListener(
-'submit',
-async event=>{
-
-event.preventDefault();
-
-if(!needUser()) return;
-
-
-if(currentProfile?.role !== 'family'){
-
-msg(
-'patientResult',
-'طلب الرعاية متاح لحساب العائلة فقط.',
-'error'
-);
-
-return;
-
-}
-
-
-const form = event.target;
-
-const formData =
-new FormData(form);
-
-const button =
-form.querySelector('button');
-
-button.disabled = true;
-
-
-try{
-
-let {
-data:family,
-error:familyError
-} =
-await supabase
-.from('families')
-.select('id')
-.eq(
-'user_id',
-currentUser.id
-)
-.maybeSingle();
-
-
-if(familyError){
-
-throw familyError;
-
-}
-
-
-if(!family){
-
-const result =
-await supabase
-.from('families')
-.insert({
-
-user_id:currentUser.id
-
-})
-.select('id')
-.single();
-
-
-if(result.error){
-
-throw result.error;
-
-}
-
-
-family =
-result.data;
-
-}
-
-
-const {
-data:patient,
-error:patientError
-} =
-await supabase
-.from('patients')
-.insert({
-
-family_id:family.id,
-
-name:
-formData.get('patientName'),
-
-age:
-formData.get('age')
-? Number(formData.get('age'))
-: null,
-
-case_type:
-formData.get('caseType'),
-
-location:
-formData.get('location') || null,
-
-doctor_name:
-formData.get('doctorName') || null,
-
-doctor_phone:
-formData.get('doctorPhone') || null,
-
-medical_needs:
-formData.get('details') || null
-
-})
-.select('id')
-.single();
-
-
-if(patientError){
-
-throw patientError;
-
-}
-
-
-const {
-error:requestError
-} =
-await supabase
-.from('care_requests')
-.insert({
-
-request_number:
-`CR-${Date.now()}`,
-
-family_id:family.id,
-
-patient_id:patient.id,
-
-required_services:
-formData.get('details') || null,
-
-status:'pending',
-
-notes:
-`الهاتف: ${formData.get('familyPhone')}`
-
-});
-
-
-if(requestError){
-
-throw requestError;
-
-}
-
-
-msg(
-'patientResult',
-'تم إنشاء طلب الرعاية بنجاح. سيتم التواصل معك بعد مراجعة المسؤول.'
-);
-
-
-form.reset();
-
-
-}catch(error){
-
-msg(
-'patientResult',
-error.message || 'حدث خطأ غير معروف.',
-'error'
-);
-
-}finally{
-
-button.disabled = false;
-
-}
-
-});
-
-
-supabase.auth.onAuthStateChange(
-async(_event,session)=>{
-
-currentUser =
-session?.user || null;
-
-try{
-
-await loadProfile(
-currentUser
-);
-
-}catch(error){
-
-msg(
-'authResult',
-error.message,
-'error'
-);
-
-}
-
-});
-
-
-const {
-data:{
-session
-}
-} =
-await supabase.auth.getSession();
-
-
-currentUser =
-session?.user || null;
-
-
-if(currentUser){
-
-try{
-
-await loadProfile(
-currentUser
-);
-
-}catch(error){
-
-msg(
-'authResult',
-error.message,
-'error'
-);
-
-}
-
-}
-
-
-if('serviceWorker' in navigator){
-
-navigator.serviceWorker
-.register('./sw.js')
-.catch(()=>{});
-
-}
-
+import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const SUPABASE_URL='https://qmuxaehrahfsnabyjens.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD';
+const supabase=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const $=id=>document.getElementById(id);
+let currentUser=null;let currentProfile=null;
+const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const msg=(id,text,type='success')=>{const element=$(id);if(!element)return;element.className=type;element.textContent=text;};
+const needUser=()=>{if(!currentUser){msg('authResult','يرجى تسجيل الدخول أولًا.','error');$('authCard')?.scrollIntoView({behavior:'smooth'});return false;}return true;};
+window.showSection=id=>{document.querySelectorAll('.card[id]').forEach(section=>section.classList.add('hidden'));const target=$(id);if(target){target.classList.remove('hidden');target.scrollIntoView({behavior:'smooth',block:'start'});}};
+async function loadProfile(user){if(!user){$('authCard')?.classList.remove('hidden');$('accountCard')?.classList.add('hidden');currentProfile=null;return;}const {data,error}=await supabase.from('profiles').select('id,first_name,last_name,email,phone,address,role,status').eq('id',user.id).maybeSingle();if(error)throw error;currentProfile=data;$('authCard')?.classList.add('hidden');$('accountCard')?.classList.remove('hidden');const accountStatus=$('accountStatus');if(accountStatus)accountStatus.innerHTML=`الحساب: <strong>${esc(data?.email||user.email)}</strong><br>الدور: <strong>${esc(data?.role||'غير محدد')}</strong><br>الحالة: <strong>${esc(data?.status||'غير محددة')}</strong>`;}
+$('authForm')?.addEventListener('submit',async event=>{event.preventDefault();const email=$('authEmail').value.trim(),password=$('authPassword').value;const {data,error}=await supabase.auth.signInWithPassword({email,password});if(error){msg('authResult',error.message,'error');return;}if(data?.user){currentUser=data.user;try{await loadProfile(currentUser);msg('authResult','تم تسجيل الدخول بنجاح.');}catch(profileError){msg('authResult','تم تسجيل الدخول، لكن تعذر تحميل ملف الحساب: '+profileError.message,'error');}}});
+$('signupBtn')?.addEventListener('click',async()=>{const email=$('authEmail').value.trim(),password=$('authPassword').value,requested_role=$('authRole').value;if(!email){msg('authResult','أدخل البريد الإلكتروني.','error');return;}if(password.length<6){msg('authResult','كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.','error');return;}const {data,error}=await supabase.auth.signUp({email,password,options:{data:{requested_role},emailRedirectTo:'https://issaapplication-blip.github.io/index.html'}});if(error){msg('authResult',error.message,'error');return;}if(data?.session){currentUser=data.user;await loadProfile(currentUser);msg('authResult','تم إنشاء الحساب وتسجيل الدخول.');}else msg('authResult','تم إنشاء الحساب. تحقق من بريدك الإلكتروني ثم سجّل الدخول.');});
+$('signoutBtn')?.addEventListener('click',async()=>{await supabase.auth.signOut();currentUser=null;currentProfile=null;await loadProfile(null);});
+async function uploadDoc(uid,file,type){if(!file||!(file instanceof File)||file.size===0)return null;if(file.size>10*1024*1024)throw new Error('حجم الملف يتجاوز 10MB.');const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const path=`${uid}/${type}/${crypto.randomUUID()}-${safeName}`;const {error:uploadError}=await supabase.storage.from('private_documents').upload(path,file,{upsert:false,contentType:file.type||undefined});if(uploadError)throw uploadError;const {error:documentError}=await supabase.from('documents').insert({user_id:uid,document_type:type,storage_path:path,file_name:file.name,mime_type:file.type||null,file_size:file.size,verification_status:'pending'});if(documentError)throw documentError;return path;}
+async function uploadMany(uid,files,type){for(const file of Array.from(files||[]))await uploadDoc(uid,file,type);}
+$('cvForm')?.addEventListener('submit',async event=>{event.preventDefault();if(!needUser())return;const form=event.target,formData=new FormData(form),button=form.querySelector('button');button.disabled=true;try{const {error:profileError}=await supabase.from('profiles').update({first_name:formData.get('firstName'),last_name:formData.get('lastName'),phone:formData.get('mobile'),address:formData.get('address')}).eq('id',currentUser.id);if(profileError)throw profileError;await uploadDoc(currentUser.id,formData.get('cv'),'cv');await uploadDoc(currentUser.id,formData.get('payment'),'payment_receipt');const {error:applicationError}=await supabase.from('applications').insert({user_id:currentUser.id,application_type:'CV',status:'pending',notes:String(formData.get('service')||'')});if(applicationError)throw applicationError;msg('cvResult','تم إرسال طلب CV وحفظ المستندات. سيتم التواصل معك بعد المراجعة.');form.reset();}catch(error){msg('cvResult',error.message||'حدث خطأ غير معروف.','error');}finally{button.disabled=false;}});
+async function submitProfessional(formId,role,resultId){if(!needUser())return;const form=$(formId),formData=new FormData(form),button=form.querySelector('button');button.disabled=true;try{if(currentProfile?.role!==role)throw new Error('هذا الحساب مسجل بدور مختلف. اختر الدور الصحيح عند إنشاء الحساب.');const {error:profileError}=await supabase.from('profiles').update({first_name:formData.get('firstName'),last_name:formData.get('lastName'),phone:formData.get('mobile'),address:formData.get('address')}).eq('id',currentUser.id);if(profileError)throw profileError;const table=role==='caregiver'?'caregivers':'nurses';let payload={user_id:currentUser.id,father_name:formData.get('fatherName')||null,birth_date:formData.get('birthDate')||null,languages:formData.get('languages')||null,experience:formData.get('experience')||null,services:formData.get('services')||null};if(role==='caregiver')payload={...payload,has_car:formData.get('car')==='true',car_type:formData.get('carType')||null,car_year:formData.get('carYear')?Number(formData.get('carYear')):null};else payload={...payload,specialty:formData.get('specialty')||null};const {error:professionalError}=await supabase.from(table).upsert(payload,{onConflict:'user_id'});if(professionalError)throw professionalError;await uploadDoc(currentUser.id,formData.get('cv'),'cv');await uploadDoc(currentUser.id,formData.get('idFront'),'id_front');await uploadDoc(currentUser.id,formData.get('idBack'),'id_back');await uploadDoc(currentUser.id,formData.get('portrait'),'portrait');if(role==='caregiver')await uploadMany(currentUser.id,formData.getAll('certificates'),'certificate');else{await uploadDoc(currentUser.id,formData.get('professionalLicense'),'professional_license');await uploadDoc(currentUser.id,formData.get('nursingCertificate'),'nursing_certificate');await uploadMany(currentUser.id,formData.getAll('otherCertificates'),'certificate');}const {error:applicationError}=await supabase.from('applications').insert({user_id:currentUser.id,application_type:role,status:'pending'});if(applicationError)throw applicationError;msg(resultId,'تم إرسال طلب التقديم وحفظ المستندات بشكل خاص. سيتم التواصل معك بعد مراجعة المسؤول.');form.reset();}catch(error){msg(resultId,error.message||'حدث خطأ غير معروف.','error');}finally{button.disabled=false;}}
+$('caregiverForm')?.addEventListener('submit',event=>{event.preventDefault();submitProfessional('caregiverForm','caregiver','caregiverResult');});
+$('nurseForm')?.addEventListener('submit',event=>{event.preventDefault();submitProfessional('nurseForm','nurse','nurseResult');});
+$('patientForm')?.addEventListener('submit',async event=>{event.preventDefault();if(!needUser())return;if(currentProfile?.role!=='family'){msg('patientResult','طلب الرعاية متاح لحساب العائلة فقط.','error');return;}const form=event.target,formData=new FormData(form),button=form.querySelector('button');button.disabled=true;try{let {data:family,error:familyError}=await supabase.from('families').select('id').eq('user_id',currentUser.id).maybeSingle();if(familyError)throw familyError;if(!family){const result=await supabase.from('families').insert({user_id:currentUser.id}).select('id').single();if(result.error)throw result.error;family=result.data;}const {data:patient,error:patientError}=await supabase.from('patients').insert({family_id:family.id,name:formData.get('patientName'),age:formData.get('age')?Number(formData.get('age')):null,case_type:formData.get('caseType'),location:formData.get('location')||null,doctor_name:formData.get('doctorName')||null,doctor_phone:formData.get('doctorPhone')||null,medical_needs:formData.get('details')||null}).select('id').single();if(patientError)throw patientError;const {error:requestError}=await supabase.from('care_requests').insert({request_number:`CR-${Date.now()}`,family_id:family.id,patient_id:patient.id,required_services:formData.get('details')||null,status:'pending',notes:`الهاتف: ${formData.get('familyPhone')}`});if(requestError)throw requestError;msg('patientResult','تم إنشاء طلب الرعاية بنجاح. سيتم التواصل معك بعد مراجعة المسؤول.');form.reset();}catch(error){msg('patientResult',error.message||'حدث خطأ غير معروف.','error');}finally{button.disabled=false;}});
+supabase.auth.onAuthStateChange(async(_event,session)=>{currentUser=session?.user||null;try{await loadProfile(currentUser);}catch(error){msg('authResult',error.message,'error');}});
+const {data:{session}}=await supabase.auth.getSession();currentUser=session?.user||null;if(currentUser){try{await loadProfile(currentUser);}catch(error){msg('authResult',error.message,'error');}}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script>
-
 </body>
 </html>
