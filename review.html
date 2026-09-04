@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#087f58"><meta name="description" content="رعاية منزلية متألقة - صفحة المراجعة النهائية قبل النشر">
+<title>رعاية منزلية متألقة | المراجعة النهائية</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f4f8f6;color:#17372d;line-height:1.7}main{max-width:1050px;margin:auto;padding:12px}.card{background:#fff;border-radius:18px;padding:20px;margin:14px 0;box-shadow:0 5px 22px rgba(0,0,0,.06)}h1,h2,h3{color:#087f58}.hero{background:linear-gradient(135deg,#eaf8f1,#fff)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.role,.price{border:1px solid #dce8e2;border-radius:14px;padding:15px}.btn{border:0;border-radius:11px;padding:12px 18px;background:#087f58;color:#fff;font-weight:bold;cursor:pointer}.alt{background:#eaf2ef;color:#17372d}.actions{display:flex;gap:10px;flex-wrap:wrap}.hidden{display:none!important}label{display:block;font-weight:bold;margin:10px 0}input,select,textarea{width:100%;padding:12px;margin-top:5px;border:1px solid #cbdad3;border-radius:9px;font:inherit}textarea{min-height:100px}.notice,.ok,.err,.pay{padding:12px;border-radius:10px;margin:10px 0}.notice{background:#fff8e8}.pay{background:#eef7ff}.ok{background:#edf8f2}.err{background:#fff0f0;color:#8b1e1e}.small{font-size:13px;color:#66756f}.pill{display:inline-block;padding:4px 9px;border-radius:999px;background:#eaf2ef;margin:3px}.price strong{font-size:23px;color:#087f58}.price .old{text-decoration:line-through;color:#777}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check{display:flex;gap:8px;align-items:flex-start}.check input{width:auto;margin-top:7px}.topnav{position:sticky;top:0;z-index:5;background:#ffffffee;backdrop-filter:blur(8px);padding:8px;border-bottom:1px solid #dce8e2}.topnav a{margin:3px}.muted{color:#66756f}.successBox{border:2px solid #9bd5b9;background:#f2fbf6;border-radius:14px;padding:15px}.danger{color:#8b1e1e}@media(max-width:650px){main{padding:7px}.card{padding:15px}.two{grid-template-columns:1fr}.btn{width:100%}.topnav .btn{width:auto}}
+</style>
+</head>
+<body>
+<div class="topnav"><main style="padding:0"><div class="actions"><a class="btn alt" href="#roles">التسجيل والطلبات</a><a class="btn alt" href="#cv">CV & Cover Letter</a><a class="btn alt" href="#benefits">المزايا والخصومات</a><a class="btn alt" href="#about">عن المنصة</a></div></main></div>
+<main>
+<section class="card hero" id="about">
+<h1>🌟 رعاية منزلية متألقة</h1>
+<p><b>أهلاً بكم.</b> نحن نعمل حاليًا على استقبال طلبات التسجيل وبناء قاعدة مهنية موثوقة من مقدمي ومقدمات الرعاية، والممرضين والممرضات، والمعالجين والمعالجات الفيزيائيين، تمهيدًا للإطلاق التشغيلي الكامل.</p>
+<p>التسجيل في هذه المرحلة خطوة مبكرة للانضمام إلى المنصة والاستعداد للفرص القادمة. نهدف إلى بدء العمل تدريجيًا على الأراضي اللبنانية، ومع توسع المنصة نُحضّر للتعاون والتعاقد مع مؤسسات وجهات خارج لبنان.</p>
+<div class="notice"><b>مهم:</b> التسجيل لا يعني القبول أو التوظيف أو توقيع عقد. جميع الطلبات تخضع للمراجعة والتحقق، والقرارات النهائية المتعلقة بالقبول والمطابقة والعقود والمدفوعات تبقى لدى إدارة المنصة.</div>
+</section>
+
+<section class="card" id="auth">
+<h2>🔐 الدخول أو إنشاء حساب</h2>
+<p class="muted">يمكنك أولًا اختيار نوع الخدمة أدناه، ثم إنشاء الحساب أو الدخول. اختيارك لا يُلزمك بعقد ولا يعني قبول الطلب.</p>
+<div class="two"><label>البريد الإلكتروني<input id="email" type="email" autocomplete="email" required></label><label>كلمة المرور<input id="password" type="password" autocomplete="current-password" minlength="10" maxlength="128" required></label></div>
+<div class="actions"><button id="login" class="btn">دخول</button><button id="signup" class="btn alt">إنشاء حساب</button><button id="logout" class="btn alt hidden">تسجيل الخروج</button></div><div id="authMsg"></div>
+<p class="small">إذا كان تأكيد البريد الإلكتروني مفعّلًا، أكّد البريد ثم اضغط «دخول». بعد الدخول تظهر لك النماذج المناسبة.</p>
+</section>
+
+<section class="card" id="roles">
+<h2>📝 التسجيل وطلبات الرعاية</h2>
+<div class="grid">
+<div class="role"><h3>🤝 مقدم/ة رعاية</h3><p>خبرة رعاية كبار السن والمساعدة المنزلية، مع المناطق واللغات والخدمات والتوفر.</p><button class="btn choose" data-role="caregiver">بدء التقديم</button></div>
+<div class="role"><h3>👩‍⚕️ ممرض/ة</h3><p>اختصاص، خبرة، خدمات، لغات ومناطق العمل والمؤهلات.</p><button class="btn choose" data-role="nurse">بدء التقديم</button></div>
+<div class="role"><h3>🧑‍🦽 معالج/ة فيزيائي/ة</h3><p>اختصاص، خبرة، خدمات/علاجات، لغات ومناطق العمل.</p><button class="btn choose" data-role="physiotherapist">بدء التقديم</button></div>
+<div class="role"><h3>👨‍👩‍👧 العائلة</h3><p>تقديم طلب رعاية لشخص من العائلة مع الموقع والجدول والاحتياجات.</p><button class="btn choose" data-role="family">تقديم طلب رعاية</button></div>
+</div>
+</section>
+
+<section class="card hidden" id="application">
+<h2 id="title">التقديم</h2>
+<form id="form">
+<input type="hidden" id="role">
+<div id="personFields"><div class="grid">
+<label>الاسم الأول<input name="first_name" maxlength="80"></label><label>اسم العائلة<input name="last_name" maxlength="80"></label><label>اسم الأب<input name="father_name" maxlength="80"></label><label>تاريخ الميلاد<input name="birth_date" type="date"></label><label>رقم الهاتف<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label><label>العنوان<input name="address" maxlength="250"></label><label>المنطقة/المناطق التي تستطيع العمل فيها<input name="preferred_location" maxlength="250" placeholder="طرابلس، الميناء، الكورة، زغرتا..."></label><label>اللغات<input name="languages" maxlength="250" placeholder="العربية، الإنكليزية..."></label><label>الاختصاص<input name="specialty" maxlength="200"></label>
+</div><label>الخبرة<textarea name="experience" maxlength="4000"></textarea></label><label>الخدمات التي تقدمها<textarea name="services" maxlength="4000"></textarea></label><label>ملاحظات إضافية<textarea name="notes" maxlength="3000"></textarea></label><label>السيرة الذاتية CV — اختياري<input name="cv" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label></div>
+<div id="familyFields" class="hidden"><div class="grid"><label>اسم طالب الرعاية<input name="family_name" maxlength="160"></label><label>اسم الشخص المحتاج للرعاية<input name="patient_name" maxlength="160"></label><label>العمر<input name="patient_age" type="number" min="0" max="120"></label><label>منطقة الرعاية<input name="care_location" maxlength="250"></label><label>نوع الخدمة<input name="service_type" maxlength="200" placeholder="رعاية منزلية، تمريض، علاج فيزيائي..."></label><label>الجدول المطلوب<input name="schedule" maxlength="500" placeholder="الأيام والساعات"></label></div><label>احتياجات أو ملاحظات الطلب<textarea name="care_notes" maxlength="4000"></textarea></label></div>
+<div class="check"><input id="consent" type="checkbox" required><label for="consent">أقر بصحة المعلومات وأوافق على معالجة البيانات بالقدر اللازم لمراجعة الطلب وإدارة المنصة.</label></div>
+<button class="btn" type="submit">إرسال الطلب للمراجعة</button></form><div id="appMsg"></div>
+</section>
+
+<section class="card" id="cv">
+<h2>📄 خدمة CV & Cover Letter</h2>
+<p><b>قدّم نفسك مهنيًا بالصورة التي تستحقها.</b> نجهز السيرة الذاتية وخطاب التغطية بصياغة مهنية واضحة، مع تخصيص المحتوى حسب الوظيفة، ومن دون اختلاق معلومات غير صحيحة.</p>
+<p class="small">نموذج مصمم وفق ممارسات مناسبة لأكثر الأنظمة التي تعمل بنظام ATS وقابل للقراءة الآلية، مع تخصيص المحتوى حسب الوظيفة.</p>
+<div class="grid">
+<div class="price"><h3>CV احترافي</h3><p>ضمن العرض: <strong>$25</strong> &nbsp; خارج العرض: <strong>$35</strong></p><button class="btn service" data-service="cv">طلب CV</button></div>
+<div class="price"><h3>Cover Letter</h3><p>ضمن العرض: <strong>$10</strong> &nbsp; خارج العرض: <strong>$16</strong></p><button class="btn service" data-service="cover_letter">طلب Cover Letter</button></div>
+<div class="price"><h3>CV + Cover Letter</h3><p>ضمن العرض: <strong>$35</strong> &nbsp; خارج العرض: <strong>$51</strong></p><button class="btn service" data-service="cv_cover_letter">طلب الاثنين</button></div>
+<div class="price"><h3>لغة إضافية</h3><p>ضمن العرض: <strong>+$20</strong> &nbsp; خارج العرض: <strong>+$28</strong></p><span class="pill">العربية</span><span class="pill">English</span><span class="pill">Français</span><span class="pill">Italiano</span></div>
+</div>
+<div id="serviceBox" class="hidden pay"><h3 id="serviceTitle">طلب الخدمة</h3><p id="servicePrice"></p><form id="serviceForm"><input type="hidden" id="serviceType"><label>الاسم الكامل<input id="serviceName" required maxlength="160"></label><label>اللغة المطلوبة / اللغات<input id="serviceLanguages" required maxlength="200" placeholder="العربية + English مثلًا"></label><label>الوظيفة المستهدفة<textarea id="targetJob" maxlength="2000" required></textarea></label><label>ملف CV إن وجد<input id="cvFile" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label><label>Cover Letter موجود إن وجد<input id="coverFile" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label><label>إثبات تحويل Whish<input id="paymentProof" type="file" accept="image/*,.pdf"></label><div class="notice"><b>الدفع:</b> استخدم Whish ثم أرسل إثبات التحويل. يبدأ العمل بعد التحقق من الدفع.</div><button class="btn" type="submit">أرسلت الدفعة وأريد تسجيل الطلب</button></form><div id="serviceMsg"></div></div>
+</section>
+
+<section class="card" id="payment">
+<h2>💳 Whish Money</h2>
+<div class="pay"><p><b>رابط الدفع:</b> <a href="https://whish.money/pay/IkTRI0O40" target="_blank" rel="noopener">فتح رابط Whish للدفع</a></p><p><b>رقم Whish:</b> <span dir="ltr">0096170600157</span></p><p class="small">يمكن استخدام رابط الدفع أو التحويل عبر رقم Whish. بعد التحويل، أرفق إثبات العملية داخل الطلب. مسح رمز QR وحده لا يُعتبر إثباتًا نهائيًا للدفع.</p></div>
+</section>
+
+<section class="card" id="benefits">
+<h2>🎁 المزايا والخدمات الإضافية للمشتركين</h2>
+<p>نعمل على إعداد مزايا وخدمات إضافية للمسجلين، وفق العروض والشروط الفعلية لكل جهة متعاقدة. تشمل الخطة المستقبلية:</p>
+<div class="grid"><div class="role"><h3>🧪 تحاليل</h3><p>عروض وخصومات لدى مختبرات يتم التعاقد معها بعد التحقق من الجودة والشروط والأسعار.</p></div><div class="role"><h3>🩻 تصوير طبي</h3><p>عروض لدى مراكز تصوير وCT مع اعتماد الشروط الفعلية لكل مركز.</p></div><div class="role"><h3>🛏️ معدات طبية</h3><p>عروض لدى مزودين متخصصين بالمعدات الطبية وفق الاحتياج والشروط المعتمدة.</p></div><div class="role"><h3>👨‍👩‍👧 الأقارب من الدرجة الأولى</h3><p>إمكانية الاستفادة وفق شروط كل عرض وسياسة المنصة.</p></div></div>
+<div class="notice"><b>شفافية:</b> لا نعرض اسم جهة أو سعرًا أو خصمًا على أنه متعاقد أو مؤكد قبل إتمام الاتفاق والتحقق منه. الجودة والفائدة للمريض أولًا، والخصم يأتي ضمن الشروط الفعلية.</div>
+</section>
+
+<section class="card">
+<h2>🛡️ الخصوصية والأمان</h2>
+<p>المنصة تستخدم Supabase للمصادقة وقاعدة البيانات وسياسات RLS. المستندات الخاصة مخصصة للوصول المصرح به، ولا نضع مفاتيح الخدمة السرية في المتصفح.</p>
+<p>الذكاء الاصطناعي يشرح ويسجل الطلب ويراجعه ويعرض النتيجة للمستخدم/الإدارة، ولا يملك وحده القرار النهائي في قبول العاملين أو المطابقة النهائية أو العقود أو الأموال أو العمولات أو الاستثناءات.</p>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://qmuxaehrahfsnabyjens.supabase.co';
+const SUPABASE_KEY='sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD';
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);const show=(id,on)=>$(id).classList.toggle('hidden',!on);const msg=(id,text,ok=false)=>$(id).innerHTML='<div class="'+(ok?'ok':'err')+'">'+text+'</div>';
+let selectedRole='';let selectedService='';
+async function refresh(){const {data:{session}}=await db.auth.getSession();show('auth',!session);show('logout',!!session);document.querySelectorAll('.choose,.service').forEach(b=>b.disabled=!session);}
+$('login').onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)return msg('authMsg','تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور.');msg('authMsg','تم الدخول بنجاح.',true);refresh()};
+$('signup').onclick=async()=>{const email=$('email').value.trim(),password=$('password').value;if(password.length<10)return msg('authMsg','كلمة المرور يجب أن تكون 10 أحرف على الأقل.');const {error}=await db.auth.signUp({email,password});if(error)return msg('authMsg','تعذر إنشاء الحساب. إذا كان البريد مستخدمًا، استخدم زر الدخول.');msg('authMsg','تم إنشاء الحساب. إذا ظهر طلب تأكيد البريد، أكّد البريد ثم اضغط دخول.',true)};
+$('logout').onclick=async()=>{await db.auth.signOut();location.reload()};
+function setRole(r){selectedRole=r;$('role').value=r;show('application',true);show('familyFields',r==='family');show('personFields',r!=='family');$('title').textContent={caregiver:'🤝 طلب مقدم/ة رعاية',nurse:'👩‍⚕️ طلب ممرض/ة',physiotherapist:'🧑‍🦽 طلب معالج/ة فيزيائي/ة',family:'👨‍👩‍👧 طلب رعاية عائلية'}[r];$('application').scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('.choose').forEach(b=>b.onclick=()=>setRole(b.dataset.role));
+async function uploadDocument(user,file,type){if(!file)return null;const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');const path=user.id+'/'+Date.now()+'-'+safe;const up=await db.storage.from('private_documents').upload(path,file,{upsert:false,contentType:file.type||'application/octet-stream'});if(up.error)throw up.error;const ins=await db.from('documents').insert({user_id:user.id,document_type:type,storage_path:path,file_name:file.name,mime_type:file.type||null,file_size:file.size,verification_status:'pending'});if(ins.error)throw ins.error;return path}
+$('form').onsubmit=async e=>{e.preventDefault();const {data:{user}}=await db.auth.getUser();if(!user)return msg('appMsg','يجب تسجيل الدخول أولًا.');const fd=new FormData(e.target);if(selectedRole!=='family'&&(!fd.get('first_name')||!fd.get('last_name')||!fd.get('phone')))return msg('appMsg','يرجى تعبئة الاسم ورقم الهاتف.');if(selectedRole==='family'&&(!fd.get('family_name')||!fd.get('patient_name')||!fd.get('care_location')||!fd.get('service_type')))return msg('appMsg','يرجى تعبئة اسم طالب الرعاية واسم الشخص والمنطقة ونوع الخدمة.');let profile={id:user.id,email:user.email,first_name:fd.get('first_name')||fd.get('family_name')||'',last_name:fd.get('last_name')||'',phone:fd.get('phone')||'',address:fd.get('address')||'',role:selectedRole,status:'pending'};let r=await db.from('profiles').upsert(profile,{onConflict:'id'});if(r.error)return msg('appMsg','تعذر حفظ الحساب. يرجى المحاولة مجددًا.');try{if(selectedRole==='caregiver')r=await db.from('caregivers').upsert({user_id:user.id,father_name:fd.get('father_name')||null,birth_date:fd.get('birth_date')||null,languages:fd.get('languages')||null,experience:fd.get('experience')||null,services:fd.get('services')||null,preferred_location:fd.get('preferred_location')||null,availability:'حسب الحالة',has_car:false},{onConflict:'user_id'});else if(selectedRole==='nurse')r=await db.from('nurses').upsert({user_id:user.id,father_name:fd.get('father_name')||null,birth_date:fd.get('birth_date')||null,specialty:fd.get('specialty')||null,experience:fd.get('experience')||null,services:fd.get('services')||null,languages:fd.get('languages')||null,preferred_location:fd.get('preferred_location')||null},{onConflict:'user_id'});else if(selectedRole==='physiotherapist')r=await db.from('physiotherapists').upsert({user_id:user.id,father_name:fd.get('father_name')||null,birth_date:fd.get('birth_date')||null,specialty:fd.get('specialty')||null,experience:fd.get('experience')||null,services:fd.get('services')||null,languages:fd.get('languages')||null,preferred_location:fd.get('preferred_location')||null},{onConflict:'user_id'});else if(selectedRole==='family'){const fam=await db.from('families').upsert({user_id:user.id},{onConflict:'user_id'}).select('id').single();if(fam.error)throw fam.error;const pat=await db.from('patients').insert({family_id:fam.data.id,name:fd.get('patient_name'),age:Number(fd.get('patient_age'))||null,case_type:'elderly',location:fd.get('care_location'),medical_needs:fd.get('care_notes')||null}).select('id').single();if(pat.error)throw pat.error;r=await db.from('care_requests').insert({family_id:fam.data.id,patient_id:pat.data.id,service_type:fd.get('service_type'),schedule:fd.get('schedule')||null,status:'pending',notes:fd.get('care_notes')||null});}if(r.error)throw r.error;const cv=fd.get('cv');if(cv&&cv.size)await uploadDocument(user,cv,'cv');const type=selectedRole==='family'?'family':selectedRole;r=await db.from('applications').insert({user_id:user.id,application_type:type,status:'pending',notes:selectedRole==='family'?(fd.get('care_notes')||''):(fd.get('notes')||'')});if(r.error)throw r.error;msg('appMsg','تم تسجيل الطلب بنجاح ووضعه بانتظار المراجعة والتحقق.',true);e.target.reset();show('application',false)}catch(err){msg('appMsg','تم حفظ جزء من البيانات، لكن تعذر إكمال الطلب. يرجى المحاولة مرة أخرى.')}};
+const serviceMeta={cv:{title:'طلب CV احترافي',price:'ضمن العرض $25 / خارج العرض $35'},cover_letter:{title:'طلب Cover Letter',price:'ضمن العرض $10 / خارج العرض $16'},cv_cover_letter:{title:'طلب CV + Cover Letter',price:'ضمن العرض $35 / خارج العرض $51'}};
+document.querySelectorAll('.service').forEach(b=>b.onclick=()=>{selectedService=b.dataset.service;$('serviceType').value=selectedService;$('serviceTitle').textContent=serviceMeta[selectedService].title;$('servicePrice').textContent=serviceMeta[selectedService].price;show('serviceBox',true);$('serviceBox').scrollIntoView({behavior:'smooth'})});
+$('serviceForm').onsubmit=async e=>{e.preventDefault();const {data:{user}}=await db.auth.getUser();if(!user)return msg('serviceMsg','يجب تسجيل الدخول أولًا ثم تسجيل الخدمة.');const proof=$('paymentProof').files[0];if(!proof)return msg('serviceMsg','يرجى إرفاق إثبات تحويل Whish.');try{const r=await db.from('profiles').upsert({id:user.id,email:user.email,first_name:$('serviceName').value.trim(),role:'family',status:'pending'},{onConflict:'id'});if(r.error)throw r.error;const app=await db.from('applications').insert({user_id:user.id,application_type:selectedService,status:'pending',notes:'خدمة مدفوعة — بانتظار التحقق من الدفع. اللغات: '+$('serviceLanguages').value+' | الوظيفة: '+$('targetJob').value});if(app.error)throw app.error;await uploadDocument(user,proof,'payment_proof');const cv=$('cvFile').files[0];if(cv)await uploadDocument(user,cv,'cv_source');const cover=$('coverFile').files[0];if(cover)await uploadDocument(user,cover,'cover_letter_source');msg('serviceMsg','تم تسجيل طلب الخدمة وإثبات الدفع. الحالة: بانتظار التحقق من الدفع، ولا يبدأ العمل قبل التأكيد.',true);e.target.reset()}catch(err){msg('serviceMsg','تعذر تسجيل الخدمة أو رفع المستند. يرجى المحاولة مجددًا.')}};
+refresh();
+</script>
+</body></html>
