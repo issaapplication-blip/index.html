@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+<defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0b7f48"/><stop offset="1" stop-color="#1f9b45"/></linearGradient><linearGradient id="r" x1="0" x2="1"><stop offset="0" stop-color="#b40000"/><stop offset="1" stop-color="#f11"/></linearGradient><linearGradient id="gold" x1="0" x2="1"><stop offset="0" stop-color="#b98a12"/><stop offset=".5" stop-color="#f5d56a"/><stop offset="1" stop-color="#b98a12"/></linearGradient></defs>
+<rect width="1000" height="1000" rx="70" fill="#fffdf8"/>
+<path d="M190 390 L500 100 L810 390 L760 390 L500 160 L240 390 Z" fill="url(#g)" stroke="#b98a12" stroke-width="12"/>
+<path d="M220 420 Q120 560 235 720 Q340 850 500 820 Q660 850 765 720 Q880 560 780 420" fill="none" stroke="url(#gold)" stroke-width="28"/>
+<path d="M300 300 Q235 390 270 520 Q300 640 410 690" fill="none" stroke="url(#r)" stroke-width="48" stroke-linecap="round"/>
+<path d="M700 300 Q765 390 730 520 Q700 640 590 690" fill="none" stroke="url(#r)" stroke-width="48" stroke-linecap="round"/>
+<circle cx="440" cy="390" r="55" fill="url(#g)"/><circle cx="570" cy="440" r="48" fill="url(#gold)"/>
+<path d="M360 520 Q445 430 545 515 Q590 555 650 640 Q560 690 500 690 Q400 680 350 600 Q335 565 360 520Z" fill="url(#g)"/>
+<path d="M520 530 Q610 475 700 550 Q740 590 700 650 Q620 700 520 650 Q480 620 520 530Z" fill="url(#gold)"/>
+<text x="500" y="780" text-anchor="middle" font-family="Georgia,serif" font-size="145" font-weight="700" fill="#16743b">RAFIQ</text>
+<path d="M245 825 Q500 790 755 825" fill="none" stroke="url(#gold)" stroke-width="16" stroke-linecap="round"/>
+<text x="500" y="885" text-anchor="middle" direction="rtl" font-family="Arial,Tahoma,sans-serif" font-size="43" font-weight="700" fill="#17613b">نصل بالحب والامان لرعاية العائلة</text>
+</svg>
