@@ -1,11 +1,15 @@
 {
-  "name": "رعاية منزلية متألقة",
-  "short_name": "رعاية منزلية",
-  "description": "منصة رعاية منزلية للمسنين والمرضى ومقدمي الرعاية والممرضين.",
+  "name": "RAFIQ | نصل بالحب والامان لرعاية العائلة",
+  "short_name": "RAFIQ",
+  "description": "RAFIQ — منصة تنظيم خدمات الرعاية المنزلية والخدمات المساندة.",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#f4f8f6",
-  "theme_color": "#087f58"
+  "theme_color": "#087f58",
+  "icons": [
+    {"src":"./assets/rafig-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
 }
