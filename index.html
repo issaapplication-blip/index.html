@@ -9,7 +9,7 @@
 <link rel="icon" href="./assets/rafig-logo.svg" type="image/svg+xml">
 <title>RAFIQ | نصل بالحب والامان لرعاية العائلة</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f4f8f6;color:#17372d;line-height:1.7}main{max-width:1050px;margin:auto;padding:12px}.card{background:#fff;border-radius:20px;padding:22px;margin:14px 0;box-shadow:0 5px 22px rgba(0,0,0,.06)}h1,h2,h3{color:#087f58}.hero{text-align:center}.logo{display:block;width:min(260px,70vw);height:auto;margin:0 auto 8px}.tagline{font-size:20px;font-weight:700;color:#17613b}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.item{border:1px solid #dce8e2;border-radius:14px;padding:16px}.btn{display:inline-block;border:0;border-radius:11px;padding:12px 18px;background:#087f58;color:#fff;font-weight:bold;text-decoration:none}.alt{background:#eaf2ef;color:#17372d}.actions{display:flex;gap:10px;flex-wrap:wrap}.notice{padding:13px;border-radius:10px;background:#fff8e8}.contact{font-size:18px}.contact a{font-weight:700}.small{font-size:13px;color:#66756f}.price strong{font-size:22px;color:#087f58}@media(max-width:600px){main{padding:7px}.card{padding:16px}.btn{width:100%;text-align:center}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f4f8f6;color:#17372d;line-height:1.7}main{max-width:1050px;margin:auto;padding:12px}.card{background:#fff;border-radius:20px;padding:22px;margin:14px 0;box-shadow:0 5px 22px rgba(0,0,0,.06)}h1,h2,h3{color:#087f58}.hero{text-align:center}.logo{display:block;width:min(260px,70vw);height:auto;margin:0 auto 8px}.tagline{font-size:20px;font-weight:700;color:#17613b}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.item{border:1px solid #dce8e2;border-radius:14px;padding:16px}.btn{display:inline-block;border:0;border-radius:11px;padding:12px 18px;background:#087f58;color:#fff;font-weight:bold;text-decoration:none;cursor:pointer}.alt{background:#eaf2ef;color:#17372d}.actions{display:flex;gap:10px;flex-wrap:wrap}.contact{font-size:18px}.contact a{font-weight:700}.small{font-size:13px;color:#66756f}.install[hidden]{display:none}.install{background:#b98a12;color:#fff}.notice{padding:13px;border-radius:10px;background:#fff8e8}@media(max-width:600px){main{padding:7px}.card{padding:16px}.btn{width:100%;text-align:center}}
 </style>
 </head>
 <body>
@@ -19,7 +19,11 @@
 <h1>RAFIQ</h1>
 <p class="tagline">نصل بالحب والامان لرعاية العائلة</p>
 <p>منصة لتنظيم خدمات الرعاية المنزلية، وربط العائلات بمقدمي الرعاية والممرضين والمعالجين الفيزيائيين، مع خدمات ومؤسسات طبية مساندة وفق اتفاقات موثقة.</p>
-<div class="actions" style="justify-content:center"><a class="btn" href="./app.html">التسجيل وتقديم طلب</a><a class="btn alt" href="https://wa.me/96181506299" target="_blank" rel="noopener">واتساب المراسلات</a></div>
+<div class="actions" style="justify-content:center">
+<a class="btn" href="./app.html">التسجيل وتقديم طلب</a>
+<a class="btn alt" href="https://wa.me/96181506299" target="_blank" rel="noopener">واتساب المراسلات</a>
+<button id="installApp" class="btn install" type="button" hidden>📲 تثبيت التطبيق</button>
+</div>
 </section>
 
 <section class="card">
@@ -69,5 +73,27 @@
 
 <footer class="card small">© RAFIQ — نصل بالحب والامان لرعاية العائلة · issaapplication@gmail.com</footer>
 </main>
+<script>
+let deferredInstallPrompt=null;
+const installApp=document.getElementById('installApp');
+const isStandalone=window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;
+if(isStandalone) installApp.hidden=true;
+window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();
+  deferredInstallPrompt=event;
+  if(!isStandalone) installApp.hidden=false;
+});
+installApp.addEventListener('click',async()=>{
+  if(!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt=null;
+  installApp.hidden=true;
+});
+window.addEventListener('appinstalled',()=>{
+  deferredInstallPrompt=null;
+  installApp.hidden=true;
+});
+</script>
 </body>
 </html>
