@@ -1,21 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
-  <title id="title">RAFIQ | رفيق</title>
-  <desc id="desc">رفيق — نصل بالحب والأمان لرعاية العائلة</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#087f58"/>
-      <stop offset="1" stop-color="#0aa36f"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-opacity="0.16"/>
-    </filter>
-  </defs>
-  <rect x="28" y="28" width="968" height="968" rx="220" fill="#f4f8f6"/>
-  <circle cx="512" cy="430" r="292" fill="url(#bg)" filter="url(#shadow)"/>
-  <path d="M512 650c-22-22-170-132-170-252 0-72 57-130 128-130 42 0 80 20 104 52 24-32 62-52 104-52 71 0 128 58 128 130 0 120-148 230-170 252-12 12-28 12-40 0z" fill="#fff" opacity="0.98"/>
-  <path d="M370 438l142-122 142 122v170c0 18-14 32-32 32H402c-18 0-32-14-32-32V438z" fill="#087f58" opacity="0.94"/>
-  <path d="M458 640v-116h108v116" fill="#fff"/>
-  <circle cx="512" cy="465" r="28" fill="#fff"/>
-  <text x="512" y="820" text-anchor="middle" font-family="Arial, Tahoma, sans-serif" font-size="108" font-weight="700" letter-spacing="5" fill="#087f58">RAFIQ</text>
-  <text x="512" y="902" text-anchor="middle" direction="rtl" unicode-bidi="plaintext" font-family="Arial, Tahoma, sans-serif" font-size="70" font-weight="700" fill="#173b31">رفيق</text>
+<title id="title">RAFIQ | رفيق</title>
+<desc id="desc">رفيق — نصل بالحب والأمان لرعاية العائلة</desc>
+<defs>
+ <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b6f45"/><stop offset="1" stop-color="#15965a"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b88916"/><stop offset=".5" stop-color="#f1cf63"/><stop offset="1" stop-color="#b88916"/></linearGradient>
+ <linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b91418"/><stop offset="1" stop-color="#ef3430"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#17372d" flood-opacity=".16"/></filter>
+</defs>
+<rect width="1024" height="1024" rx="92" fill="#fffdf8"/>
+<!-- laurel wreath -->
+<g fill="none" stroke="url(#gold)" stroke-width="14" stroke-linecap="round">
+ <path d="M192 650C102 530 122 352 255 235"/><path d="M832 650C922 530 902 352 769 235"/>
+</g>
+<g fill="url(#gold)">
+ <ellipse cx="160" cy="520" rx="24" ry="9" transform="rotate(-62 160 520)"/><ellipse cx="150" cy="458" rx="24" ry="9" transform="rotate(-55 150 458)"/><ellipse cx="153" cy="397" rx="24" ry="9" transform="rotate(-47 153 397)"/><ellipse cx="176" cy="337" rx="24" ry="9" transform="rotate(-39 176 337)"/><ellipse cx="218" cy="284" rx="24" ry="9" transform="rotate(-28 218 284)"/>
+ <ellipse cx="864" cy="520" rx="24" ry="9" transform="rotate(62 864 520)"/><ellipse cx="874" cy="458" rx="24" ry="9" transform="rotate(55 874 458)"/><ellipse cx="871" cy="397" rx="24" ry="9" transform="rotate(47 871 397)"/><ellipse cx="848" cy="337" rx="24" ry="9" transform="rotate(39 848 337)"/><ellipse cx="806" cy="284" rx="24" ry="9" transform="rotate(28 806 284)"/>
+</g>
+<!-- home -->
+<path d="M238 425L512 160L786 425H730V650H294V425Z" fill="#fff" stroke="url(#gold)" stroke-width="12" filter="url(#shadow)"/>
+<path d="M205 420L512 120L819 420L768 420L512 172L256 420Z" fill="url(#green)" stroke="url(#gold)" stroke-width="10"/>
+<path d="M690 245h72v112h-72z" fill="url(#green)" stroke="url(#gold)" stroke-width="8"/>
+<!-- central red heart -->
+<path d="M512 610C485 584 330 478 330 358C330 286 388 230 458 230C486 230 506 240 512 260C518 240 538 230 566 230C636 230 694 286 694 358C694 478 539 584 512 610Z" fill="url(#red)"/>
+<!-- family figures -->
+<circle cx="450" cy="336" r="45" fill="url(#green)"/>
+<path d="M390 470C390 408 415 370 450 370C485 370 510 408 510 470Z" fill="url(#green)"/>
+<circle cx="575" cy="375" r="36" fill="url(#gold)"/>
+<path d="M527 480C527 428 547 399 575 399C603 399 623 428 623 480Z" fill="url(#gold)"/>
+<!-- supporting hand -->
+<path d="M286 530C360 486 435 486 508 535C557 568 615 585 688 542C709 530 731 536 740 553C748 570 741 589 724 599C643 650 559 662 482 629C413 599 356 586 302 605C276 614 259 598 260 575C261 556 269 542 286 530Z" fill="url(#green)"/>
+<path d="M485 540c37-17 71-16 105 3" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".85"/>
+<!-- small house/window -->
+<path d="M470 505l42-35 42 35v48h-84z" fill="#fff" opacity=".95"/><path d="M490 552v-28h44v28" fill="url(#gold)"/><path d="M490 514h44" stroke="url(#gold)" stroke-width="7"/>
+<!-- brand -->
+<text x="512" y="760" text-anchor="middle" font-family="Georgia,Times New Roman,serif" font-size="128" font-weight="700" letter-spacing="5" fill="#13763e">RAFIQ</text>
+<path d="M245 798C345 774 679 774 779 798" fill="none" stroke="url(#gold)" stroke-width="13" stroke-linecap="round"/>
+<path d="M512 792c-17-21-55-2-55 23c0 31 55 65 55 65s55-34 55-65c0-25-38-44-55-23z" fill="#d51f2a"/>
+<text x="512" y="884" text-anchor="middle" direction="rtl" font-family="Arial,Tahoma,sans-serif" font-size="43" font-weight="700" fill="#17613b">نصل بالحب والأمان لرعاية العائلة</text>
 </svg>
