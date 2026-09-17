@@ -1,13 +1,13 @@
 {
-  "name": "RAFIQ | نصل بالحب والامان لرعاية العائلة",
+  "name": "RAFIQ | رفيق للخدمات",
   "short_name": "RAFIQ",
-  "description": "RAFIQ — منصة تنظيم خدمات الرعاية المنزلية والخدمات المساندة.",
+  "description": "رفيق RAFIQ للخدمات — منصة لتنظيم خدمات الرعاية المنزلية والصحية والخدمات المساندة.",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f8f6",
+  "background_color": "#ffffff",
   "theme_color": "#087f58",
   "icons": [
     {"src":"./assets/rafig-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
