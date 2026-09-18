@@ -10,6 +10,6 @@
   "background_color": "#ffffff",
   "theme_color": "#087f58",
   "icons": [
-    {"src":"./assets/rafig-approved-logo.webp","sizes":"512x512","type":"image/webp","purpose":"any"}
+    {"src":"./assets/rafig-logo-hq.svg","sizes":"512x512","type":"image/webp","purpose":"any"}
   ]
 }
