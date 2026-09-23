@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087f58">
+<link rel="icon" href="./assets/rafig-logo-hq.svg" type="image/svg+xml">
+<title>RAFIQ | لوحة المدير</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f4f8f6;color:#17372d;line-height:1.6}
+main{max-width:1200px;margin:auto;padding:12px}.card{background:#fff;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 5px 22px rgba(0,0,0,.06)}
+h1,h2,h3{color:#087f58}.brand{display:block;width:min(250px,70vw);margin:auto}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.item{border:1px solid #dce8e2;border-radius:14px;padding:14px}.btn{border:0;border-radius:10px;padding:10px 15px;background:#087f58;color:#fff;font-weight:bold;cursor:pointer}.danger{background:#a52b2b}.alt{background:#eaf2ef;color:#17372d}.actions{display:flex;gap:8px;flex-wrap:wrap}.small{font-size:13px;color:#66756f}.hidden{display:none!important}.ok,.err,.notice{padding:12px;border-radius:10px;margin:10px 0}.ok{background:#edf8f2}.err{background:#fff0f0;color:#8b1e1e}.notice{background:#fff8e8}.row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.status{font-weight:bold}.doc{background:#f7faf8;padding:10px;border-radius:9px;margin:7px 0}
+input,textarea{width:100%;padding:10px;border:1px solid #cbdad3;border-radius:9px;font:inherit}
+</style>
+</head>
+<body>
+<main>
+<section class="card" style="text-align:center">
+<img class="brand" src="./assets/rafig-logo-hq.svg" alt="RAFIQ - رفيق">
+<h1>لوحة مدير RAFIQ</h1>
+<p><strong>المراجعة والموافقة على الطلبات والوثائق</strong></p>
+<p class="small">هذه الصفحة لا تمنح صلاحيات بحد ذاتها. الوصول إلى البيانات والقرارات محمي داخل Supabase بدور Admin نشط.</p>
+</section>
+
+<section class="card" id="auth">
+<h2>🔐 دخول المدير</h2>
+<label>البريد الإلكتروني<input id="email" type="email" autocomplete="username"></label>
+<label>كلمة المرور<input id="password" type="password" autocomplete="current-password"></label>
+<div class="actions"><button class="btn" id="login">دخول</button><a class="btn alt" href="./app.html">العودة إلى التسجيل</a></div>
+<div id="authMsg"></div>
+</section>
+
+<section class="card hidden" id="dashboard">
+<div class="row"><div><h2>📋 الطلبات والملفات</h2><p class="small" id="who"></p></div><button class="btn alt" id="logout">تسجيل الخروج</button></div>
+<div id="dashMsg"></div>
+<div class="actions"><button class="btn" id="refresh">🔄 تحديث</button><button class="btn alt" id="pendingOnly">الطلبات المعلقة</button></div>
+<div id="applications" class="grid"></div>
+<h2>📎 الوثائق الخاصة</h2>
+<div id="documents" class="grid"></div>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const URL='https://qmuxaehrahfsnabyjens.supabase.co',KEY='sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD';
+const db=supabase.createClient(URL,KEY),$=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function msg(t,ok=false){$('dashMsg').innerHTML='<div class="'+(ok?'ok':'err')+'">'+esc(t)+'</div>'}
+async function requireAdmin(){
+ const {data:{user}}=await db.auth.getUser(); if(!user)return false;
+ const {data:p,error}=await db.from('profiles').select('email,role,status').eq('id',user.id).single();
+ if(error||!p||p.role!=='admin'||p.status!=='active'){await db.auth.signOut();return false}
+ $('who').textContent='المدير: '+(p.email||user.email);return true;
+}
+async function load(){
+ if(!await requireAdmin()){ $('dashboard').classList.add('hidden');$('auth').classList.remove('hidden'); return; }
+ $('auth').classList.add('hidden');$('dashboard').classList.remove('hidden');
+ const {data:apps,error:ae}=await db.from('applications').select('id,user_id,application_type,status,notes,created_at,updated_at').order('created_at',{ascending:false}).limit(100);
+ if(ae){msg('تعذر تحميل الطلبات: '+ae.message);return}
+ $('applications').innerHTML=apps.map(a=>'<article class="item"><div class="row"><strong>'+esc(a.application_type)+'</strong><span class="status">'+esc(a.status)+'</span></div><p class="small">ID: '+esc(a.id)+'<br>المستخدم: '+esc(a.user_id)+'<br>'+esc(a.created_at)+'</p><p>'+esc(a.notes||'لا توجد ملاحظات')+'</p><div class="actions"><button class="btn" onclick="reviewApp(\''+a.id+'\',\'approved\')">✓ موافقة</button><button class="btn danger" onclick="reviewApp(\''+a.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="reviewApp(\''+a.id+'\',\'under_review\')">مراجعة</button></div></article>').join('')||'<p>لا توجد طلبات.</p>';
+ const {data:docs,error:de}=await db.from('documents').select('id,user_id,document_type,file_name,mime_type,file_size,verification_status,storage_path,created_at').order('created_at',{ascending:false}).limit(100);
+ if(de){$('documents').innerHTML='<div class="err">تعذر تحميل الوثائق: '+esc(de.message)+'</div>';return}
+ $('documents').innerHTML=docs.map(d=>'<article class="item"><strong>'+esc(d.file_name)+'</strong><p class="small">'+esc(d.document_type)+' · '+esc(d.verification_status)+'<br>المستخدم: '+esc(d.user_id)+'<br>'+esc(d.storage_path)+'</p><div class="actions"><button class="btn" onclick="reviewDoc(\''+d.id+'\',\'verified\')">✓ اعتماد</button><button class="btn danger" onclick="reviewDoc(\''+d.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="openDoc(\''+encodeURIComponent(d.storage_path)+'\')">فتح الوثيقة</button></div></article>').join('')||'<p>لا توجد وثائق.</p>';
+}
+window.reviewApp=async(id,status)=>{const notes=prompt(status==='rejected'?'سبب الرفض (اختياري):':'ملاحظات المدير (اختياري):');const {error}=await db.rpc('admin_review_application',{p_application_id:id,p_status:status,p_notes:notes||null});if(error)return msg('تعذر تحديث الطلب: '+error.message);msg('تم تحديث الطلب بنجاح.',true);load()};
+window.reviewDoc=async(id,status)=>{const {error}=await db.rpc('admin_review_document',{p_document_id:id,p_status:status});if(error)return msg('تعذر تحديث الوثيقة: '+error.message);msg('تم تحديث الوثيقة بنجاح.',true);load()};
+window.openDoc=async encoded=>{const path=decodeURIComponent(encoded);const {data,error}=await db.storage.from('application-files').createSignedUrl(path,300);if(error)return msg('تعذر فتح الوثيقة. تأكد من وجود bucket application-files وصلاحيات المدير.');window.open(data.signedUrl,'_blank','noopener')};
+$('login').onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('authMsg').innerHTML='<div class="err">تعذر تسجيل الدخول.</div>';return}load()};
+$('logout').onclick=async()=>{await db.auth.signOut();location.reload()};
+$('refresh').onclick=load;$('pendingOnly').onclick=async()=>{await load();document.querySelectorAll('#applications .item').forEach((el)=>{if(!el.querySelector('.status').textContent.includes('pending'))el.style.display='none'})};
+load();
+</script>
+</body>
+</html>
