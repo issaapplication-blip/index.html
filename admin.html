@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#087f58">
-<link rel="icon" href="./assets/rafig-logo-hq.svg" type="image/svg+xml">
+<link rel="icon" href="./assets/rafig-logo-hq.svg?v=20260923" type="image/svg+xml">
 <title>RAFIQ | لوحة المدير</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f4f8f6;color:#17372d;line-height:1.6}
@@ -17,7 +17,7 @@ input,textarea{width:100%;padding:10px;border:1px solid #cbdad3;border-radius:9p
 <body>
 <main>
 <section class="card" style="text-align:center">
-<img class="brand" src="./assets/rafig-logo-hq.svg" alt="RAFIQ - رفيق">
+<img class="brand" src="./assets/rafig-logo-hq.svg?v=20260923" alt="RAFIQ - رفيق">
 <h1>لوحة مدير RAFIQ</h1>
 <p><strong>المراجعة والموافقة على الطلبات والوثائق</strong></p>
 <p class="small">هذه الصفحة لا تمنح صلاحيات بحد ذاتها. الوصول إلى البيانات والقرارات محمي داخل Supabase بدور Admin نشط.</p>
@@ -48,9 +48,9 @@ const db=supabase.createClient(URL,KEY),$=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function msg(t,ok=false){$('dashMsg').innerHTML='<div class="'+(ok?'ok':'err')+'">'+esc(t)+'</div>'}
 async function requireAdmin(){
- const {data:{user}}=await db.auth.getUser(); if(!user)return false;
+ const {data:{user}}=await db.auth.getUser(); if(!user){$('authMsg').innerHTML='<div class="err">يرجى تسجيل الدخول بحساب المدير.</div>';return false;}
  const {data:p,error}=await db.from('profiles').select('email,role,status').eq('id',user.id).single();
- if(error||!p||p.role!=='admin'||p.status!=='active'){await db.auth.signOut();return false}
+ if(error){$('authMsg').innerHTML='<div class="err">تعذر التحقق من صلاحيات الحساب: '+esc(error.message||'خطأ في الصلاحيات')+'</div>';return false;} if(!p||p.role!=='admin'||p.status!=='active'){await db.auth.signOut();$('authMsg').innerHTML='<div class="err">هذا الحساب ليس حساب مدير نشطًا.</div>';return false;}
  $('who').textContent='المدير: '+(p.email||user.email);return true;
 }
 async function load(){
@@ -61,12 +61,12 @@ async function load(){
  $('applications').innerHTML=apps.map(a=>'<article class="item"><div class="row"><strong>'+esc(a.application_type)+'</strong><span class="status">'+esc(a.status)+'</span></div><p class="small">ID: '+esc(a.id)+'<br>المستخدم: '+esc(a.user_id)+'<br>'+esc(a.created_at)+'</p><p>'+esc(a.notes||'لا توجد ملاحظات')+'</p><div class="actions"><button class="btn" onclick="reviewApp(\''+a.id+'\',\'approved\')">✓ موافقة</button><button class="btn danger" onclick="reviewApp(\''+a.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="reviewApp(\''+a.id+'\',\'review\')">مراجعة</button></div></article>').join('')||'<p>لا توجد طلبات.</p>';
  const {data:docs,error:de}=await db.from('documents').select('id,user_id,document_type,file_name,mime_type,file_size,verification_status,storage_path,created_at').order('created_at',{ascending:false}).limit(100);
  if(de){$('documents').innerHTML='<div class="err">تعذر تحميل الوثائق: '+esc(de.message)+'</div>';return}
- $('documents').innerHTML=docs.map(d=>'<article class="item"><strong>'+esc(d.file_name)+'</strong><p class="small">'+esc(d.document_type)+' · '+esc(d.verification_status)+'<br>المستخدم: '+esc(d.user_id)+'<br>'+esc(d.storage_path)+'</p><div class="actions"><button class="btn" onclick="reviewDoc(\''+d.id+'\',\'verified\')">✓ اعتماد</button><button class="btn danger" onclick="reviewDoc(\''+d.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="openDoc(\''+encodeURIComponent(d.storage_path)+'\')">فتح الوثيقة</button></div></article>').join('')||'<p>لا توجد وثائق.</p>';
+ $('documents').innerHTML=docs.map(d=>'<article class="item"><strong>'+esc(d.file_name)+'</strong><p class="small">'+esc(d.document_type)+' · '+esc(d.verification_status)+'<br>المستخدم: '+esc(d.user_id)+'<br>'+esc(d.storage_path)+'</p><div class="actions"><button class="btn" onclick="reviewDoc(\''+d.id+'\',\'approved\')">✓ اعتماد</button><button class="btn danger" onclick="reviewDoc(\''+d.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="openDoc(\''+encodeURIComponent(d.storage_path)+'\')">فتح الوثيقة</button></div></article>').join('')||'<p>لا توجد وثائق.</p>';
 }
 window.reviewApp=async(id,status)=>{const notes=prompt(status==='rejected'?'سبب الرفض (اختياري):':status==='approved'?'ملاحظات الموافقة (اختياري):':'ملاحظات المدير (اختياري):');const {error}=await db.rpc('admin_review_application',{p_application_id:id,p_status:status,p_notes:notes||null});if(error)return msg('تعذر تحديث الطلب: '+error.message);msg('تم تحديث الطلب بنجاح.',true);load()};
 window.reviewDoc=async(id,status)=>{const {error}=await db.rpc('admin_review_document',{p_document_id:id,p_status:status});if(error)return msg('تعذر تحديث الوثيقة: '+error.message);msg('تم تحديث الوثيقة بنجاح.',true);load()};
-window.openDoc=async encoded=>{const path=decodeURIComponent(encoded);const {data,error}=await db.storage.from('private_documents').createSignedUrl(path,300);if(error)return msg('تعذر فتح الوثيقة. تأكد من وجود مستند صحيح وصلاحيات المدير وصلاحيات المدير.');window.open(data.signedUrl,'_blank','noopener,noreferrer')};
-$('login').onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('authMsg').innerHTML='<div class="err">تعذر تسجيل الدخول.</div>';return}load()};
+window.openDoc=async encoded=>{const path=decodeURIComponent(encoded);const {data,error}=await db.storage.from('private_documents').createSignedUrl(path,300);if(error)return msg('تعذر فتح الوثيقة. تأكد من وجود مستند صحيح وصلاحيات المدير.');window.open(data.signedUrl,'_blank','noopener,noreferrer')};
+$('login').onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error){$('authMsg').innerHTML='<div class="err">تعذر تسجيل الدخول: '+esc(error.message||'بيانات الدخول غير صحيحة')+'</div>';return}load()};
 $('logout').onclick=async()=>{await db.auth.signOut();location.reload()};
 $('refresh').onclick=load;$('pendingOnly').onclick=async()=>{await load();document.querySelectorAll('#applications .item').forEach((el)=>{if(!el.querySelector('.status').textContent.includes('pending'))el.style.display='none'})};
 load();
