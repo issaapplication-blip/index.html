@@ -1,0 +1,16 @@
+# tooling and local-only folders
+live/
+_tools/
+_backup-original/
+_wisal/
+node_modules/
+_test/
+*.log
+Thumbs.db
+.DS_Store
+
+# secrets must never be committed
+.env
+.env.*
+*.pem
+*.key
