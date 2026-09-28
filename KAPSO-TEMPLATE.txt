@@ -1,0 +1,78 @@
+RAFIQ | رفيق — قالب طلب جاهز (Kapso API)
+==========================================================
+
+⚠️ هذا قالب للتطوير فقط. المفتاح في متغيرات البيئة على Kapso،
+ولا يُكتب داخل الكود ولا يُرسل في أي محادثة.
+
+==========================================================
+1) متغيرات البيئة (تُضبط في Kapso أو في جهازك)
+==========================================================
+KAPSO_API_KEY=ضع_المفتاح_الجديد_هنا
+KAPSO_PHONE_NUMBER_ID=رقم_الـPhone_الذي_يظهره_Kapso
+KAPSO_API_URL=https://api.kapso.ai     (انسخه من صفحة API)
+
+==========================================================
+2) قائمة الخدمات (يستخدمها Kapso)
+==========================================================
+RAFIQ_PHONE=+96181506299
+
+RAFIQ_SERVICES=[
+  {"key":"elderly",  "ar":"رعاية كبار السن"},
+  {"key":"patient",  "ar":"رعاية المرضى"},
+  {"key":"nursing",  "ar":"التمريض المنزلي"},
+  {"key":"caregiver","ar":"مقدمو الرعاية"},
+  {"key":"physio",   "ar":"العلاج الفيزيائي"},
+  {"key":"dental",   "ar":"أطباء أسنان"},
+  {"key":"nutrition","ar":"اختصاصيو تغذية"},
+  {"key":"speech",   "ar":"اختصاصيو نطق"},
+  {"key":"lab",      "ar":"المختبرات ومراكز الأشعة"},
+  {"key":"equipment","ar":"المعدات الطبية"},
+  {"key":"cv",       "ar":"خدمة السيرة الذاتية"}
+]
+
+RAFIQ_FINANCIAL_NUMBER=+96170600157
+RAFIQ_REVIEW_NUMBER=+96181506299
+
+RAFIQ_RULES={
+  "no_approval": true,
+  "no_contract": true,
+  "no_money": true,
+  "no_medical_advice": true,
+  "no_phone_before_approval": true,
+  "escalate_all_financial": true,
+  "reply_lang": "ar"
+}
+
+==========================================================
+3) الجهة: الإرسال فقط بعد موافقة المدير
+==========================================================
+
+RAFIQ_PARTNERS=[
+  {"name":"مختبرات ميدل إيست","phone":"+96181463485","type":"lab","area":"طرابلس","contracted":false,"published":false,"commission":0.20},
+  {"name":"Midtown","phone":"+96181812242","type":"lab","contracted":false,"published":false,"commission":0.20},
+  {"name":"CEMA","phone":"+96178837501","type":"imaging","contracted":false,"published":false,"commission":0.20},
+  {"name":"مختبرات داغر الطبية الحديثة","phone":"+96176744999","type":"lab","contracted":false,"published":false,"commission":0.20},
+  {"name":"د. هيثم سلطية","phone":"+96171823764","type":"imaging","contracted":false,"published":false,"commission":0.20},
+  {"name":"د. بلال حسين","phone":"+9613351486","type":"physio","contracted":false,"published":false,"commission":0.20},
+  {"name":"سامي ضاحي","phone":"+9613123294","type":"physio","contracted":false,"published":false,"commission":0.20},
+  {"name":"د. رامي مواس","phone":"+9613161885","type":"physio","contracted":false,"published":false,"commission":0.20},
+  {"name":"عماد","phone":"+96170966571","type":"physio","contracted":false,"published":false,"commission":0.20},
+  {"name":"علي","phone":"+96170256128","type":"nurse","contracted":false,"published":false,"commission":0.20},
+  {"name":"ليال","phone":"+96176173801","type":"nurse","contracted":false,"published":false,"commission":0.20},
+  {"name":"نيبال","phone":"+96171114462","type":"nurse","contracted":false,"published":false,"commission":0.20},
+  {"name":"الين مظلوم","phone":"+96170000000","type":"nurse","contracted":false,"published":false,"commission":0.20},
+  {"name":"مركز الدكتور جهاد اليوسف — DMC","phone":"+96178982153","type":"equipment","contracted":false,"published":false,"commission":0.20},
+  {"name":"د. عدنان مواس","phone":"+9613321659","type":"equipment","contracted":false,"published":false,"commission":0.20},
+  {"name":"أنور الحصني — Quality Med","phone":"+9613183372","type":"equipment","contracted":false,"published":false,"commission":0.20},
+  {"name":"دياب","phone":"+96170157300","type":"equipment","contracted":false,"published":false,"commission":0.20}
+]
+
+==========================================================
+4) القاعدة الذهبية
+==========================================================
+- contracted=false  →  لا رقم، لا إعلان، لا عمولة
+- contracted=true   →  يظهر بالباركود ويبدأ احتساب العمولة
+- published=true    →  يظهر اسمه وخدماته للمنتسبين
+- كل تحويل مالي → المدير فقط على 81 506 299
+- الرقم 70 600 157 → لا يُذكر ولا يُطلب منه شيء
+==========================================================
