@@ -1,15 +1,17 @@
 {
   "name": "RAFIQ | رفيق للخدمات",
-  "short_name": "RAFIQ",
-  "description": "رفيق RAFIQ للخدمات — منصة لتنظيم خدمات الرعاية المنزلية والصحية والخدمات المساندة.",
+  "short_name": "رفيق",
+  "description": "منصة RAFIQ لتنظيم الرعاية المنزلية في لبنان.",
+  "id": "/",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#087f58",
   "icons": [
-    {"src":"./assets/rafig-logo-hq.svg","sizes":"1024x1024","type":"image/svg+xml","purpose":"any"}
+    {"src":"/assets/rafig-logo-hq.svg","sizes":"192x192","type":"image/svg+xml","purpose":"any"},
+    {"src":"/assets/rafig-logo-hq.svg","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}
   ]
 }

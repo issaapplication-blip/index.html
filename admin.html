@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#087f58">
-<link rel="icon" href="./assets/rafig-logo-hq.svg?v=20260923" type="image/svg+xml">
+<meta name="theme-color" content="#087f58"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./assets/rafig-logo-hq.svg?v=20260928">
+<link rel="icon" href="./assets/rafig-logo-hq.svg?v=20260928" type="image/svg+xml">
 <title>RAFIQ | لوحة المدير</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#f4f8f6;color:#17372d;line-height:1.6}
@@ -17,7 +17,7 @@ input,textarea{width:100%;padding:10px;border:1px solid #cbdad3;border-radius:9p
 <body>
 <main>
 <section class="card" style="text-align:center">
-<img class="brand" src="./assets/rafig-logo-hq.svg?v=20260923" alt="RAFIQ - رفيق">
+<img class="brand" src="./assets/rafig-logo-hq.svg?v=20260928" alt="RAFIQ - رفيق">
 <h1>لوحة مدير RAFIQ</h1>
 <p><strong>المراجعة والموافقة على الطلبات والوثائق</strong></p>
 <p class="small">هذه الصفحة لا تمنح صلاحيات بحد ذاتها. الوصول إلى البيانات والقرارات محمي داخل Supabase بدور Admin نشط.</p>
@@ -38,6 +38,7 @@ input,textarea{width:100%;padding:10px;border:1px solid #cbdad3;border-radius:9p
 <div id="applications" class="grid"></div>
 <h2>📎 الوثائق الخاصة</h2>
 <div id="documents" class="grid"></div>
+<h2>💬 محادثات واتساب المهمة</h2><p class="small">تظهر بعد تطبيق migration الوكيل. لا تُعرض للعامة.</p><div id="conversations" class="grid"></div>
 </section>
 </main>
 
@@ -62,6 +63,8 @@ async function load(){
  const {data:docs,error:de}=await db.from('documents').select('id,user_id,document_type,file_name,mime_type,file_size,verification_status,storage_path,created_at').order('created_at',{ascending:false}).limit(100);
  if(de){$('documents').innerHTML='<div class="err">تعذر تحميل الوثائق: '+esc(de.message)+'</div>';return}
  $('documents').innerHTML=docs.map(d=>'<article class="item"><strong>'+esc(d.file_name)+'</strong><p class="small">'+esc(d.document_type)+' · '+esc(d.verification_status)+'<br>المستخدم: '+esc(d.user_id)+'<br>'+esc(d.storage_path)+'</p><div class="actions"><button class="btn" onclick="reviewDoc(\''+d.id+'\',\'approved\')">✓ اعتماد</button><button class="btn danger" onclick="reviewDoc(\''+d.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="openDoc(\''+encodeURIComponent(d.storage_path)+'\')">فتح الوثيقة</button></div></article>').join('')||'<p>لا توجد وثائق.</p>';
+ const {data:conversations,error:ce}=await db.from('whatsapp_conversations').select('contact,state,escalated,updated_at').order('updated_at',{ascending:false}).limit(100);
+ $('conversations').innerHTML=ce?'<p class="small">ستظهر المحادثات بعد نشر migration الوكيل ومنح صلاحية المدير.</p>':(conversations.map(c=>'<article class="item"><strong dir="ltr">'+esc(c.contact)+'</strong><p class="small">'+esc(c.updated_at)+'</p><p>'+esc(c.state?.last_message||'')+'</p><p class="small">النية: '+esc(c.state?.last_intent||'غير محددة')+' · '+(c.escalated?'تحتاج تدخلًا بشريًا':'متابعة تلقائية')+'</p></article>').join('')||'<p>لا توجد محادثات.</p>');
 }
 window.reviewApp=async(id,status)=>{const notes=prompt(status==='rejected'?'سبب الرفض (اختياري):':status==='approved'?'ملاحظات الموافقة (اختياري):':'ملاحظات المدير (اختياري):');const {error}=await db.rpc('admin_review_application',{p_application_id:id,p_status:status,p_notes:notes||null});if(error)return msg('تعذر تحديث الطلب: '+error.message);msg('تم تحديث الطلب بنجاح.',true);load()};
 window.reviewDoc=async(id,status)=>{const {error}=await db.rpc('admin_review_document',{p_document_id:id,p_status:status});if(error)return msg('تعذر تحديث الوثيقة: '+error.message);msg('تم تحديث الوثيقة بنجاح.',true);load()};
