@@ -1,0 +1,14 @@
+# ==========================================================
+#  RAFIQ | رفيق  —  إعدادات النشر على Render
+#  الاستخدام: اربط هذا المستودع في Render كـ "Static Site"
+#  ومجلد النشر هو جذر المشروع.
+# ==========================================================
+
+services:
+  - type: web
+    name: rafiq
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    healthCheckPath: /
