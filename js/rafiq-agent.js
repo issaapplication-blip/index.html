@@ -25,8 +25,14 @@
 
 const RAFIQ_AGENT = (function () {
 
+  /* The review number is the ONLY number the agent may ever speak.
+     Every other phone number is stripped from any outgoing text. Blocking one
+     hard-coded number would leak it into the public source and would miss the
+     next account the business opens, so the rule is inverted:
+     allow-list a single number, strip everything else. */
   const REVIEW_NUMBER = '81 506 299';
-  const FINANCIAL_NUMBER = '96170600157';
+  const REVIEW_DIGITS = '96181506299';
+  const FINANCIAL_NUMBER = null;   // never stored in the source
   const HANDOFF =
     `سأحوّل طلبك للمدير على الرقم ${REVIEW_NUMBER} وسيتواصل معك في أقرب وقت.`;
 
@@ -107,13 +113,28 @@ const RAFIQ_AGENT = (function () {
   function clean(reply) {
     if (!reply) return null;
     let s = String(reply).trim();
-    // the AI must never see or speak the financial number
-    s = s.replace(/961\s*70\s*600\s*157/g, '')
-         .replace(/70\s*600\s*157/g, '')
-         .replace(/\+\s*961\s*81\s*506\s*299/g, REVIEW_NUMBER)
-         .replace(/961\s*81\s*506\s*299/g, REVIEW_NUMBER)
-         .replace(/[ \t]{2,}/g, ' ')
+
+    // 1) one canonical form for the review number, whatever prefix it arrived with
+    s = s.replace(/(?:\+|00)?\s*961[\s-]?81[\s-]?506[\s-]?299/g, REVIEW_NUMBER);
+
+    // 2) strip every OTHER phone number. Each removal leaves a space so the
+    //    Arabic sentence around it stays readable.
+    //    International: +961 xx xxx xxx, 00961 xx xxx xxx
+    //    National:      03 xx xxx xxx, 07x xxx xxx, 01x xxx xxx
+    s = s.replace(/(?:\+|00)?\s*961[\s-]?\d[\d\s-]{6,9}(?![\d])/g, ' ')
+         .replace(/(?<![\d-])0[137]\d[\d\s-]{5,9}(?![\d])/g, ' ')
+         .replace(/(?<![\d-])7\d{6,8}(?![\d])/g, ' ')
+         .replace(/(?<![\d-])9\d{6,8}(?![\d])/g, ' ');
+
+    // 3) tidy up only the artefacts the removal left behind - never touch
+    //    punctuation that belongs to the sentence
+    s = s.replace(/[ \t]{2,}/g, ' ')
+         .replace(/[ \t]+([،,؛.!?؟])/g, '$1')
+         .replace(/[ \t]+$/gm, '')
+         .replace(/^[ \t]+/gm, '')
+         .replace(/\n{3,}/g, '\n\n')
          .trim();
+
     return s || null;
   }
 

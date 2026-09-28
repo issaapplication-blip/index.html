@@ -8,7 +8,8 @@
 --    * A family cannot see a worker's phone until an admin has
 --      approved the request AND approved the worker's contract.
 --    * A worker cannot see the family's phone until the same.
---    * Nobody can read the financial number 70 600 157.
+--    * Nobody can read the financial account number; it is not stored in
+--      this repository and is held only in platform_settings.
 --    * Un-contracted partners are invisible to members.
 --    * Every unlock is written to audit_logs.
 -- ==============================================================
@@ -109,16 +110,61 @@ comment on view public.contact_directory is
 -- blank the phone column, so no guard trigger is needed here.
 
 -- ------------------------------------------------------------
--- 4) Block the financial number at the database level
---    so no query can ever leak it to a member.
+-- 4) Block private lines at the database level
+--    The digits live in platform_settings, NOT in this file, so the
+--    financial account number is never committed to a public repo.
+--    The manager seeds the row once from the Supabase SQL Editor.
+--    See DEPLOY.md, section "Seeding the private numbers".
 -- ------------------------------------------------------------
-create or replace function public.block_financial_number()
+create table if not exists public.platform_settings (
+  key text primary key,
+  value text not null,
+  updated_at timestamptz not null default now(),
+  updated_by uuid references auth.users(id) on delete set null
+);
+
+comment on table public.platform_settings is
+  'إعدادات المنصة الخاصة. الجدول غير مقروء إلا من الإدارة.';
+
+alter table public.platform_settings enable row level security;
+
+drop policy if exists settings_read_staff on public.platform_settings;
+create policy settings_read_staff on public.platform_settings
+  for select to authenticated
+  using (public.is_staff());
+
+drop policy if exists settings_write_staff on public.platform_settings;
+create policy settings_write_staff on public.platform_settings
+  for all to authenticated
+  using (public.is_staff())
+  with check (public.is_staff());
+
+-- seeded empty so the trigger is valid on day one; the manager replaces ''
+-- with the real digits in the SQL Editor
+insert into public.platform_settings (key, value)
+values ('blocked_phone_digits', '')
+on conflict (key) do nothing;
+
+create or replace function public.blocked_phone_digits()
+returns text
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select coalesce((select value from public.platform_settings where key = 'blocked_phone_digits'), '');
+$$;
+
+create or replace function public.block_private_number()
 returns trigger
 language plpgsql
 as $$
+declare
+  blocked text := public.blocked_phone_digits();
+  digits  text := replace(replace(coalesce(new.phone, ''), ' ', ''), '-', '');
 begin
-  if new.phone is not null and replace(replace(new.phone,' ',''),'-','') like '%70600157%' then
-    raise exception 'the financial number is not a member contact number'
+  if blocked <> '' and length(digits) >= 7 and digits like '%' || blocked || '%' then
+    raise exception 'this number is not a member contact number'
       using errcode = '22023';
   end if;
   return new;
@@ -126,9 +172,10 @@ end;
 $$;
 
 drop trigger if exists trg_block_financial_families  on public.families;
-create trigger trg_block_financial_families
+drop trigger if exists trg_block_private_families    on public.families;
+create trigger trg_block_private_families
   before insert or update of phone on public.families
-  for each row execute function public.block_financial_number();
+  for each row execute function public.block_private_number();
 
 -- ------------------------------------------------------------
 -- 5) Audit every unlock decision

@@ -199,7 +199,7 @@ create table if not exists public.settlements (
 );
 
 comment on table public.settlements is
-  'تحويل العمولة: يدوي بالكامل عبر Whish Money إلى 70 600 157. الوكيل لا يتدخل.';
+  'تحويل العمولة: يدوي بالكامل عبر Whish Money إلى {{FINANCIAL_NUMBER}}. الوكيل لا يتدخل.';
 
 -- the order_code column is created with the table above;
 -- nothing further is required here.

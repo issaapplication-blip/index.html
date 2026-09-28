@@ -40,9 +40,27 @@ const AGENT_URL = process.env.RAFIQ_AGENT_URL ||
 const ANON_KEY  = process.env.SUPABASE_ANON_KEY ||
   "sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD";
 
+/* Never message a number that is not a customer. The business number is the
+   only line the platform may ever write to, and the private lines are supplied
+   through the environment rather than baked into the source, so no private
+   number is ever published with the repository. */
 const POLL_MS         = Number(process.env.POLL_MS || 20000);
-const FINANCIAL_NUMBER = "96170600157";
-const REVIEW_NUMBER    = "96181506299";
+const REVIEW_NUMBER   = "96181506299";
+const SELF_NUMBER     = (process.env.KAPSO_PHONE_NUMBER || "").replace(/\D/g, "");
+const BLOCKED_DIGITS  = new Set(
+  (process.env.RAFIQ_BLOCKED_NUMBERS || "")
+    .split(",")
+    .map((s) => s.replace(/\D/g, ""))
+    .filter(Boolean)
+);
+
+function isCustomer(to) {
+  const d = String(to || "").replace(/\D/g, "");
+  if (!d) return false;
+  if (SELF_NUMBER && d === SELF_NUMBER) return false;   // never message ourselves
+  if (BLOCKED_DIGITS.has(d)) return false;               // private / financial lines
+  return true;
+}
 
 /* ---------------- Kapso MCP ---------------- */
 async function kapso(name, args) {
@@ -65,8 +83,7 @@ async function kapso(name, args) {
 
 async function sendText(to, text) {
   if (!to || !text) return null;
-  // never message the transfers-only number
-  if (to.replace(/\D/g, "").endsWith(FINANCIAL_NUMBER.slice(-8))) return null;
+  if (!isCustomer(to)) return null;          // private lines and our own number
   return kapso("whatsapp_messages", {
     action: "send",
     params: { phone_number_id: PHONE_ID, to, text }
@@ -102,9 +119,8 @@ async function answer(userText, ctx) {
     }
   }
 
-  // final safety sweep
+  // final safety sweep: the review number is the only one the agent may speak
   reply = RAFIQ_AGENT.clean(reply) || RAFIQ_AGENT.HANDOFF;
-  if (String(reply).includes(FINANCIAL_NUMBER)) reply = RAFIQ_AGENT.HANDOFF;
   return reply;
 }
 
@@ -143,7 +159,7 @@ async function tick() {
 
       if (!phone || !lastId || !text) continue;
       if (c.status && c.status !== "active") continue;
-      if (String(phone).replace(/\D/g, "").endsWith(FINANCIAL_NUMBER.slice(-8))) continue;
+      if (!isCustomer(phone)) continue;
 
       const key = phone + "|" + lastId;
       if (seen.has(key)) continue;

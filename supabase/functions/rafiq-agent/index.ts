@@ -13,7 +13,12 @@
 // ==============================================================
 
 const REVIEW_NUMBER = "81 506 299";
-const FINANCIAL_NUMBER = "96170600157";
+/* The review number is the only number the agent may ever speak. Every other
+   phone number is stripped from any outgoing text. An allow-list of one is
+   used instead of a denylist naming the financial account, because a denylist
+   would put that number in the public source and would miss the next account
+   the business opens. */
+const FINANCIAL_NUMBER = null;
 const HANDOFF = `سأحوّل طلبك للمدير على الرقم ${REVIEW_NUMBER} وسيتواصل معك في أقرب وقت.`;
 
 /* ---------------- 1. safety ---------------- */
@@ -150,14 +155,19 @@ const SYSTEM = `أنت وكيل استقبال لمنصة "رفيق / RAFIQ" —
 إذا كان الطلب خارج خدمات المنصة أو يحتاج قراراً إدارياً، قل بالضبط:
 "${HANDOFF}"`;
 
-/** the AI must never be able to speak the financial number */
+/** the agent may only ever speak the review number */
 function clean(reply: string | null | undefined): string | null {
   if (!reply) return null;
   const s = String(reply)
-    .replace(new RegExp(FINANCIAL_NUMBER, "g"), "")
-    .replace(/70\s*600\s*157/g, "")
-    .replace(/\+?\s*961\s*81\s*506\s*299/g, REVIEW_NUMBER)
+    .replace(/(?:\+|00)?\s*961[\s-]?81[\s-]?506[\s-]?299/g, REVIEW_NUMBER)
+    .replace(/(?:\+|00)?\s*961[\s-]?\d[\d\s-]{6,9}(?![\d])/g, " ")
+    .replace(/(?<![\d-])0[137]\d[\d\s-]{5,9}(?![\d])/g, " ")
+    .replace(/(?<![\d-])7\d{6,8}(?![\d])/g, " ")
+    .replace(/(?<![\d-])9\d{6,8}(?![\d])/g, " ")
     .replace(/[ \t]{2,}/g, " ")
+    .replace(/[ \t]+([،,؛.!?؟])/g, "$1")
+    .replace(/[ \t]+$/gm, "")
+    .replace(/\n{3,}/g, "\n\n")
     .trim();
   return s || null;
 }

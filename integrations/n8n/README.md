@@ -7,7 +7,7 @@
 - WhatsApp Business Account ID: 1571101954509141
 - Connection target: Meta WhatsApp Cloud API
 - Orchestration target: n8n
-- Secondary number +961 70 600 157 is financial-only and must never be connected to this workflow.
+- Secondary number {{FINANCIAL_NUMBER}} is financial-only and must never be connected to this workflow.
 
 ## Architecture
 

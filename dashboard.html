@@ -198,7 +198,9 @@ th{color:var(--muted);font-size:11px;font-weight:800}
       <h2>💰 العمولات</h2>
       <div class="grid" id="gMoney"></div>
       <div class="notice">
-        ⚠️ التحويل يدوي بالكامل عبر <b>Whish Money</b> إلى الرقم المالي <b>70 600 157</b> حصراً.<br>
+        ⚠️ التحويل يدوي بالكامل عبر <b>Whish Money</b> إلى الرقم المالي <b id="finNumber">— يُضبط من لوحة المدير —</b> حصراً.<br>
+        🔒 الرقم المالي لا يوجد في الكود ولا في هذا الموقع، ولا يظهر لأي مستخدم، ولا يعرفه الوكيل الآلي.<br>
+        <small>لإظهاره هنا: اضغط على الرقم أعلاه — يُحفظ على جهازك فقط ولا يُرفع إلى أي خادم.</small><br>
         🤖 الوكيل لا يتدخل في أي عملية مالية ولا يعرف الرقم المالي.
       </div>
     </div>
@@ -209,7 +211,7 @@ th{color:var(--muted);font-size:11px;font-weight:800}
       <p class="small">لا يظهر رقم أي مقدم خدمة أو أسرة قبل موافقتك. كل طلب ينتظرك هنا.</p>
       <div class="scroll"><table id="tUnlocks"></table></div>
       <div class="notice">
-        🔒 الرقم المالي <b>70 600 157</b> محجوب على مستوى قاعدة البيانات ولا يظهر لأي مستخدم.<br>
+        🔒 الرقم المالي محجوب على مستوى قاعدة البيانات ولا يظهر لأي مستخدم، وليس جزءاً من هذا الموقع.<br>
         🤖 الوكيل لا يرى ولا يدير الأرقام المالية.
       </div>
     </div>
@@ -701,6 +703,34 @@ document.addEventListener("DOMContentLoaded",function(){
     });
   });
 });
+
+/* The financial number is deliberately NOT part of this file or of any file
+   served by this site. The manager types it once, on this device only; it is
+   kept in localStorage so it never travels over the network or into a repo. */
+(function(){
+  var KEY = 'rafiq.financial.number';
+  var el = document.getElementById('finNumber');
+  if(!el) return;
+  function paint(){
+    var v = '';
+    try { v = localStorage.getItem(KEY) || ''; } catch(e) {}
+    el.textContent = v || '— يُضبط من لوحة المدير —';
+    el.style.cursor = 'pointer';
+    el.title = v ? 'اضغط للإخفاء' : 'اضغط لضبط الرقم المالي على هذا الجهاز فقط';
+  }
+  el.addEventListener('click', function(){
+    var cur = '';
+    try { cur = localStorage.getItem(KEY) || ''; } catch(e) {}
+    if (cur) { try { localStorage.removeItem(KEY); } catch(e) {} paint(); return; }
+    var v = window.prompt('الرقم المالي (للتحويلات فقط)\nيُحفظ على هذا الجهاز فقط ولا يُرسل إلى أي خادم:');
+    if (!v) return;
+    v = v.replace(/[^\d+]/g, '');
+    if (v.length < 6) { window.alert('الرقم غير صالح.'); return; }
+    try { localStorage.setItem(KEY, v); } catch(e) { window.alert('تعذر الحفظ على هذا المتصفح.'); return; }
+    paint();
+  });
+  paint();
+})();
 </script>
 <script src="/install-app.js?v=69" defer></script>
 </body>

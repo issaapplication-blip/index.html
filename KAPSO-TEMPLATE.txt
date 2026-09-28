@@ -30,7 +30,7 @@ RAFIQ_SERVICES=[
   {"key":"cv",       "ar":"خدمة السيرة الذاتية"}
 ]
 
-RAFIQ_FINANCIAL_NUMBER=+96170600157
+RAFIQ_FINANCIAL_NUMBER={{FINANCIAL_NUMBER}}
 RAFIQ_REVIEW_NUMBER=+96181506299
 
 RAFIQ_RULES={
@@ -74,5 +74,5 @@ RAFIQ_PARTNERS=[
 - contracted=true   →  يظهر بالباركود ويبدأ احتساب العمولة
 - published=true    →  يظهر اسمه وخدماته للمنتسبين
 - كل تحويل مالي → المدير فقط على 81 506 299
-- الرقم 70 600 157 → لا يُذكر ولا يُطلب منه شيء
+- الرقم {{FINANCIAL_NUMBER}} → لا يُذكر ولا يُطلب منه شيء
 ==========================================================
