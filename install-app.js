@@ -148,11 +148,11 @@
       deferred.userChoice.then(function (choice) {
         deferred = null;
         if (choice && choice.outcome === 'accepted') hide();
-        else say('تم إلغاء التثبيت. ' + steps());
-      }).catch(function () { say(steps()); });
+        else say(reason() || steps());
+      }).catch(function () { say(reason() || steps()); });
       return;
     }
-    say(steps());
+    say(reason() || steps());
   }
 
   document.addEventListener('click', function (e) {
@@ -169,13 +169,41 @@
     return 'المتصفح لا يعرض زر التثبيت. ' + steps();
   }
 
-  window.RAFIQ_INSTALL = {
+  /* ---------- diagnose: WHY can the browser not install right now? ----------
+     The button must never be a dead end, so each state gets its own wording
+     instead of one generic instruction. */
+  function diagnose() {
+    return {
+      secureContext: !!window.isSecureContext,
+      hasManifest: !!document.querySelector('link[rel=manifest]'),
+      swSupported: 'serviceWorker' in navigator,
+      standalone: standalone(),
+      canPrompt: !!deferred
+    };
+  }
+
+  function reason() {
+    var d = diagnose();
+    if (d.standalone) return 'التطبيق مثبَّت بالفعل على هذا الجهاز.';
+    if (!d.secureContext) return 'التثبيت يحتاج رابطاً آمناً https — سيعمل الزر مباشرة عند فتحه.';
+    if (!d.swSupported) return 'هذا المتصفح لا يدعم تثبيت التطبيقات. افتح الموقع في Chrome.';
+    if (!d.hasManifest) return 'ملف التطبيق غير متاح على هذا الخادم بعد.';
+    if (isIOS()) return 'على iPhone: زر المشاركة ⬆︎ ← "إضافة إلى الشاشة الرئيسية" ← "إضافة".';
+    if (!d.canPrompt) {
+      return 'اضغط قائمة المتصفح ⋮ ← "تثبيت التطبيق". إن لم يظهر الخيار، أعد فتح الموقع من الرابط المباشر.';
+    }
+    return '';
+  }
+
+window.RAFIQ_INSTALL = {
     install: install,
     steps: steps,
     show: show,
     hide: hide,
     repair: repairManifest,
     manifestRepaired: false,
+    diagnose: diagnose,
+    reason: reason,
     canPrompt: function () { return !!deferred; },
     unsupported: unsupported
   };
@@ -197,10 +225,8 @@
     // give the browser a moment to fire beforeinstallprompt
     setTimeout(function () {
       if (deferred) { say('اضغط «تثبيت التطبيق» لإضافته إلى جهازك.'); return; }
-      // no native prompt on this platform - say so, but keep the button useful
-      if (!window.isSecureContext || /Android/i.test(navigator.userAgent) || isIOS()) {
-        say(steps());
-      }
+      var r = reason();
+      if (r) say(r);
     }, 1200);
   }
 

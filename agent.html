@@ -14,8 +14,28 @@
 <meta property="og:url" content="https://rafiq-o6qd.onrender.com/agent.html">
 <meta property="og:image" content="https://rafiq-o6qd.onrender.com/assets/rafig-logo.png">
 <meta name="twitter:card" content="summary">
+<style>.agent-hero{text-align:center;padding:26px 18px 22px;background:linear-gradient(180deg,#ffffff 0%,#f4f8f6 100%);border-radius:24px;box-shadow:0 10px 34px rgba(8,127,88,.10);border:1px solid #e2efe8;margin:0 0 14px}
+.agent-hero img{width:min(230px,62vw);height:auto;display:block;margin:0 auto 6px;filter:drop-shadow(0 10px 24px rgba(11,95,67,.18))}
+.agent-hero h1{font-size:26px;margin:6px 0 2px}
+.agent-hero .tagline{font-size:16px;font-weight:700;color:#17613b;margin:0 0 6px}
+.agent-hero .who{font-size:13.5px;color:#5c6f67;margin:0}
+.agent-hero .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.agent-hero .pill{background:#eaf2ef;color:#0b7f5a;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:800}
+@media(max-width:600px){.agent-hero{padding:20px 12px 18px}.agent-hero h1{font-size:22px}.agent-hero img{width:min(190px,56vw)}}</style>
 </head>
-<body><main class="wrap"><section class="card" style="text-align:center"><img class="logo" src="./assets/rafig-logo.png?v=20260928" alt="RAFIQ"><h1>🤖 مساعد رفيق RAFIQ</h1><p><strong>نصل بالحب والأمان لرعاية العائلة</strong></p><p class="small">مساعد أولي للاستفسارات، اختيار الخدمة، والتوجيه إلى التسجيل أو المدير. لا يقدم تشخيصًا أو قرارًا طبيًا.</p></section>
+<body><main class="wrap"><section class="card agent-hero">
+<img src="./assets/rafig-agent.svg?v=20261001" alt="مساعد رفيق — وكيل منصة الرعاية المنزلية" width="512" height="512" fetchpriority="high">
+<h1>مساعد رفيق RAFIQ</h1>
+<p class="tagline">نصل بالحب والأمان لرعاية العائلة</p>
+<p class="who">وكيل استقبال ذكي — يجيب فوراً ويحوّل ما يحتاجه للمدير</p>
+<div class="pills">
+  <span class="pill">🏠 رعاية منزلية</span>
+  <span class="pill">🩺 تمريض منزلي</span>
+  <span class="pill">🧑‍🦽 علاج فيزيائي</span>
+  <span class="pill">🔒 لا يتدخل مالياً</span>
+</div>
+<p class="small" style="margin:14px auto 0;max-width:520px">مساعد أولي للاستفسارات واختيار الخدمة والتوجيه إلى التسجيل أو المدير. لا يقدم تشخيصًا ولا قرارًا طبيًا ولا يطلب تحويلًا ماليًا.</p>
+</section>
 <section class="card"><div id="auth"><label>البريد الإلكتروني<input id="email" type="email" autocomplete="email"></label><label>كلمة المرور<input id="password" type="password" autocomplete="current-password"></label><div class="actions"><button id="login" class="btn">دخول</button><a class="btn alt" href="./app.html">إنشاء حساب / التسجيل</a></div><div id="authMsg" class="small" style="margin-top:8px"></div></div><div id="chat" class="chat" hidden></div><div class="composer"><textarea id="input" maxlength="1500" placeholder="اكتب سؤالك هنا..."></textarea><button id="send" class="btn">إرسال</button></div><div class="actions" style="margin-top:10px"><button class="btn alt q">أريد مقدم رعاية</button><button class="btn alt q">أريد ممرض/ة</button><button class="btn alt q">أريد علاج فيزيائي</button><button class="btn alt q">أريد تقديم طلب</button></div></section>
 <section class="card"><div class="notice">للطلبات العاجلة أو الحالات التي تحتاج قرارًا من الإدارة، يتولى المدير المراجعة والموافقة قبل أي إجراء حساس.</div><div class="actions" style="margin-top:10px"><a class="btn" href="./app.html">التسجيل وتقديم الطلب</a><a class="btn alt" href="./faq.html">الأسئلة الشائعة</a><a class="btn alt" href="https://wa.me/96181506299" target="_blank" rel="noopener">واتساب RAFIQ</a><a class="btn alt" href="./">الصفحة الرئيسية</a></div></section>
 </main><script src="./js/rafiq-kb.js"></script><script src="./js/rafiq-agent.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>

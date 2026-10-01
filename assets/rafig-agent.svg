@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"
+     role="img" aria-label="مساعد رفيق — وكيل منصة الرعاية المنزلية">
+  <title>مساعد رفيق</title>
+  <desc>بيت يجمع شخصين، وباب مفتوح، وقلب يرمز للرعاية، وفقاعة حوار للوكيل، ودرع للخصوصية.</desc>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#f2faf6"/>
+      <stop offset="1"   stop-color="#dcefe6"/>
+    </linearGradient>
+    <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#0f9c6d"/>
+      <stop offset="1"   stop-color="#087f58"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#ffffff"/>
+      <stop offset="1"   stop-color="#eef7f2"/>
+    </linearGradient>
+    <linearGradient id="care" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#2fb98a"/>
+      <stop offset="1"   stop-color="#0b7f5a"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#ff8fa3"/>
+      <stop offset="1"   stop-color="#e4586f"/>
+    </linearGradient>
+    <linearGradient id="bubble" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#ffffff"/>
+      <stop offset="1"   stop-color="#e9f6f0"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0b5f43" flood-opacity=".18"/>
+    </filter>
+    <filter id="tiny" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0b5f43" flood-opacity=".22"/>
+    </filter>
+  </defs>
+
+  <!-- background -->
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <circle cx="256" cy="248" r="196" fill="#ffffff" opacity=".55"/>
+
+  <!-- ground -->
+  <path d="M40 432h432" stroke="#bfe3d3" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- house: the platform is a home, not an office -->
+  <g filter="url(#soft)">
+    <path d="M256 92 76 232h360z" fill="url(#roof)"/>
+    <rect x="104" y="232" width="304" height="200" rx="26" fill="url(#wall)"/>
+  </g>
+
+  <!-- door, open: someone is welcome here -->
+  <rect x="222" y="300" width="68" height="132" rx="12" fill="#0b7f5a" opacity=".14"/>
+  <rect x="230" y="308" width="52" height="124" rx="10" fill="#cdeadb"/>
+  <circle cx="270" cy="374" r="5" fill="#0b7f5a"/>
+
+  <!-- window with a heart: care is what is inside -->
+  <g filter="url(#tiny)">
+    <rect x="132" y="266" width="86" height="80" rx="14" fill="#eaf6f0" stroke="#bfe3d3" stroke-width="4"/>
+    <path d="M175 282c6-12 24-10 24 5 0 12-16 22-24 29-8-7-24-17-24-29 0-15 18-17 24-5z" fill="url(#heart)"/>
+  </g>
+
+  <!-- two figures: a family member and their carer, side by side -->
+  <g filter="url(#tiny)">
+    <!-- carer, standing, supporting -->
+    <circle cx="352" cy="286" r="26" fill="url(#care)"/>
+    <path d="M326 306h52a20 20 0 0 1 20 20v58a12 12 0 0 1-12 12h-68a12 12 0 0 1-12-12v-58a20 20 0 0 1 20-20z" fill="url(#care)"/>
+    <rect x="330" y="330" width="10" height="66" rx="5" fill="#ffffff" opacity=".45"/>
+    <!-- arm reaching toward the other figure -->
+    <path d="M330 322c-14 4-26 14-34 26" stroke="url(#care)" stroke-width="15" stroke-linecap="round"/>
+    <!-- seated person, in a chair -->
+    <circle cx="196" cy="322" r="24" fill="#f0b98a"/>
+    <path d="M172 342h48a18 18 0 0 1 18 18v40a12 12 0 0 1-12 12h-60a12 12 0 0 1-12-12v-40a18 18 0 0 1 18-18z" fill="#6fa8d8"/>
+    <rect x="166" y="404" width="76" height="16" rx="8" fill="#3f7fae"/>
+  </g>
+
+  <!-- speech bubble: this is the agent, always listening -->
+  <g filter="url(#soft)">
+    <path d="M300 60h150a26 26 0 0 1 26 26v66a26 26 0 0 1-26 26H360l-30 26v-26h-30a26 26 0 0 1-26-26V86a26 26 0 0 1 26-26z" fill="url(#bubble)"/>
+  </g>
+  <!-- three dots = a reply is on its way -->
+  <circle cx="330" cy="119" r="12" fill="#0b7f5a"/>
+  <circle cx="375" cy="119" r="12" fill="#2fb98a"/>
+  <circle cx="420" cy="119" r="12" fill="#8fd9bd"/>
+
+  <!-- pulse line across the heart window: health monitoring, not diagnosis -->
+  <path d="M142 306h16l10-16 14 32 12-22 10 12h14"
+        fill="none" stroke="#0b7f5a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+
+  <!-- small shield: privacy, nothing leaves without approval -->
+  <g filter="url(#tiny)">
+    <path d="M462 300l30 12v34c0 24-13 40-30 48-17-8-30-24-30-48v-34z" fill="#0b7f5a" opacity=".16"/>
+    <path d="M462 300l30 12v34c0 24-13 40-30 48-17-8-30-24-30-48v-34z"
+          fill="none" stroke="#0b7f5a" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M448 348l11 11 20-22" fill="none" stroke="#0b7f5a" stroke-width="8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
