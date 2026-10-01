@@ -278,7 +278,7 @@ async function loadStats(){
   // applications can be missing on a fresh install
   const appsPending = ap.error ? 0 : by(A,'status','pending');
   const appsReview  = ap.error ? 0 : by(A,'status','under_review');
-  const appsOk      = ap.error ? 0 : by(A,'status','approved');
+  const appsOk      = ap.error ? 0 : by(A,'status','verified');
   const appsNo      = ap.error ? 0 : by(A,'status','rejected');
 
   return {
@@ -300,7 +300,7 @@ async function loadStats(){
     care_contract: by(C,'status','contract_pending'),
 
     docs_pending:  by(D,'verification_status','pending'),
-    docs_approved: by(D,'verification_status','approved'),
+    docs_approved: by(D,'verification_status','verified'),
     docs_rejected: by(D,'verification_status','rejected'),
 
     partners_active:0, partners_negotiating:0,
@@ -611,7 +611,7 @@ async function loadDocs(){
       '<td>'+st(d.verification_status)+'</td>'+
       '<td><div class="actions" style="display:flex;gap:5px;flex-wrap:wrap">'+
         '<button class="btn alt" onclick="openDoc(\''+encodeURIComponent(d.storage_path)+'\')">فتح</button>'+
-        '<button class="btn" onclick="reviewDoc(\''+d.id+'\',\'approved\')">✓</button>'+
+        '<button class="btn" onclick="reviewDoc(\''+d.id+'\',\'verified\')">✓</button>'+
         '<button class="btn danger" onclick="reviewDoc(\''+d.id+'\',\'rejected\')">✕</button>'+
       '</div></td></tr>').join('')+'</tbody></table></div>';
 }
@@ -732,6 +732,6 @@ document.addEventListener("DOMContentLoaded",function(){
   paint();
 })();
 </script>
-<script src="/install-app.js?v=69" defer></script>
+<script src="/install-app.js?v=71" defer></script>
 </body>
 </html>

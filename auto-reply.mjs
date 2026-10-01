@@ -19,6 +19,7 @@
    ========================================================== */
 
 import { createRequire } from "node:module";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -63,7 +64,7 @@ function isCustomer(to) {
 }
 
 /* ---------------- Kapso MCP ---------------- */
-async function kapso(name, args) {
+async function kapsoRaw(name, args) {
   const r = await fetch(KAPSO_MCP, {
     method: "POST",
     headers: {
@@ -76,9 +77,18 @@ async function kapso(name, args) {
       params: { name, arguments: args }
     })
   });
-  const j = await r.json();
-  const raw = j?.result?.content?.[0]?.text;
-  try { return JSON.parse(raw).data; } catch { return null; }
+  const text = await r.text();
+  let json;
+  try { json = JSON.parse(text); } catch { return { httpStatus: r.status, raw: text.slice(0, 600) }; }
+  if (json.error) return { httpStatus: r.status, error: json.error };
+  const raw = json?.result?.content?.[0]?.text;
+  try { return { httpStatus: r.status, data: JSON.parse(raw).data }; }
+  catch { return { httpStatus: r.status, raw: String(raw).slice(0, 600) }; }
+}
+
+async function kapso(name, args) {
+  const r = await kapsoRaw(name, args);
+  return r.data ?? null;
 }
 
 async function sendText(to, text) {
@@ -88,6 +98,74 @@ async function sendText(to, text) {
     action: "send",
     params: { phone_number_id: PHONE_ID, to, text }
   });
+}
+
+/* ---------------- read a conversation without knowing Kapso's exact shape ---
+   The field names below are defensive on purpose: the first real response
+   prints itself with KAPSO_DRY_RUN=1, so the shape can be confirmed instead of
+   guessed. Several candidate names are accepted for each value. */
+function readConversation(c) {
+  const meta = c.kapso || c.meta || c.last_message || {};
+  const flat = Object.assign({}, c, meta);
+
+  const phone =
+    c.phone_number || c.phone || c.from || flat.to || flat.contact || null;
+
+  const text =
+    meta.last_inbound_text || c.last_inbound_text ||
+    meta.last_message_text || c.last_message_text ||
+    meta.text || c.text || flat.body || flat.message || null;
+
+  const id =
+    meta.last_inbound_id || c.last_inbound_id ||
+    meta.last_message_id || c.last_message_id ||
+    meta.id || c.id || null;
+
+  // direction, if Kapso exposes it: only ever answer an inbound message
+  const dir = String(
+    meta.last_direction || c.last_direction ||
+    meta.direction || c.direction || ""
+  ).toLowerCase();
+  const inbound =
+    !dir || /in|inbound|received|incoming/.test(dir);
+
+  return { phone, text, id, inbound, raw: flat };
+}
+
+/* ---------------- dry run: prove the wiring, send nothing ---------------- */
+async function dryRun() {
+  console.log("--- KAPSO DRY RUN: nothing will be sent ---");
+  if (!KAPSO_KEY) { console.error("KAPSO_API_KEY is not set"); process.exit(1); }
+
+  const ping = await kapsoRaw("whatsapp_conversations", {
+    action: "list", params: { phone_number_id: PHONE_ID, limit: 5 }
+  });
+  console.log("HTTP status:", ping.httpStatus);
+  if (ping.error) console.log("error:", JSON.stringify(ping.error));
+  if (ping.raw)    console.log("raw:", ping.raw);
+
+  const convs = Array.isArray(ping.data) ? ping.data
+              : Array.isArray(ping.data?.data) ? ping.data.data
+              : null;
+  if (!convs) {
+    console.log("\nCould not read a conversation list. Paste the 'raw' line above");
+    console.log("back to the agent and the field names will be corrected.");
+    return;
+  }
+
+  console.log("conversations:", convs.length);
+  for (const c of convs.slice(0, 3)) {
+    const r = readConversation(c);
+    console.log("  phone   :", r.phone);
+    console.log("  inbound :", r.inbound);
+    console.log("  text    :", String(r.text).slice(0, 80));
+    if (r.text) {
+      const ctx = RAFIQ_AGENT.extract(r.text, {});
+      console.log("  reply   :", RAFIQ_AGENT.answerSync(r.text, ctx).split("\n")[0].slice(0, 80));
+    }
+    console.log("  keys    :", Object.keys(r.raw).join(", "));
+    console.log("");
+  }
 }
 
 /* ---------------- answer ---------------- */
@@ -134,7 +212,34 @@ const absorb = (phone, text) => {
 };
 
 /* ---------------- main loop ---------------- */
-const seen = new Set();
+/* `seen` is persisted so a restart cannot reply twice to the same message */
+const SEEN_FILE = process.env.KAPSO_SEEN_FILE ||
+  path.join(here, ".rafiq-seen.json");
+const DRY_RUN = process.env.KAPSO_DRY_RUN === "1";
+
+let seen = new Set();
+try {
+  if (fs.existsSync(SEEN_FILE)) {
+    seen = new Set(JSON.parse(fs.readFileSync(SEEN_FILE, "utf8")));
+    console.log("restored", seen.size, "handled message(s) from disk");
+  }
+} catch { seen = new Set(); }
+
+let saving = false;
+function remember(key) {
+  seen.add(key);
+  if (saving) return;
+  saving = true;
+  setTimeout(() => {
+    try {
+      fs.writeFileSync(SEEN_FILE, JSON.stringify([...seen].slice(-2000)));
+    } catch (e) {
+      console.error("could not persist seen set:", e.message);
+    }
+    saving = false;
+  }, 500);
+}
+
 let ticking = false;
 
 async function tick() {
@@ -146,33 +251,39 @@ async function tick() {
       return;
     }
 
-    const convs = await kapso("whatsapp_conversations", {
+    const res = await kapsoRaw("whatsapp_conversations", {
       action: "list", params: { phone_number_id: PHONE_ID, limit: 25 }
     });
-    if (!Array.isArray(convs)) return;
+    const convs = Array.isArray(res.data) ? res.data
+                : Array.isArray(res.data?.data) ? res.data.data
+                : null;
+    if (!convs) {
+      if (res.error) console.error("kapso:", JSON.stringify(res.error).slice(0, 200));
+      return;
+    }
 
     for (const c of convs) {
-      const phone  = c.phone_number;
-      const meta   = c.kapso || {};
-      const lastId = meta.last_inbound_id || meta.last_message_id;
-      const text   = meta.last_inbound_text || meta.last_message_text;
+      const r = readConversation(c);
 
-      if (!phone || !lastId || !text) continue;
+      if (!r.phone || !r.id || !r.text) continue;
       if (c.status && c.status !== "active") continue;
-      if (!isCustomer(phone)) continue;
+      if (!r.inbound) continue;             // never answer our own message
+      if (!isCustomer(r.phone)) continue;
+      if (DRY_RUN) continue;                // never send in dry run
 
-      const key = phone + "|" + lastId;
+      const key = r.phone + "|" + r.id;
       if (seen.has(key)) continue;
 
-      const ctx = absorb(phone, text);
-      const reply = await answer(text, ctx);
-      const sent = await sendText(phone, reply);
+      const ctx = absorb(r.phone, r.text);
+      const reply = await answer(r.text, ctx);
+      const sent = await sendText(r.phone, reply);
 
       if (sent) {
-        seen.add(key);
-        console.log(new Date().toISOString(), "replied to", phone, "->", reply.slice(0, 70));
+        remember(key);
+        console.log(new Date().toISOString(), "replied to", r.phone, "->",
+                    reply.split("\n")[0].slice(0, 70));
       }
-      await new Promise((r) => setTimeout(r, 1200));   // stay under Meta rate limits
+      await new Promise((x) => setTimeout(x, 1200));   // stay under Meta rate limits
     }
   } catch (e) {
     console.error("tick failed:", e?.message || e);
@@ -181,6 +292,10 @@ async function tick() {
   }
 }
 
-console.log("RAFIQ auto-reply started; poll every", POLL_MS, "ms");
-tick();
-setInterval(tick, POLL_MS);
+if (DRY_RUN) {
+  dryRun();
+} else {
+  console.log("RAFIQ auto-reply started; poll every", POLL_MS, "ms");
+  tick();
+  setInterval(tick, POLL_MS);
+}

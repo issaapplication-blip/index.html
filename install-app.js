@@ -1,98 +1,146 @@
 /* ==========================================================
-   RAFIQ | رفيق — install helper
-   Gives the user a one-tap install path on every device,
-   including plain HTTP where Chrome hides its own button.
+   RAFIQ | رفيق — install button, kept deliberately simple.
+
+   One rule: the button is always there. If the browser can install the app
+   itself we use that; if it cannot, the same button shows the two taps to
+   do it by hand. No floating bar, no alerts, no hidden buttons.
+
+   Markup contract - put this anywhere you want the button:
+       <button data-rafiq-install>تثبيت التطبيق</button>
+       <p data-rafiq-install-hint hidden></p>
    ========================================================== */
 (function () {
+  'use strict';
+
+  var deferred = null;
+
   function standalone() {
-    return window.matchMedia('(display-mode: standalone)').matches ||
-           window.navigator.standalone === true;
+    try {
+      return window.matchMedia('(display-mode: standalone)').matches ||
+             window.navigator.standalone === true;
+    } catch (e) { return false; }
   }
 
-  if (standalone()) return;
+  function isIOS() {
+    var ua = navigator.userAgent;
+    return /iPad|iPhone|iPod/.test(ua) ||
+           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
 
-  /* ---------- Android / Chrome: the real one-tap prompt ---------- */
-  var deferred = null;
+  /* the manual steps, as one short block */
+  function steps() {
+    if (isIOS()) {
+      return 'اضغط زر المشاركة ⬆︎ في الأسفل ← "إضافة إلى الشاشة الرئيسية" ← "إضافة".';
+    }
+    if (/Android/i.test(navigator.userAgent)) {
+      return 'افتح قائمة المتصفح ⋮ ← "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".';
+    }
+    return 'اضغط أيقونة التثبيت ⊕ في شريط عنوان المتصفح.';
+  }
+
+  function buttons() {
+    return document.querySelectorAll('[data-rafiq-install], #installApp');
+  }
+
+  function hints() {
+    return document.querySelectorAll('[data-rafiq-install-hint], #installHint');
+  }
+
+  function say(text) {
+    hints().forEach(function (el) {
+      el.textContent = text;
+      el.hidden = false;
+    });
+  }
+
+  function hide() {
+    buttons().forEach(function (b) { b.hidden = true; });
+    hints().forEach(function (h) { h.hidden = true; });
+  }
+
+  function show() {
+    if (standalone()) { hide(); return false; }
+    buttons().forEach(function (b) { b.hidden = false; });
+    return true;
+  }
+
+  /* ---------- the browser can install it: use its own prompt ---------- */
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
     deferred = e;
-    document.querySelectorAll('[data-rafiq-install]').forEach(function (b) {
-      b.hidden = false;
-    });
+    show();
   });
 
   window.addEventListener('appinstalled', function () {
     deferred = null;
-    document.querySelectorAll('[data-rafiq-install]').forEach(function (b) {
-      b.hidden = true;
-    });
+    hide();
+    say('تم التثبيت ✅ التطبيق الآن على شاشتك.');
   });
 
-  /* ---------- every platform: manual instructions ---------- */
-  function instructions() {
-    var ua = navigator.userAgent;
-    var isIOS = /iPad|iPhone|iPod/.test(ua) ||
-                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (isIOS) {
-      return 'لتثبيت التطبيق على iPhone:\n\n' +
-             '1. اضغط زر المشاركة (المربّع والسهم لأعلى) في أسفل الشاشة\n' +
-             '2. اختر "إضافة إلى الشاشة الرئيسية"\n' +
-             '3. اضغط "إضافة"\n\n' +
-             'سيظهر التطبيق بعدها كأيقونة على شاشتك ويُفتح مباشرة.';
+  /* ---------- service worker: required for installability ---------- */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js?v=71', { updateViaCache: 'none' })
+        .catch(function () { /* the site still works without it */ });
+    });
+  }
+
+  /* ---------- one click, whatever the platform ---------- */
+  function install(e) {
+    if (e) e.preventDefault();
+    if (deferred) {
+      deferred.prompt();
+      deferred.userChoice.then(function (choice) {
+        deferred = null;
+        if (choice && choice.outcome === 'accepted') hide();
+        else say('تم إلغاء التثبيت. ' + steps());
+      }).catch(function () { say(steps()); });
+      return;
     }
-    if (/Android/i.test(ua)) {
-      return 'لتثبيت التطبيق على أندرويد:\n\n' +
-             '1. اضغط قائمة المتصفح ⋮ (أعلى اليمين)\n' +
-             '2. اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية"\n' +
-             '3. اضغط "تثبيت"\n\n' +
-             'سيظهر التطبيق بعدها كأيقونة على شاشتك ويُفتح مباشرة.';
+    say(steps());
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-rafiq-install], #installApp');
+    if (b) install(e);
+  });
+
+  /* a short, honest fallback for browsers that hide the button entirely
+     (plain HTTP, or a browser with no install path at all) */
+  function unsupported() {
+    if (!window.isSecureContext) {
+      return 'التثبيت يحتاج اتصالاً آمناً (https). الموقع يعمل عادياً الآن.';
     }
-    return 'لتثبيت التطبيق:\n\n' +
-           'أندرويد: قائمة Chrome ⋮ ← "تثبيت التطبيق"\n' +
-           'iPhone: زر المشاركة ← "إضافة إلى الشاشة الرئيسية"\n' +
-           'كمبيوتر: أيقونة التثبيت ⊕ في شريط العنوان.';
+    return 'المتصفح لا يعرض زر التثبيت. ' + steps();
   }
 
   window.RAFIQ_INSTALL = {
-    prompt: function () {
-      if (deferred) {
-        deferred.prompt();
-        deferred.userChoice.then(function () { deferred = null; });
-        return true;
-      }
-      return false;
-    },
-    instructions: instructions
+    install: install,
+    steps: steps,
+    show: show,
+    hide: hide,
+    canPrompt: function () { return !!deferred; },
+    unsupported: unsupported
   };
 
-  /* ---------- attach to any button marked for install ---------- */
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('[data-rafiq-install]');
-    if (!b) return;
-    e.preventDefault();
-    if (!RAFIQ_INSTALL.prompt()) alert(instructions());
-  });
+  /* ---------- wire up on load ---------- */
+  function boot() {
+    if (standalone()) { hide(); return; }
+    show();
 
-  /* ---------- add a bar when no button exists on the page ---------- */
-  window.addEventListener('load', function () {
-    if (document.querySelector('[data-rafiq-install]')) return;
+    // give the browser a moment to fire beforeinstallprompt
+    setTimeout(function () {
+      if (deferred) { say('اضغط «تثبيت التطبيق» لإضافته إلى جهازك.'); return; }
+      // no native prompt on this platform - say so, but keep the button useful
+      if (!window.isSecureContext || /Android/i.test(navigator.userAgent) || isIOS()) {
+        say(steps());
+      }
+    }, 1200);
+  }
 
-    var bar = document.createElement('div');
-    bar.setAttribute('data-rafiq-bar', '1');
-    bar.style.cssText =
-      'position:fixed;inset-inline:0;bottom:0;z-index:9999;display:none;' +
-      'gap:10px;align-items:center;justify-content:center;padding:11px 12px;' +
-      'background:#087f58;color:#fff;font-weight:800;font-size:14px;' +
-      'box-shadow:0 -6px 22px rgba(0,0,0,.2);font-family:system-ui,sans-serif';
-    bar.innerHTML =
-      '<span>ثبّت منصة رفيق على جهازك</span>' +
-      '<button type="button" data-rafiq-install ' +
-      'style="background:#fff;color:#087f58;border:0;border-radius:10px;' +
-      'padding:10px 18px;font-weight:900;cursor:pointer">تثبيت الآن</button>';
-    document.body.appendChild(bar);
-
-    var show = function () { bar.style.display = 'flex'; };
-    if (deferred) show();
-    setTimeout(show, 2500);
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 })();
