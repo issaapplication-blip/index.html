@@ -1,0 +1,112 @@
+name: RAFIQ PWA icons
+
+# The previous version of this workflow failed with:
+#     line 3: convert: command not found
+# ImageMagick is NOT preinstalled on ubuntu-latest, so it must be installed
+# first. The job is also idempotent: when the icons are already present and
+# have the correct dimensions it verifies them and exits, so a missing tool can
+# never block a push again.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/**'
+      - 'manifest.webmanifest'
+      - '.github/workflows/pwa-icons.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pwa-icons
+  cancel-in-progress: true
+
+jobs:
+  icons:
+    name: Verify PWA icons
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq imagemagick
+          convert -version
+
+      - name: Report what is already there
+        run: |
+          set -u
+          for f in assets/icon-192.png assets/icon-512.png \
+                   assets/icon-maskable-512.png assets/apple-touch-icon.png \
+                   assets/rafig-logo.png; do
+            if [ -f "$f" ]; then
+              printf '  %-34s %s\n' "$f" "$(identify -format '%wx%h' "$f")"
+            else
+              printf '  %-34s MISSING\n' "$f"
+            fi
+          done
+
+      - name: Generate only what is missing or wrong
+        run: |
+          set -eu
+          SRC="assets/rafig-logo.png"
+          [ -f "$SRC" ] || { echo "approved logo not found at $SRC"; exit 1; }
+
+          make_icon () {           # $1 = path  $2 = size
+            want="$2"
+            if [ -f "$1" ] && [ "$(identify -format '%wx%h' "$1" 2>/dev/null || echo 0x0)" = "${want}x${want}" ]; then
+              echo "  keep    $1 ($want)"
+              return
+            fi
+            convert "$SRC" -resize "${want}x${want}" -background none -gravity center \
+                    -extent "${want}x${want}" -strip "$1"
+            echo "  created $1 ($want)"
+          }
+
+          echo "PWA icons:"
+          make_icon assets/icon-192.png         192
+          make_icon assets/icon-512.png         512
+          # maskable needs a safe zone, so it is padded on a light square
+          if [ ! -f assets/icon-maskable-512.png ] || \
+             [ "$(identify -format '%wx%h' assets/icon-maskable-512.png 2>/dev/null || echo 0x0)" != "512x512" ]; then
+            convert -size 512x512 xc:'#f4f8f6' \
+                    \( "$SRC" -resize 360x360 \) -gravity center -composite \
+                    -strip assets/icon-maskable-512.png
+            echo "  created assets/icon-maskable-512.png (512x512, padded)"
+          else
+            echo "  keep    assets/icon-maskable-512.png (512x512)"
+          fi
+          make_icon assets/apple-touch-icon.png 180
+
+      - name: Commit only if something changed
+        run: |
+          set -eu
+          if git diff --quiet -- assets; then
+            echo "icons already correct - nothing to commit"
+            exit 0
+          fi
+          git config user.name  "RAFIQ Admin"
+          git config user.email "issaapplication@gmail.com"
+          git add assets
+          git commit -m "chore(pwa): regenerate PWA icons from the approved logo"
+          git push
+
+      - name: Final check
+        run: |
+          set -eu
+          fail=0
+          check () {
+            got=$(identify -format '%wx%h' "$1" 2>/dev/null || echo 0x0)
+            if [ "$got" = "$2" ]; then echo "  OK   $1 $got"
+            else echo "  FAIL $1 is $got, expected $2"; fail=1; fi
+          }
+          echo "PWA icon check:"
+          check assets/icon-192.png          192x192
+          check assets/icon-512.png          512x512
+          check assets/icon-maskable-512.png 512x512
+          check assets/apple-touch-icon.png  180x180
+          exit $fail

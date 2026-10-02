@@ -82,33 +82,145 @@
   .pick .ic{font-size:26px}
 }
 @media(max-width:400px){.pick{grid-template-columns:1fr}}
+
+/* ---- 3-page layout: essentials / services / about ---- */
+.page-nav .actions{justify-content:center}
+.page-head{text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f4f8f6 100%);border-radius:24px;box-shadow:0 10px 34px rgba(8,127,88,.10);border:1px solid #e2efe8}
+.page-head .logo{width:min(190px,52vw);margin:0 auto 8px;background:#fff;border-radius:20px;padding:9px;box-shadow:0 8px 24px rgba(0,0,0,.07)}
+.page-head h1{font-size:26px;margin:6px 0 2px}
+.page-head .tagline{font-size:16px;font-weight:700;color:#17613b;margin:0}
+.about .lead{font-size:16.5px;line-height:2;background:#f2faf6;border-inline-start:4px solid #087f58;border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 16px}
+.about h3{margin:22px 0 8px}
+.steps{margin:0;padding-inline-start:22px;line-height:2}
+.steps li{margin-bottom:8px;padding-inline-start:4px}
+.steps li b{color:#087f58}
+.scroll table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.scroll th,.scroll td{border:1px solid #dce8e2;padding:11px;text-align:right}
+.scroll th{background:#eef8f3;font-weight:800;color:#0b6b4a}
+footer a{color:#087f58;font-weight:700}
+footer a:hover{text-decoration:underline}
+
+/* the assistant button gets its own identity: a live, lit presence */
+.cta .c-bot{background:linear-gradient(135deg,#0f9c6d,#6b4fbf);color:#fff;
+  box-shadow:0 8px 22px rgba(107,79,191,.30);position:relative;overflow:hidden}
+.cta .c-bot::after{content:"";position:absolute;inset-inline-start:-40%;top:-60%;
+  width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:rotate(18deg);animation:rafiq-sheen 4.5s ease-in-out infinite}
+@keyframes rafiq-sheen{0%,72%{inset-inline-start:-40%}88%,100%{inset-inline-start:130%}}
+.cta .c-bot .ic{font-size:28px}
+.cta .c-bot small{opacity:.94}
+@media(prefers-reduced-motion:reduce){.cta .c-bot::after{animation:none}}
+@media(max-width:600px){.page-head h1{font-size:22px}.page-head .logo{width:min(160px,46vw)}.about .lead{font-size:15.5px}}
 </style>
-<style>.logo-fallback{display:inline-block;font-weight:900;color:#087f58;font-size:20px;letter-spacing:.5px}</style>
-<style>body{overflow-x:hidden}nav.card{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:12px}nav.card a.btn{flex:0 0 auto;white-space:nowrap;font-size:14px;padding:10px 14px}.logo{display:block;width:min(150px,42vw)!important;height:auto!important;margin:0 auto 10px!important;background:#fff;border-radius:14px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,.07)}.brand-logo{display:block;width:min(190px,55vw)!important;height:auto!important;margin:0 auto 10px!important;background:#fff;border-radius:14px;padding:6px}h1{font-size:24px}article.card h1,section.card h1{font-size:22px}@media(max-width:520px){nav.card{gap:6px}nav.card a.btn{font-size:13px;padding:9px 11px;flex:1 1 calc(50% - 3px);text-align:center}}</style>
-<style>.item h2 a,.item h3 a{display:inline-block;background:#087f58;color:#fff!important;text-decoration:none;border-radius:10px;padding:9px 14px;margin:4px 0;font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(8,127,88,.22)}.item h2 a:hover,.item h3 a:hover{background:#0b9b6b}</style>
+<style>.logo-fallback{display:inline-block;font-weight:900;color:#087f58;font-size:20px;letter-spacing:.5px}
+/* ---- 3-page layout: essentials / services / about ---- */
+.page-nav .actions{justify-content:center}
+.page-head{text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f4f8f6 100%);border-radius:24px;box-shadow:0 10px 34px rgba(8,127,88,.10);border:1px solid #e2efe8}
+.page-head .logo{width:min(190px,52vw);margin:0 auto 8px;background:#fff;border-radius:20px;padding:9px;box-shadow:0 8px 24px rgba(0,0,0,.07)}
+.page-head h1{font-size:26px;margin:6px 0 2px}
+.page-head .tagline{font-size:16px;font-weight:700;color:#17613b;margin:0}
+.about .lead{font-size:16.5px;line-height:2;background:#f2faf6;border-inline-start:4px solid #087f58;border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 16px}
+.about h3{margin:22px 0 8px}
+.steps{margin:0;padding-inline-start:22px;line-height:2}
+.steps li{margin-bottom:8px;padding-inline-start:4px}
+.steps li b{color:#087f58}
+.scroll table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.scroll th,.scroll td{border:1px solid #dce8e2;padding:11px;text-align:right}
+.scroll th{background:#eef8f3;font-weight:800;color:#0b6b4a}
+footer a{color:#087f58;font-weight:700}
+footer a:hover{text-decoration:underline}
+
+/* the assistant button gets its own identity: a live, lit presence */
+.cta .c-bot{background:linear-gradient(135deg,#0f9c6d,#6b4fbf);color:#fff;
+  box-shadow:0 8px 22px rgba(107,79,191,.30);position:relative;overflow:hidden}
+.cta .c-bot::after{content:"";position:absolute;inset-inline-start:-40%;top:-60%;
+  width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:rotate(18deg);animation:rafiq-sheen 4.5s ease-in-out infinite}
+@keyframes rafiq-sheen{0%,72%{inset-inline-start:-40%}88%,100%{inset-inline-start:130%}}
+.cta .c-bot .ic{font-size:28px}
+.cta .c-bot small{opacity:.94}
+@media(prefers-reduced-motion:reduce){.cta .c-bot::after{animation:none}}
+@media(max-width:600px){.page-head h1{font-size:22px}.page-head .logo{width:min(160px,46vw)}.about .lead{font-size:15.5px}}
+</style>
+<style>body{overflow-x:hidden}nav.card{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:12px}nav.card a.btn{flex:0 0 auto;white-space:nowrap;font-size:14px;padding:10px 14px}.logo{display:block;width:min(150px,42vw)!important;height:auto!important;margin:0 auto 10px!important;background:#fff;border-radius:14px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,.07)}.brand-logo{display:block;width:min(190px,55vw)!important;height:auto!important;margin:0 auto 10px!important;background:#fff;border-radius:14px;padding:6px}h1{font-size:24px}article.card h1,section.card h1{font-size:22px}@media(max-width:520px){nav.card{gap:6px}nav.card a.btn{font-size:13px;padding:9px 11px;flex:1 1 calc(50% - 3px);text-align:center}}
+/* ---- 3-page layout: essentials / services / about ---- */
+.page-nav .actions{justify-content:center}
+.page-head{text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f4f8f6 100%);border-radius:24px;box-shadow:0 10px 34px rgba(8,127,88,.10);border:1px solid #e2efe8}
+.page-head .logo{width:min(190px,52vw);margin:0 auto 8px;background:#fff;border-radius:20px;padding:9px;box-shadow:0 8px 24px rgba(0,0,0,.07)}
+.page-head h1{font-size:26px;margin:6px 0 2px}
+.page-head .tagline{font-size:16px;font-weight:700;color:#17613b;margin:0}
+.about .lead{font-size:16.5px;line-height:2;background:#f2faf6;border-inline-start:4px solid #087f58;border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 16px}
+.about h3{margin:22px 0 8px}
+.steps{margin:0;padding-inline-start:22px;line-height:2}
+.steps li{margin-bottom:8px;padding-inline-start:4px}
+.steps li b{color:#087f58}
+.scroll table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.scroll th,.scroll td{border:1px solid #dce8e2;padding:11px;text-align:right}
+.scroll th{background:#eef8f3;font-weight:800;color:#0b6b4a}
+footer a{color:#087f58;font-weight:700}
+footer a:hover{text-decoration:underline}
+
+/* the assistant button gets its own identity: a live, lit presence */
+.cta .c-bot{background:linear-gradient(135deg,#0f9c6d,#6b4fbf);color:#fff;
+  box-shadow:0 8px 22px rgba(107,79,191,.30);position:relative;overflow:hidden}
+.cta .c-bot::after{content:"";position:absolute;inset-inline-start:-40%;top:-60%;
+  width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:rotate(18deg);animation:rafiq-sheen 4.5s ease-in-out infinite}
+@keyframes rafiq-sheen{0%,72%{inset-inline-start:-40%}88%,100%{inset-inline-start:130%}}
+.cta .c-bot .ic{font-size:28px}
+.cta .c-bot small{opacity:.94}
+@media(prefers-reduced-motion:reduce){.cta .c-bot::after{animation:none}}
+@media(max-width:600px){.page-head h1{font-size:22px}.page-head .logo{width:min(160px,46vw)}.about .lead{font-size:15.5px}}
+</style>
+<style>.item h2 a,.item h3 a{display:inline-block;background:#087f58;color:#fff!important;text-decoration:none;border-radius:10px;padding:9px 14px;margin:4px 0;font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(8,127,88,.22)}.item h2 a:hover,.item h3 a:hover{background:#0b9b6b}
+/* ---- 3-page layout: essentials / services / about ---- */
+.page-nav .actions{justify-content:center}
+.page-head{text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f4f8f6 100%);border-radius:24px;box-shadow:0 10px 34px rgba(8,127,88,.10);border:1px solid #e2efe8}
+.page-head .logo{width:min(190px,52vw);margin:0 auto 8px;background:#fff;border-radius:20px;padding:9px;box-shadow:0 8px 24px rgba(0,0,0,.07)}
+.page-head h1{font-size:26px;margin:6px 0 2px}
+.page-head .tagline{font-size:16px;font-weight:700;color:#17613b;margin:0}
+.about .lead{font-size:16.5px;line-height:2;background:#f2faf6;border-inline-start:4px solid #087f58;border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 16px}
+.about h3{margin:22px 0 8px}
+.steps{margin:0;padding-inline-start:22px;line-height:2}
+.steps li{margin-bottom:8px;padding-inline-start:4px}
+.steps li b{color:#087f58}
+.scroll table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.scroll th,.scroll td{border:1px solid #dce8e2;padding:11px;text-align:right}
+.scroll th{background:#eef8f3;font-weight:800;color:#0b6b4a}
+footer a{color:#087f58;font-weight:700}
+footer a:hover{text-decoration:underline}
+
+/* the assistant button gets its own identity: a live, lit presence */
+.cta .c-bot{background:linear-gradient(135deg,#0f9c6d,#6b4fbf);color:#fff;
+  box-shadow:0 8px 22px rgba(107,79,191,.30);position:relative;overflow:hidden}
+.cta .c-bot::after{content:"";position:absolute;inset-inline-start:-40%;top:-60%;
+  width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:rotate(18deg);animation:rafiq-sheen 4.5s ease-in-out infinite}
+@keyframes rafiq-sheen{0%,72%{inset-inline-start:-40%}88%,100%{inset-inline-start:130%}}
+.cta .c-bot .ic{font-size:28px}
+.cta .c-bot small{opacity:.94}
+@media(prefers-reduced-motion:reduce){.cta .c-bot::after{animation:none}}
+@media(max-width:600px){.page-head h1{font-size:22px}.page-head .logo{width:min(160px,46vw)}.about .lead{font-size:15.5px}}
+</style>
 </head>
-<body>
-<main>
-<!-- ============ 1) BRAND: the logo sits at the very top, alone ============ -->
+<body><main>
 <section class="brand" aria-label="RAFIQ">
-  <img class="logo" src="./assets/rafig-logo.png?v=20260928" alt="RAFIQ - رفيق للخدمات" width="512" height="512" decoding="async" fetchpriority="high">
-  <h1>رفيق | RAFIQ</h1>
-  <p class="tagline">نصل بالحب والأمان لرعاية العائلة</p>
-  <p class="who">منصة رعاية منزلية وخدمات صحية في لبنان · مدير المنصة</p>
+  <img class="logo" src="./assets/rafig-logo.png?v=20260928" alt="RAFIQ - ╪▒┘┘è┘é ┘┘╪«╪»┘à╪د╪ز" width="512" height="512" decoding="async" fetchpriority="high">
+  <h1>╪▒┘┘è┘é | RAFIQ</h1>
+  <p class="tagline">┘╪╡┘ ╪ذ╪د┘╪ص╪ذ ┘ê╪د┘╪ث┘à╪د┘ ┘╪▒╪╣╪د┘è╪ر ╪د┘╪╣╪د╪خ┘╪ر</p>
+  <p class="who">┘à┘╪╡╪ر ╪▒╪╣╪د┘è╪ر ┘à┘╪▓┘┘è╪ر ┘ê╪«╪»┘à╪د╪ز ╪╡╪ص┘è╪ر ┘┘è ┘╪ذ┘╪د┘ ┬╖ ┘à╪»┘è╪▒ ╪د┘┘à┘╪╡╪ر</p>
 
   <!-- ============ 2) THE THREE THINGS THAT MATTER, biggest first ============ -->
   <div class="cta">
-    <a class="c-main" href="./app.html"><span class="ic">📝</span>اطلب خدمة الآن<small>التسجيل أو طلب رعاية</small></a>
-    <a class="c-wa" href="https://wa.me/96181506299" target="_blank" rel="noopener"><span class="ic">💬</span>واتساب<small>رد مباشر</small></a>
-    <a class="c-bot" href="./agent.html"><span class="ic">🤖</span>اسأل الوكيل<small>توجيه فوري</small></a>
+    <a class="c-main" href="./app.html"><span class="ic">≡اôإ</span>╪د╪╖┘╪ذ ╪«╪»┘à╪ر ╪د┘╪ت┘<small>╪د┘╪ز╪│╪ش┘è┘ ╪ث┘ê ╪╖┘╪ذ ╪▒╪╣╪د┘è╪ر</small></a>
+    <a class="c-wa" href="https://wa.me/96181506299" target="_blank" rel="noopener"><span class="ic">≡اْش</span>┘ê╪د╪ز╪│╪د╪ذ<small>╪▒╪» ┘à╪ذ╪د╪┤╪▒</small></a>
+    <a class="c-bot" href="./agent.html"><span class="ic">≡اجû</span>╪د╪│╪ث┘ ╪د┘┘ê┘â┘è┘<small>╪ز┘ê╪ش┘è┘ç ┘┘ê╪▒┘è</small></a>
   </div>
   <div class="actions" style="justify-content:center;margin-top:14px">
-    <button id="installApp" class="btn install" type="button" data-rafiq-install>📲 تثبيت التطبيق</button>
+    <button id="installApp" class="btn install" type="button" data-rafiq-install>≡اô▓ ╪ز╪س╪ذ┘è╪ز ╪د┘╪ز╪╖╪ذ┘è┘é</button>
   </div>
   <p id="installHint" data-rafiq-install-hint class="small" hidden style="margin:10px auto 0;max-width:520px"></p>
 </section>
-
-<!-- ============ 3) WHAT YOU CAME FOR: ranked, most important first ============ -->
 <nav class="card" aria-labelledby="pickTitle">
   <h2 id="pickTitle">اختر ما تحتاجه</h2>
   <div class="pick">
@@ -123,65 +235,63 @@
   </div>
 </nav>
 
-<nav class="card" aria-label="التنقل الرئيسي"><div class="actions">
-<a class="btn alt" href="./services.html">كل الخدمات</a>
-<a class="btn alt" href="./lebanon.html">🇱🇧 كل لبنان</a>
-</div></nav>
-<section class="card hero">
-<h2>رعاية منزلية في لبنان</h2><p>RAFIQ هي منصة لتنظيم خدمات الرعاية المنزلية وربط العائلات بمقدمي الرعاية والممرضين والمعالجين الفيزيائيين وفق احتياجات الحالة والمنطقة والخبرة والتوفر. نعمل على بناء شبكة خدمات مفيدة للعائلات وللمنتسبين إلى المنصة.</p><div class="grid"><div class="item"><h3><a href="./elderly-care.html">رعاية كبار السن</a></h3><p>تنظيم طلبات الرعاية اليومية والليلية والمساعدة للأشخاص غير المستقلين.</p></div><div class="item"><h3><a href="./patient-care.html">رعاية المرضى</a></h3><p>طلبات الرعاية المنزلية ومتابعة احتياجات الحالة وفق المعلومات المقدمة من العائلة.</p></div><div class="item"><h3><a href="./home-nursing.html">التمريض المنزلي</a></h3><p>ربط طلبات التمريض بالممرضين والممرضات وفق الاختصاص والخبرة والموقع.</p></div><div class="item"><h3><a href="./physiotherapy.html">العلاج الفيزيائي المنزلي</a></h3><p>تنظيم طلبات العلاج الفيزيائي وربطها بالمعالجين ضمن شبكة RAFIQ.</p></div></div></section><section class="card"><h2>خدمات RAFIQ</h2><div class="grid">
-<div class="item"><h3>🤝 مقدمو الرعاية</h3><p>تسجيل الخبرة والخدمات واللغات ومناطق العمل والوثائق المهنية.</p></div>
-<div class="item"><h3>👩‍⚕️ التمريض</h3><p>تسجيل الاختصاص والخبرة والخدمات والوثائق والترخيص وفق المراجعة.</p></div>
-<div class="item"><h3>🧑‍🦽 العلاج الفيزيائي</h3><p>تسجيل الاختصاص والخبرة والخدمات والمناطق والعمل ضمن شبكة RAFIQ.</p></div>
-<div class="item"><h3>👨‍👩‍👧 طلبات العائلات</h3><p>إرسال بيانات الحالة والموقع والجدول والاحتياجات لتتم مراجعتها ومطابقتها.</p></div>
-<div class="item"><h3>🧪 المختبرات ومراكز الأشعة</h3><p>إمكانية الانضمام إلى شبكة مقدمي الخدمات المساندة والتعاقد وفق اتفاق واضح ومراجعة الإدارة.</p></div>
-<div class="item soon"><h3>🩺 أطباء من مختلف الاختصاصات</h3><span class="soon-badge">⏳ انتظرونا قريبًا</span><p>مع إمكانية التعاقد مع أطباء من جميع الاختصاصات ضمن توسع شبكة الخدمات.</p></div>
-<div class="item soon"><h3>🥗 اختصاصيو التغذية</h3><span class="soon-badge">⏳ انتظرونا قريبًا</span><p>ضمن تطوير شبكة الخدمات الصحية والمساندة في RAFIQ.</p></div>
-<div class="item soon"><h3>🦷 أطباء الأسنان</h3><span class="soon-badge">⏳ انتظرونا قريبًا</span><p>ضمن شبكة الخدمات الطبية المتخصصة في RAFIQ.</p></div>
-<div class="item soon"><h3>🗣️ اختصاصيو النطق</h3><span class="soon-badge">⏳ انتظرونا قريبًا</span><p>ضمن تطوير شبكة الخدمات الصحية والمساندة في RAFIQ.</p></div>
-</div></section>
-<section class="card"><h2>🎫 باركود المنصة</h2><p>لكل منتسب باركود خاص يوثّق نوع خدمته وأسعاره وخصوماته، ولكل جهة متعاقدة باركود خاص يُسجَّل به العمل المنجز. يُسلَّم الباركود بعد توقيع الاتفاق، ويُفتح بمسح رمز QR أو من لوحة المدير.</p><p class="small">لا يظهر أي رقم هاتف أو بيانات خاصة قبل توقيع الاتفاق وموافقة الإدارة.</p></section>
-<section class="card"><h2>📄 أسعار CV و Cover Letter</h2>
-<div class="scroll"><table style="width:100%;border-collapse:collapse;margin:12px 0">
-<thead><tr style="background:#eef8f3">
-<th style="text-align:right;padding:11px;border:1px solid #dce8e2">الخدمة</th>
-<th style="text-align:center;padding:11px;border:1px solid #dce8e2">🎁 ضمن العرض</th>
-<th style="text-align:center;padding:11px;border:1px solid #dce8e2">السعر العادي</th>
-</tr></thead>
-<tbody>
-<tr><td style="padding:11px;border:1px solid #dce8e2"><b>CV احترافي</b></td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;color:#087f58;font-weight:900">$25</td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;text-decoration:line-through;color:#66756f">$35</td></tr>
-<tr><td style="padding:11px;border:1px solid #dce8e2"><b>Cover Letter</b></td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;color:#087f58;font-weight:900">$10</td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;text-decoration:line-through;color:#66756f">$16</td></tr>
-<tr style="background:#f7fbf9"><td style="padding:11px;border:1px solid #dce8e2"><b>CV + Cover Letter</b></td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;color:#087f58;font-weight:900">$35</td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;text-decoration:line-through;color:#66756f">$51</td></tr>
-<tr><td style="padding:11px;border:1px solid #dce8e2"><b>لغة إضافية للـCV</b></td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;color:#087f58;font-weight:900">+$20</td>
-<td style="text-align:center;padding:11px;border:1px solid #dce8e2;text-decoration:line-through;color:#66756f">+$28</td></tr>
-</tbody></table></div>
-<h3 style="margin:16px 0 6px">ما يتضمنه السعر</h3>
-<ul style="margin:0;padding-right:20px;line-height:2">
-<li>🇱🇧 العربية + 🇬🇧 الإنجليزية</li>
-<li>📄 PDF + Word</li>
-<li>🎨 تصميم مهني مناسب للوظيفة.</li>
-<li>✅ مراجعة اللغة والأخطاء والتنسيق.</li>
-<li>🤖 تحسين قابلية القراءة بواسطة أنظمة ATS.</li>
-<li>🎯 تخصيص المحتوى حسب الوظيفة، من دون اختلاق أي خبرة أو شهادة أو مؤهل.</li>
-</ul>
-<p class="small"><b>صياغة ATS المعتمدة:</b><br>
-«نموذج مصمم وفق ممارسات مناسبة لأكثر الأنظمة التي تعمل بنظام ATS وقابل للقراءة الآلية، مع تخصيص المحتوى حسب الوظيفة.»</p>
-<p class="notice" style="background:#fff8e8;border-right:4px solid #c9a85a;padding:13px;border-radius:10px">
-🎁 <b>العرض الخاص:</b> سعر $25 للـCV و<b>$35 للـCV + Cover Letter</b> مخصص لعرض المتابعين والمشتركين في المنصة،
-وبالأخص المتقدمين للعمل من خلال RAFIQ.</p>
-<p class="small">تبدأ خدمة إعداد السيرة الذاتية بعد اكتمال البيانات وتأكيد الدفع. يتم تحديد موعد التسليم وفق اكتمال المتطلبات.</p>
+<section class="card about">
+  <h2>ما هي منصة رفيق؟</h2>
+  <p class="lead"><b>RAFIQ | رفيق</b> منصة لبنانية لتنظيم خدمات الرعاية المنزلية والصحية. نربط العائلات التي تحتاج رعاية بمقدمي الرعاية والممرضين والمعالجين الفيزيائيين، ونراجع كل طلب وكل مقدم خدمة قبل قبوله.</p>
+
+  <div class="grid">
+    <div class="item"><h3>ماذا نفعل؟</h3><p>نستقبل طلبك، نسأل عن الحالة والمنطقة والدوام والاحتياجات، ثم نراجع الطلب يدوياً ونطابقه مع مقدمي الخدمة المناسبين.</p></div>
+    <div class="item"><h3>لماذا عبر منصة؟</h3><p>لأن الطلب لا ينجح بالصدفة: كل مقدّم خدمة يُراجع قبل نشر ملفه، وكل طلب يمرّ على الإدارة قبل المطابقة.</p></div>
+    <div class="item"><h3>ما الذي لا نفعله؟</h3><p>لا نشخّص، ولا نصف دواءً، ولا نعد بسعر مؤكّد أو بتوفّر مؤكّد، ولا نتعامل مع الأموال عبر المحادثة.</p></div>
+    <div class="item"><h3>من يراجع طلبك؟</h3><p>إدارة المنصة. لا يُقبل أي طلب ولا أي مقدّم خدمة تلقائياً، والمراجعة شرط قبل أي اتصال.</p></div>
+  </div>
+
+  <h3>كيف تعمل المنصة — 4 خطوات</h3>
+  <ol class="steps">
+    <li><b>تسجيل الطلب</b> — من الموقع أو عبر واتساب، مع بيانات الحالة والمنطقة والدوام.</li>
+    <li><b>مراجعة الإدارة</b> — تتحقق الإدارة من البيانات وتحدّد نوع الخدمة المطلوبة.</li>
+    <li><b>المطابقة</b> — يُختار مقدّم خدمة وفق نوع الحالة والخبرة واللغة والمنطقة.</li>
+    <li><b>الاتفاق</b> — بعد التوقيع والموافقة فقط تُنشر بيانات التواصل ويُسلَّم الباركود.</li>
+  </ol>
 </section>
-<section class="card"><h2>التواصل والدفع</h2><div class="grid"><div class="item contact"><h3>📲 المراسلات الرسمية</h3><p dir="ltr">+961 81 506 299</p><p class="small">هذا الرقم مخصص للمراسلات وخدمة العملاء وتحت إشراف وكيل RAFIQ.</p></div></div></section>
-<section class="card"><h2>ما الذي يميز نموذج RAFIQ؟</h2><div class="grid"><div class="item"><h3>بدون اشتراك لمقدمي الرعاية</h3><p>لا يوجد اشتراك شهري أو سنوي لمقدمي الرعاية والتمريض والمعالجين الفيزيائيين للانضمام إلى المنصة في نموذجها الأولي.</p></div><div class="item"><h3>خدمات للعائلات والمنتسبين</h3><p>RAFIQ لا تركز على العائلة فقط؛ نعمل أيضًا على تطوير خدمات ومزايا للمنتسبين إلى المنصة.</p></div><div class="item"><h3>تقييم بإشراف الإدارة</h3><p>يمكن تطوير نظام تقييم ومراجعة داخلي لمتابعة جودة مقدمي الخدمات، مع إشراف الإدارة وعدم تحويل التقييم إلى إعلان عام غير منضبط.</p></div><div class="item"><h3>خصومات وخدمات مساندة</h3><p>نعمل على إضافة مزايا مثل خصومات الفحوصات المخبرية والتصوير والمعدات الطبية وغيرها بعد الاتفاق مع مقدمي الخدمات.</p></div></div></section><section class="card"><h2>الشركاء ومقدمو الخدمات</h2><p>تعمل RAFIQ على بناء شبكة من مقدمي الخدمات الموثوقين، ومنها المختبرات، مراكز الأشعة، المعالجون الفيزيائيون، الأطباء من مختلف الاختصاصات، اختصاصيو التغذية، ومقدمو الخدمات المساندة.</p><p>يمكن أن تبدأ المشاركة مجانًا في مرحلة بناء الشبكة، ولا يتم اعتماد أي جهة كشريك أو إعلان اسمها وشعارها أو أي عرض أو خصم إلا بعد موافقة الإدارة ووجود اتفاق واضح.</p></section>
-<section class="card"><h2>التواصل الاجتماعي</h2><div class="actions"><a class="btn alt" href="https://www.facebook.com/share/1DZ4CG7hbn/" target="_blank" rel="noopener">Facebook</a><a class="btn alt" href="https://www.instagram.com/issaapplication?igsi=M2ttcjc3N2Mzbmpu" target="_blank" rel="noopener">Instagram</a></div><p class="small">يتم إعداد الإعلانات والرسائل للمراجعة أولًا، ولا يتم اعتماد التواصل الخارجي أو النشر باسم RAFIQ إلا وفق موافقة الإدارة.</p></section>
-<footer class="card small">© RAFIQ | رفيق للخدمات · نصل بالحب والأمان لرعاية العائلة · issaapplication@gmail.com</footer>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://rafiq-o6qd.onrender.com/#organization","name":"RAFIQ | رفيق","url":"https://rafiq-o6qd.onrender.com/","logo":"https://rafiq-o6qd.onrender.com/assets/rafig-logo.png","description":"منصة لتنظيم خدمات الرعاية المنزلية والصحية في لبنان وربط العائلات بمقدمي الخدمات."},{"@type":"WebSite","@id":"https://rafiq-o6qd.onrender.com/#website","url":"https://rafiq-o6qd.onrender.com/","name":"RAFIQ | رفيق","inLanguage":"ar-LB","publisher":{"@id":"https://rafiq-o6qd.onrender.com/#organization"}}]}</script>
+
+<section class="card">
+  <h2>الخدمات الأساسية</h2>
+  <div class="grid">
+    <div class="item"><h3><a href="./elderly-care.html">👴 رعاية كبار السن</a></h3><p>رعاية يومية وليلية ومساعدة في النظافة واللباس والطعام والحركة والمرافقة داخل المنزل.</p></div>
+    <div class="item"><h3><a href="./patient-care.html">🛏️ رعاية المرضى</a></h3><p>رعاية منزلية للمريض وفق تعليمات الطبيب، مع متابعة احتياجات الحالة من الأسرة.</p></div>
+    <div class="item"><h3><a href="./home-nursing.html">🩺 التمريض المنزلي</a></h3><p>ممرض/ة مجاز/ة للإجراءات الطبية ومتابعة الأدوية وقياس العلامات وتحويل الجروح.</p></div>
+    <div class="item"><h3><a href="./physiotherapy.html">🧑‍🦽 العلاج الفيزيائي المنزلي</a></h3><p>تمارين حركية وإعادة تأهيل منزلي بعد الجلطة أو الإصابة أو العملية.</p></div>
+  </div>
+  <p class="small">التفاصيل الكاملة في <a href="./services.html">صفحة الخدمات</a>.</p>
+</section>
+
+<section class="card">
+  <h2>قاعدة أساسية تفرّق بين المهن</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>من هو</th><th>ماذا يقوم به</th><th>متى تحتاجه</th></tr></thead>
+    <tbody>
+      <tr><td><b>مقدّم الرعاية</b></td><td>النظافة، اللباس، الطعام، الحركة، المرافقة، الروتين اليومي</td><td>حين تكون الحاجة للرعاية اليومية فقط</td></tr>
+      <tr><td><b>ممرض/ة مجاز/ة</b></td><td>إجراءات طبية، متابعة أدوية، قياسات، تحويل جروح</td><td>حين تكون هناك حاجة تمريضية</td></tr>
+      <tr><td><b>معالج فيزيائي</b></td><td>تمارين حركية وإعادة تأهيل</td><td>بعد الجلطة أو الإصابة أو العملية</td></tr>
+    </tbody>
+  </table></div>
+  <p class="notice"><b>RAFIQ لا تشخّص ولا تصف دواءً ولا تغيّر علاج الطبيب.</b> نحن ننظّم الطلب ونوجّهه للخدمة المناسبة.</p>
+</section>
+
+<section class="card">
+  <h2>📲 التواصل</h2>
+  <div class="grid">
+    <div class="item contact"><h3>المراسلات الرسمية</h3><p dir="ltr" style="font-size:20px;font-weight:800;color:#087f58">+961 81 506 299</p><p class="small">للمراسلات وخدمة العملاء، تحت إشراف وكيل RAFIQ.</p></div>
+    <div class="item"><h3>الطلب الإلكتروني</h3><p><a class="btn alt" href="./app.html">تسجيل وتقديم طلب</a></p><p class="small">تعبئة النموذج أسهل وأسرع من الاتصال.</p></div>
+    <div class="item"><h3>قبل أن تقرر</h3><p><a class="btn alt" href="./faq.html">الأسئلة الشائعة</a></p><p class="small">10 أسئلة تجيب على أكثر ما يُسأل عنه.</p></div>
+  </div>
+</section>
+
+<footer class="card small">
+© RAFIQ | رفيق للخدمات · نصل بالحب والأمان لرعاية العائلة · issaapplication@gmail.com<br>
+<a href="./services.html">الخدمات</a> · <a href="./about.html">عن المنصة</a> · <a href="./faq.html">الأسئلة الشائعة</a> · <a href="./guide.html">الدليل</a> · <a href="./regions.html">المناطق</a>
+</footer>
 </main>
 <script src="/install-app.js?v=71" defer></script>
 <script>

@@ -39,6 +39,34 @@ th,td{border:1px solid #dce8e2;padding:10px;text-align:right}
 th{background:#eef8f3}
 .notice{background:#fffaf0;border-right:4px solid #c9a85a;padding:13px;border-radius:10px;margin:12px 0;font-size:14px}
 ul{padding-right:20px;line-height:2}
+/* ---- 3-page layout: essentials / services / about ---- */
+.page-nav .actions{justify-content:center}
+.page-head{text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f4f8f6 100%);border-radius:24px;box-shadow:0 10px 34px rgba(8,127,88,.10);border:1px solid #e2efe8}
+.page-head .logo{width:min(190px,52vw);margin:0 auto 8px;background:#fff;border-radius:20px;padding:9px;box-shadow:0 8px 24px rgba(0,0,0,.07)}
+.page-head h1{font-size:26px;margin:6px 0 2px}
+.page-head .tagline{font-size:16px;font-weight:700;color:#17613b;margin:0}
+.about .lead{font-size:16.5px;line-height:2;background:#f2faf6;border-inline-start:4px solid #087f58;border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 16px}
+.about h3{margin:22px 0 8px}
+.steps{margin:0;padding-inline-start:22px;line-height:2}
+.steps li{margin-bottom:8px;padding-inline-start:4px}
+.steps li b{color:#087f58}
+.scroll table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.scroll th,.scroll td{border:1px solid #dce8e2;padding:11px;text-align:right}
+.scroll th{background:#eef8f3;font-weight:800;color:#0b6b4a}
+footer a{color:#087f58;font-weight:700}
+footer a:hover{text-decoration:underline}
+
+/* the assistant button gets its own identity: a live, lit presence */
+.cta .c-bot{background:linear-gradient(135deg,#0f9c6d,#6b4fbf);color:#fff;
+  box-shadow:0 8px 22px rgba(107,79,191,.30);position:relative;overflow:hidden}
+.cta .c-bot::after{content:"";position:absolute;inset-inline-start:-40%;top:-60%;
+  width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:rotate(18deg);animation:rafiq-sheen 4.5s ease-in-out infinite}
+@keyframes rafiq-sheen{0%,72%{inset-inline-start:-40%}88%,100%{inset-inline-start:130%}}
+.cta .c-bot .ic{font-size:28px}
+.cta .c-bot small{opacity:.94}
+@media(prefers-reduced-motion:reduce){.cta .c-bot::after{animation:none}}
+@media(max-width:600px){.page-head h1{font-size:22px}
 </style>
 <script type="application/ld+json">
 {
@@ -83,6 +111,12 @@ ul{padding-right:20px;line-height:2}
 </head>
 <body>
 <main>
+<nav class="card page-nav" aria-label="التنقل بين الصفحات"><div class="actions">
+<a class="btn" href="./">الرئيسية</a>
+<a class="btn alt" href="./services.html">الخدمات</a>
+<a class="btn alt" href="./about.html">عن المنصة</a>
+<a class="btn alt" href="./faq.html">الأسئلة الشائعة</a>
+</div></nav>
   <nav class="card">
     <a class="btn" href="./">الرئيسية</a>
     <a class="btn alt" href="./services.html">الخدمات</a>
