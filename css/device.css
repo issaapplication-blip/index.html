@@ -152,6 +152,96 @@ html[lang="it"] body, html[lang="de"] body { letter-spacing: .1px; }
 html[lang="en"] .brand .logo, html[lang="fr"] .brand .logo,
 html[lang="it"] .brand .logo, html[lang="de"] .brand .logo { width: min(230px, 58vw); }
 
+/* ==========================================================
+   The logo at the top of the page.
+
+   It is pinned to the physical RIGHT edge in every language, for
+   the same reason the language bar is pinned to the physical left:
+   a header that jumps sides when the visitor changes language
+   reads as a glitch.
+
+   Three traps this block deliberately avoids:
+
+   1) No logical properties. `justify-self: end` and
+      `inset-inline-start` are relative to the writing direction, so
+      they put the logo on the LEFT the moment the page flips to
+      Arabic - the exact opposite of what is wanted here. `float`
+      and `margin-left` are physical, so they behave identically in
+      RTL and LTR.
+
+   2) Specificity. The pages carry their own `.logo` / `.brand-logo`
+      rules with `margin:0 auto !important`. A single-class rule here
+      would LOSE to `.brand .logo`, so every wrapper that actually
+      exists in the project is named explicitly and at one level
+      higher.
+
+   3) Inline styles. Three pages put `style="text-align:center"` on
+      the very element that holds the logo, and an inline style beats
+      any stylesheet. `:has()` is the only way to reach the parent
+      from here, so it is used to set the text back to the left. If a
+      browser is too old for `:has()` the text simply stays centred,
+      which still looks correct - only the logo placement depends on it.
+   ========================================================== */
+
+.brand img[src*="rafig-logo"],
+.page-head img[src*="rafig-logo"],
+.card img[src*="rafig-logo"],
+img.logo,
+img.brand-logo,
+img[src*="rafig-logo"] {
+  display: block;
+  margin-left: auto !important;   /* push to the physical right */
+  margin-right: 0 !important;
+}
+
+/* the words beside the logo read from the left */
+.brand,
+.page-head { text-align: left; }
+.card:has(> img[src*="rafig-logo"]),
+article.card:has(> img[src*="rafig-logo"]) { text-align: left !important; }
+
+/* On a wide screen the name, the tagline and the line about the
+   platform sit BESIDE the logo instead of under it, so the header
+   stays one tidy row instead of a tall stack. float:right is what
+   makes this direction-proof. */
+@media (min-width: 700px) {
+  .brand img[src*="rafig-logo"],
+  .page-head img[src*="rafig-logo"],
+  .card img[src*="rafig-logo"],
+  img[src*="rafig-logo"] {
+    float: right;
+    margin: 4px 0 10px 22px !important;   /* the 22px sits on the left: the gap */
+  }
+  /* whatever follows the logo must not wrap around it */
+  .brand::after,
+  .page-head::after,
+  .card:has(> img[src*="rafig-logo"])::after { content: ""; display: block; clear: both; }
+  .cta, .actions, #installHint, .pick, .grid { clear: both; }
+  .brand h1, .brand .tagline, .brand .who,
+  .page-head h1, .page-head .tagline { text-align: left; }
+}
+
+/* On a narrow phone the logo needs its full width, so it goes on its
+   own line above the words - still flush to the right. */
+@media (max-width: 699px) {
+  .brand img[src*="rafig-logo"],
+  .page-head img[src*="rafig-logo"],
+  .card img[src*="rafig-logo"],
+  img[src*="rafig-logo"] {
+    float: none;
+    margin-bottom: 10px !important;
+  }
+  .brand h1, .brand .tagline, .brand .who,
+  .page-head h1, .page-head .tagline { text-align: left; }
+}
+
+/* a Latin script is wider than Arabic, so the logo box can be a
+   little larger without the name wrapping under it too early */
+html[lang="en"] img[src*="rafig-logo"],
+html[lang="fr"] img[src*="rafig-logo"],
+html[lang="it"] img[src*="rafig-logo"],
+html[lang="de"] img[src*="rafig-logo"] { width: min(230px, 56vw); }
+
 /* shown only on a page that has no translation yet */
 .ra-untranslated {
   margin: 0 0 14px;

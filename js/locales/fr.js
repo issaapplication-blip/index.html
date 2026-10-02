@@ -208,6 +208,39 @@
 
     'footer.rights': '© RAFIQ | Rafiq — Nous unissons l’amour et la sécurité pour le soin de la famille',
 
+    /* ---- les quatre pages de services (les quatre premiers choix) ---- */
+    'nav.caregivers': 'Pour les aidants',
+    'cta.wa': 'WhatsApp RAFIQ',
+
+    'elderly.h1': 'Soins aux personnes âgées à domicile au Liban',
+    'elderly.p': 'RAFIQ aide les familles à organiser les demandes de soins aux personnes âgées à domicile, en regroupant les informations sur la personne, les besoins, l’horaire et la zone, afin qu’elles soient examinées et mises en relation avec les bons aidants.',
+    'elderly.h2': 'Ce que le service peut inclure',
+    'elderly.li1': 'Aide aux soins personnels et à la toilette.',
+    'elderly.li2': 'Aide aux repas et préparation de ce qui est convenu dans le cadre du service.',
+    'elderly.li3': 'Compagnie et soutien aux personnes qui ne peuvent pas vivre seules.',
+    'elderly.li4': 'Prise en charge de jour ou de nuit, selon la demande.',
+    'elderly.li5': 'Aide pour sortir ou se déplacer, selon l’accord conclu.',
+    'elderly.p2': 'Les actes médicaux et la prise de médicaments relèvent des consignes du médecin, de l’accord de la famille et du périmètre du prestataire.',
+
+    'patient.h1': 'Soins aux patients à domicile au Liban',
+    'patient.p': 'Une famille peut envoyer une demande comprenant les informations du patient, l’état de la personne, le lieu, l’horaire et les besoins. La demande est ensuite examinée et la mise en relation organisée.',
+    'patient.h2': 'Pourquoi les détails comptent',
+    'patient.p2': 'Le type de pathologie, le degré d’autonomie, l’horaire, l’expérience requise et le lieu des soins aident la direction à comprendre la demande et à choisir les bons prestataires.',
+    'patient.p3': 'RAFIQ ne remplace ni le médecin ni l’hôpital, et tout soin médical ou médicamenteux doit relever de la compétence concernée et des instructions médicales approuvées.',
+
+    'nursing.h1': 'Soins infirmiers à domicile au Liban',
+    'nursing.p': 'RAFIQ organise les demandes de soins infirmiers à domicile et met les familles en relation avec les infirmiers inscrits sur le réseau de la plateforme, après examen des données et des documents professionnels.',
+    'nursing.h2a': 'La mise en relation',
+    'nursing.p2': 'La mise en relation peut tenir compte du type de pathologie, de la spécialité, de l’expérience, de la zone, de l’horaire et des services demandés.',
+    'nursing.h2b': 'Pour les infirmiers',
+    'nursing.p3': 'Aucun abonnement mensuel ni annuel n’est requis pour rejoindre le premier modèle RAFIQ. Les services et les demandes sont traités selon les règles de la plateforme et les accords de travail.',
+
+    'physio.h1': 'Kinésithérapie à domicile au Liban',
+    'physio.p': 'RAFIQ organise les demandes de kinésithérapie à domicile et met les familles en relation avec des kinésithérapeutes selon la zone, l’expérience et les services disponibles.',
+    'physio.p2': 'Le besoin de soins et le programme adapté sont déterminés par le spécialiste selon l’état de la personne. La plateforme ne remplace ni l’évaluation médicale ni le bilan kinithérapique professionnel.',
+    'physio.h2': 'Pour les kinésithérapeutes',
+    'physio.p3': 'L’adhésion au premier modèle RAFIQ ne nécessite aucun abonnement mensuel ni annuel.',
+
     'safety.nodiagnose': 'Nous ne posons pas de diagnostic, ne prescrivons pas et ne modifions pas un traitement médical.'
   };
 

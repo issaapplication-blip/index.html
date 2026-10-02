@@ -208,6 +208,39 @@
 
     'footer.rights': '© RAFIQ | Rafiq — Uniamo amore e sicurezza alla cura della famiglia',
 
+    /* ---- le quattro pagine dei servizi (le prime quattro scelte) ---- */
+    'nav.caregivers': 'Per i badanti',
+    'cta.wa': 'WhatsApp RAFIQ',
+
+    'elderly.h1': 'Assistenza agli anziani a domicilio in Libano',
+    'elderly.p': 'RAFIQ aiuta le famiglie a organizzare le richieste di assistenza agli anziani a domicile, raccogliendo i dati della persona, le esigenze, l’orario e la zona, perché vengano verificate e abbinate ai badanti più adatti.',
+    'elderly.h2': 'Che cosa può comprendere il servizio',
+    'elderly.li1': 'Aiuto all’igiene personale e alla toilette.',
+    'elderly.li2': 'Aiuto ai pasti e preparazione di quanto concordato nei limiti del servizio.',
+    'elderly.li3': 'Compagnia e sostegno a chi non riesce a vivere da solo.',
+    'elderly.li4': 'Assistenza diurna o notturna, come richiesto.',
+    'elderly.li5': 'Aiuto per uscire o spostarsi, come concordato.',
+    'elderly.p2': 'Gli atti medici e la somministrazione dei farmaci seguono le indicazioni del medico, l’accordo della famiglia e l’ambito di intervento del fornitore.',
+
+    'patient.h1': 'Assistenza ai pazienti a domicilio in Libano',
+    'patient.p': 'Una famiglia può inviare una richiesta con i dati del paziente, lo stato di salute, il luogo, l’orario e le esigenze. La richiesta viene poi verificata e organizzato l’abbinamento più adatto.',
+    'patient.h2': 'Perché i dettagli contano',
+    'patient.p2': 'Il tipo di patologia, il grado di autosufficienza, l’orario, l’esperienza richiesta e il luogo dell’assistenza aiutano la direzione a capire la richiesta e a scegliere i fornitori giusti.',
+    'patient.p3': 'RAFIQ non sostituisce il medico né l’ospedale, e ogni assistenza medica o farmacologica deve svolgersi nel rispetto della competenza e delle istruzioni mediche approvate.',
+
+    'nursing.h1': 'Infermieristica domiciliare in Libano',
+    'nursing.p': 'RAFIQ organizza le richieste di infermieristica domiciliare e collega le famiglie agli infermieri iscritti sulla rete della piattaforma, dopo la verifica dei dati e dei documenti professionali.',
+    'nursing.h2a': 'L’abbinamento',
+    'nursing.p2': 'L’abbinamento può tenere conto del tipo di patologia, della specializzazione, dell’esperienza, della zona, dell’orario e dei servizi richiesti.',
+    'nursing.h2b': 'Per gli infermieri',
+    'nursing.p3': 'Nel primo modello RAFIQ non è richiesto alcun abbonamento mensile o annuale. Servizi e richieste sono gestiti secondo le regole della piattaforma e gli accordi di lavoro.',
+
+    'physio.h1': 'Fisioterapia domiciliare in Libano',
+    'physio.p': 'RAFIQ organizza le richieste di fisioterapia domiciliare e collega le famiglie ai fisioterapisti in base alla zona, all’esperienza e ai servizi disponibili.',
+    'physio.p2': 'Il bisogno terapeutico e il programma adatto sono stabiliti dallo specialista in base allo stato della persona. La piattaforma non sostituisce né la valutazione medica né la valutazione professionale della fisioterapia.',
+    'physio.h2': 'Per i fisioterapisti',
+    'physio.p3': 'L’adesione al primo modello RAFIQ non richiede alcun abbonamento mensile o annuale.',
+
     'safety.nodiagnose': 'Non formuliamo diagnosi, non prescriviamo e non modifichiamo una cura medica.'
   };
 

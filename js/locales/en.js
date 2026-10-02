@@ -210,6 +210,39 @@
 
     'footer.rights': '© RAFIQ | Rafiq — We connect love and safety to family care',
 
+    /* ---- the four service pages (the top four picks on the home page) ---- */
+    'nav.caregivers': 'For caregivers',
+    'cta.wa': 'WhatsApp RAFIQ',
+
+    'elderly.h1': 'Elderly care at home in Lebanon',
+    'elderly.p': 'RAFIQ helps families organise requests for elderly care at home, collecting the person’s details, the needs, the schedule and the area so they can be reviewed and matched with the right caregivers.',
+    'elderly.h2': 'What the service can include',
+    'elderly.li1': 'Help with personal care and washing.',
+    'elderly.li2': 'Help with meals and preparing whatever is agreed within the scope of the service.',
+    'elderly.li3': 'Company and support for people who cannot manage alone.',
+    'elderly.li4': 'Daytime or night-time care, as requested.',
+    'elderly.li5': 'Help with going out or getting around, as agreed.',
+    'elderly.p2': 'Any medical task or the giving of medication follows the doctor’s instructions, the family’s agreement and the scope of the service provider.',
+
+    'patient.h1': 'Patient care at home in Lebanon',
+    'patient.p': 'A family can send a request with the patient’s details, the condition, the location, the schedule and the needs. The request is then reviewed and the right match organised.',
+    'patient.h2': 'Why the details matter',
+    'patient.p2': 'The type of condition, the level of independence, the schedule, the experience required and the place of care help the management understand the request and choose the right providers.',
+    'patient.p3': 'RAFIQ does not replace the doctor or the hospital, and any medical or medication-related care must take place within the relevant scope and the approved medical instructions.',
+
+    'nursing.h1': 'Home nursing in Lebanon',
+    'nursing.p': 'RAFIQ organises requests for home nursing and connects families with the nurses registered on the platform network, after the details and the professional documents have been reviewed.',
+    'nursing.h2a': 'Matching',
+    'nursing.p2': 'Matching can take into account the type of condition, the specialisation, the experience, the area, the schedule and the services required.',
+    'nursing.h2b': 'For nurses',
+    'nursing.p3': 'There is no monthly or annual subscription to join the first RAFIQ model. Services and requests are handled under the platform rules and the working agreements.',
+
+    'physio.h1': 'Home physiotherapy in Lebanon',
+    'physio.p': 'RAFIQ organises requests for home physiotherapy and connects families with physiotherapists by area, experience and the services available.',
+    'physio.p2': 'The therapeutic need and the right programme are determined by the specialist according to the condition. The platform does not replace a medical assessment or a professional therapy assessment.',
+    'physio.h2': 'For physiotherapists',
+    'physio.p3': 'Joining the first RAFIQ model requires no monthly or annual subscription.',
+
     'safety.nodiagnose': 'We do not diagnose, prescribe, or change a doctor’s treatment.'
   };
 

@@ -208,6 +208,39 @@
 
     'footer.rights': '© RAFIQ | Rafiq — Wir verbinden Liebe und Sicherheit mit der Pflege der Familie',
 
+    /* ---- die vier Leistungsseiten (die vier wichtigsten Einstiege) ---- */
+    'nav.caregivers': 'Für Betreuungskräfte',
+    'cta.wa': 'WhatsApp RAFIQ',
+
+    'elderly.h1': 'Pflege älterer Menschen zu Hause im Libanon',
+    'elderly.p': 'RAFIQ hilft Familien, Anfragen für die Pflege älterer Menschen zu Hause zu organisieren. Dabei werden Angaben zur Person, zu den Bedürfnissen, zum Zeitplan und zur Region gesammelt, geprüft und mit den passenden Betreuungskräften abgeglichen.',
+    'elderly.h2': 'Was der Service umfassen kann',
+    'elderly.li1': 'Hilfe bei Körperpflege und Waschen.',
+    'elderly.li2': 'Hilfe bei Mahlzeiten und bei dem, was im Rahmen des Services vereinbart ist.',
+    'elderly.li3': 'Begleitung und Unterstützung für Menschen, die nicht allein zurechtkommen.',
+    'elderly.li4': 'Betreuung am Tag oder in der Nacht, wie beauftragt.',
+    'elderly.li5': 'Hilfe beim Verlassen der Wohnung oder bei der Fortbewegung, wie vereinbart.',
+    'elderly.p2': 'Medizinische Handlungen und die Gabe von Medikamenten richten sich nach den ärztlichen Anweisungen, der Zustimmung der Familie und dem Leistungsumfang des Anbieters.',
+
+    'patient.h1': 'Patientenpflege zu Hause im Libanon',
+    'patient.p': 'Eine Familie kann eine Anfrage mit den Angaben zur Person, zum Zustand, zum Ort, zum Zeitplan und zu den Bedürfnissen senden. Die Anfrage wird geprüft und die passende Zuordnung organisiert.',
+    'patient.h2': 'Warum die Angaben wichtig sind',
+    'patient.p2': 'Die Art des Zustands, das Maß der Selbstständigkeit, der Zeitplan, die geforderte Erfahrung und der Ort der Pflege helfen der Leitung, die Anfrage zu verstehen und die richtigen Anbieter auszuwählen.',
+    'patient.p3': 'RAFIQ ersetzt weder die Ärztin oder den Arzt noch das Krankenhaus. Jede medizinische oder medikamentöse Versorgung muss innerhalb der jeweiligen Zuständigkeit und der genehmigten ärztlichen Anweisungen erfolgen.',
+
+    'nursing.h1': 'Hauskrankenpflege im Libanon',
+    'nursing.p': 'RAFIQ organisiert Anfragen für die Hauskrankenpflege und verbindet Familien mit den im Plattformnetz registrierten Pflegekräften, nachdem die Angaben und die Berufsunterlagen geprüft wurden.',
+    'nursing.h2a': 'Die Zuordnung',
+    'nursing.p2': 'Bei der Zuordnung können der Zustand, die Fachrichtung, die Erfahrung, die Region, der Zeitplan und die benötigten Leistungen berücksichtigt werden.',
+    'nursing.h2b': 'Für Pflegekräfte',
+    'nursing.p3': 'Für die Teilnahme am ersten RAFIQ-Modell gibt es kein monatliches oder jährliches Abo. Leistungen und Anfragen werden nach den Plattformregeln und den Arbeitsvereinbarungen bearbeitet.',
+
+    'physio.h1': 'Physiotherapie zu Hause im Libanon',
+    'physio.p': 'RAFIQ organisiert Anfragen für die Physiotherapie zu Hause und verbindet Familien anhand von Region, Erfahrung und verfügbaren Leistungen mit Physiotherapeuten.',
+    'physio.p2': 'Den Therapiebedarf und das passende Programm bestimmt die Fachperson anhand des Zustands. Die Plattform ersetzt weder die medizinische Beurteilung noch die fachliche physiotherapeutische Befundung.',
+    'physio.h2': 'Für Physiotherapeuten',
+    'physio.p3': 'Die Teilnahme am ersten RAFIQ-Modell erfordert kein monatliches oder jährliches Abo.',
+
     'safety.nodiagnose': 'Wir stellen keine Diagnose, verschreiben nicht und ändern keine ärztliche Behandlung.'
   };
 
