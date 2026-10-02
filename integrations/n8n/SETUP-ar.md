@@ -1,29 +1,32 @@
-# n8n ← → Kapso ← → WhatsApp  —  wiring guide
+# دليل ربط n8n + Kapso + WhatsApp
 
-Everything below is already built and tested. Three nodes, no API key,
-no Supabase, no server of your own.
+كل ما تحت هذا السطر مبني ومختبَر فعليًا. ثلاث عقد، بدون أي مفتاح API،
+بدون Supabase، وبدون سيرفر خاص بك.
 
 ---
 
-## The chain
+## السلسلة
 
 ```
-WhatsApp customer
-      │
-      ▼
-Meta WhatsApp Cloud API          number 1324609540731383
-      │
-      ▼
-Kapso                           project mhdissa980
-      │   POST https://mhdissa980.app.n8n.cloud/webhook/rafiq-kapso-inbound
-      ▼
-n8n  ── node 1  Webhook      ✅ verified live: POST → 200
-    ── node 2  Code         ✅ agent bundle, 9/9 scenarios pass
-    ── node 3  Kapso/Meta   ← send the reply back
-      │
-      ▼
-WhatsApp customer receives the answer
+رسالة العميل على واتساب
+        │
+        ▼
+Meta WhatsApp Cloud API          الرقم 1324609540731383
+        │
+        ▼
+Kapso                           المشروع mhdissa980
+        │   POST https://mhdissa980.app.n8n.cloud/webhook/rafiq-kapso-inbound
+        ▼
+n8n  ▸ node 1  Webhook      ▸ مُختبَر: POST يعيد 200
+    ▸ node 2  Code         ▸ حزمة الوكيل، 9/9 سيناريوهات ناجحة
+    ▸ node 3  Kapso/Meta   ▸ إرسال الرد
+        │
+        ▼
+العميل يستلم الرد
 ```
+
+**مُثبَت مسبقًا:** الـ webhook يردّ `POST ← 200`.
+**مُثبَت مسبقًا:** Meta وافقت على القالب `rafiq_customer_support_ar` (ar).
 
 **Already proven:** the webhook answers `POST → 200`.
 **Already proven:** Meta approved the template `rafiq_customer_support_ar` (ar).

@@ -14,6 +14,31 @@
 
   var deferred = null;
 
+  /* ---------- language ----------
+     Every user-visible string here goes through T(). The key is resolved
+     by the language engine when it is on the page; if it is not, the
+     Arabic fallback that sits next to the key is used. That way this file
+     never has to guess the current language, and it still works on a page
+     that does not load the engine at all. */
+  function T(key, fallback) {
+    try {
+      if (window.RAFIQ_I18N && window.RAFIQ_I18N.translate) {
+        var v = window.RAFIQ_I18N.translate(key);
+        if (v) return v;
+      }
+    } catch (e) { /* engine not ready */ }
+    return fallback;
+  }
+
+  /* the key of the message currently on screen, so a language change can
+     repaint it without having to re-derive the whole diagnosis */
+  var currentHintKey = null;
+  var currentHintFallback = null;
+
+  document.addEventListener('rafiq:i18n', function () {
+    if (currentHintKey) say(currentHintKey, currentHintFallback);
+  });
+
   function standalone() {
     try {
       return window.matchMedia('(display-mode: standalone)').matches ||
@@ -30,12 +55,15 @@
   /* the manual steps, as one short block */
   function steps() {
     if (isIOS()) {
-      return 'اضغط زر المشاركة ⬆︎ في الأسفل ← "إضافة إلى الشاشة الرئيسية" ← "إضافة".';
+      return T('install.steps.ios',
+        'اضغط زر المشاركة ⬆︎ في الأسفل ← "إضافة إلى الشاشة الرئيسية" ← "إضافة".');
     }
     if (/Android/i.test(navigator.userAgent)) {
-      return 'افتح قائمة المتصفح ⋮ ← "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".';
+      return T('install.steps.android',
+        'افتح قائمة المتصفح ⋮ ← "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".');
     }
-    return 'اضغط أيقونة التثبيت ⊕ في شريط عنوان المتصفح.';
+    return T('install.steps.desktop',
+      'اضغط أيقونة التثبيت ⊕ في شريط عنوان المتصفح.');
   }
 
   function buttons() {
@@ -46,7 +74,12 @@
     return document.querySelectorAll('[data-rafiq-install-hint], #installHint');
   }
 
-  function say(text) {
+  /* say() always takes a key plus its Arabic fallback, so the message can
+     be repainted the moment the visitor changes language. */
+  function say(key, fallback) {
+    currentHintKey = key;
+    currentHintFallback = fallback;
+    var text = T(key, fallback);
     hints().forEach(function (el) {
       el.textContent = text;
       el.hidden = false;
@@ -74,7 +107,7 @@
   window.addEventListener('appinstalled', function () {
     deferred = null;
     hide();
-    say('تم التثبيت ✅ التطبيق الآن على شاشتك.');
+    say('install.done', 'تم التثبيت ✅ التطبيق الآن على شاشتك.');
   });
 
   /* ---------- make the manifest installable on ANY host -------------
@@ -135,7 +168,7 @@
   /* ---------- service worker: required for installability ---------- */
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('/sw.js?v=71', { updateViaCache: 'none' })
+      navigator.serviceWorker.register('/sw.js?v=72', { updateViaCache: 'none' })
         .catch(function () { /* the site still works without it */ });
     });
   }
@@ -148,11 +181,11 @@
       deferred.userChoice.then(function (choice) {
         deferred = null;
         if (choice && choice.outcome === 'accepted') hide();
-        else say(reason() || steps());
-      }).catch(function () { say(reason() || steps()); });
+        else sayWhy();
+      }).catch(function () { sayWhy(); });
       return;
     }
-    say(reason() || steps());
+    sayWhy();
   }
 
   document.addEventListener('click', function (e) {
@@ -164,9 +197,10 @@
      (plain HTTP, or a browser with no install path at all) */
   function unsupported() {
     if (!window.isSecureContext) {
-      return 'التثبيت يحتاج اتصالاً آمناً (https). الموقع يعمل عادياً الآن.';
+      return T('install.https',
+        'التثبيت يحتاج اتصالاً آمناً (https). الموقع يعمل عادياً الآن.');
     }
-    return 'المتصفح لا يعرض زر التثبيت. ' + steps();
+    return T('install.noButton', 'المتصفح لا يعرض زر التثبيت. ') + steps();
   }
 
   /* ---------- diagnose: WHY can the browser not install right now? ----------
@@ -182,17 +216,38 @@
     };
   }
 
-  function reason() {
+  /* The diagnosis as a key plus its Arabic source, so a language change can
+     repaint the same reason in the new language. */
+  function reasonEntry() {
     var d = diagnose();
-    if (d.standalone) return 'التطبيق مثبَّت بالفعل على هذا الجهاز.';
-    if (!d.secureContext) return 'التثبيت يحتاج رابطاً آمناً https — سيعمل الزر مباشرة عند فتحه.';
-    if (!d.swSupported) return 'هذا المتصفح لا يدعم تثبيت التطبيقات. افتح الموقع في Chrome.';
-    if (!d.hasManifest) return 'ملف التطبيق غير متاح على هذا الخادم بعد.';
-    if (isIOS()) return 'على iPhone: زر المشاركة ⬆︎ ← "إضافة إلى الشاشة الرئيسية" ← "إضافة".';
+    if (d.standalone) return { key: 'reason.installed', ar: 'التطبيق مثبَّت بالفعل على هذا الجهاز.' };
+    if (!d.secureContext) return { key: 'reason.https', ar: 'التثبيت يحتاج رابطاً آمناً https — سيعمل الزر مباشرة عند فتحه.' };
+    if (!d.swSupported) return { key: 'reason.noSW', ar: 'هذا المتصفح لا يدعم تثبيت التطبيقات. افتح الموقع في Chrome.' };
+    if (!d.hasManifest) return { key: 'reason.noManifest', ar: 'ملف التطبيق غير متاح على هذا الخادم بعد.' };
+    if (isIOS()) return { key: 'reason.ios', ar: 'على iPhone: زر المشاركة ⬆︎ ← "إضافة إلى الشاشة الرئيسية" ← "إضافة".' };
     if (!d.canPrompt) {
-      return 'اضغط قائمة المتصفح ⋮ ← "تثبيت التطبيق". إن لم يظهر الخيار، أعد فتح الموقع من الرابط المباشر.';
+      return { key: 'reason.noPrompt', ar: 'اضغط قائمة المتصفح ⋮ ← "تثبيت التطبيق". إن لم يظهر الخيار، أعد فتح الموقع من الرابط المباشر.' };
     }
-    return '';
+    return null;
+  }
+
+  /* the reason, already in the current language (public API) */
+  function reason() {
+    var e = reasonEntry();
+    return e ? T(e.key, e.ar) : '';
+  }
+
+  /* show the reason if there is one, otherwise the manual steps */
+  function sayWhy() {
+    var e = reasonEntry();
+    if (e) { say(e.key, e.ar); return; }
+    if (isIOS()) {
+      say('install.steps.ios', 'اضغط زر المشاركة ⬆︎ في الأسفل ← "إضافة إلى الشاشة الرئيسية" ← "إضافة".');
+    } else if (/Android/i.test(navigator.userAgent)) {
+      say('install.steps.android', 'افتح قائمة المتصفح ⋮ ← "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".');
+    } else {
+      say('install.steps.desktop', 'اضغط أيقونة التثبيت ⊕ في شريط عنوان المتصفح.');
+    }
   }
 
 window.RAFIQ_INSTALL = {
@@ -204,6 +259,7 @@ window.RAFIQ_INSTALL = {
     manifestRepaired: false,
     diagnose: diagnose,
     reason: reason,
+    reasonEntry: reasonEntry,
     canPrompt: function () { return !!deferred; },
     unsupported: unsupported
   };
@@ -224,9 +280,8 @@ window.RAFIQ_INSTALL = {
 
     // give the browser a moment to fire beforeinstallprompt
     setTimeout(function () {
-      if (deferred) { say('اضغط «تثبيت التطبيق» لإضافته إلى جهازك.'); return; }
-      var r = reason();
-      if (r) say(r);
+      if (deferred) { say('install.ready', 'اضغط «تثبيت التطبيق» لإضافته إلى جهازك.'); return; }
+      sayWhy();
     }, 1200);
   }
 
