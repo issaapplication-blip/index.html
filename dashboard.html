@@ -163,7 +163,14 @@ table td,table th{vertical-align:top}</style>
         <button data-f="rejected">مرفوضة</button>
         <button data-f="">الكل</button>
       </div>
-      <div id="appList"></div>
+      <div class="docbar">
+  <input id="appQ" type="search" placeholder="ابحث بالاسم أو الرقم أو المنطقة أو نص الرسالة" aria-label="بحث في الطلبات">
+  <select id="appType" aria-label="فلتر نوع الطلب"><option value="">كل الأنواع</option></select>
+  <select id="appRegion" aria-label="فلتر المنطقة"><option value="">كل المناطق</option></select>
+  <button class="btn alt" id="appMore" type="button">تحميل المزيد</button>
+</div>
+<p class="small" id="appCount"></p>
+<div id="appList"></div>
 
       <h2 style="margin-top:20px">🧾 طلبات الرعاية</h2>
       <div class="grid" id="gCare"></div>
@@ -539,45 +546,172 @@ function profOf(uid){
   };
 }
 
-async function loadApplications(){
-  const [a,p]=await Promise.all([
-    db.from('applications').select('*').order('created_at',{ascending:false}).limit(200),
-    db.from('profiles').select('id,first_name,last_name,phone,role,region,status').limit(500)
+/* ==========================================================
+   Application review.
+
+   What this replaces
+   ------------------
+   The old table asked for the newest 200 rows and stopped. A
+   manager with 240 applications on file could never see the 40
+   oldest, and nothing on the page said that was happening. There
+   was no search, no filter by region or by application type, and
+   the applicant's message was cut at 120 characters, which is
+   usually enough to be useless.
+
+   What it does now
+   ----------------
+     - every application, paged, with the true total on screen
+     - search across name, phone, region and the applicant's note
+     - filter by status, by application type, and by region
+     - a count per status so the queue is visible at a glance
+     - the full message, expandable, not truncated
+     - the review actions unchanged: approve, reject, under review,
+       and issue the membership barcode
+
+   appFilter is kept because the status tab bar above the table
+   drives it.
+   ========================================================== */
+
+const APP_PAGE = 200;
+let APP_STATE = { total: null, q: '', type: '', region: '' };
+
+function appTypeOptions() {
+  const sel = $('appType');
+  if (!sel) return;
+  const seen = {};
+  APP.apps.forEach(function (a) { if (a.application_type) seen[a.application_type] = 1; });
+  const keys = Object.keys(seen).sort();
+  const sig = keys.join('|');
+  if (sel.dataset.sig === sig) return;
+  sel.innerHTML = '<option value="">كل الأنواع</option>' + keys.map(function (k) {
+    return '<option value="' + esc(k) + '">' + esc(ROLE_AR[k] || k) + '</option>';
+  }).join('');
+  sel.dataset.sig = sig;
+}
+
+function appRegionOptions() {
+  const sel = $('appRegion');
+  if (!sel) return;
+  const seen = {};
+  APP.profiles.forEach(function (p) { if (p.region) seen[p.region] = 1; });
+  APP.apps.forEach(function (a) { if (a.region) seen[a.region] = 1; });
+  const keys = Object.keys(seen).sort();
+  const sig = keys.join('|');
+  if (sel.dataset.sig === sig) return;
+  sel.innerHTML = '<option value="">كل المناطق</option>' + keys.map(function (k) {
+    return '<option value="' + esc(k) + '">' + esc(k) + '</option>';
+  }).join('');
+  sel.dataset.sig = sig;
+}
+
+function appCounts() {
+  const c = { pending: 0, under_review: 0, approved: 0, rejected: 0 };
+  APP.apps.forEach(function (a) {
+    const k = a.status || 'pending';
+    if (c[k] !== undefined) c[k]++;
+  });
+  return c;
+}
+
+function appRow(x) {
+  const p = profOf(x.user_id);
+  const when = String(x.created_at || '').slice(0, 16).replace('T', ' ');
+  const note = String(x.notes || '').trim();
+
+  // the full message is always reachable; the row only shows a lead-in
+  let noteCell = '<span class="small">' + (note ? esc(note.slice(0, 110)) : '—') + '</span>';
+  if (note.length > 110) {
+    noteCell = '<details><summary class="small">' + esc(note.slice(0, 110)) + '…</summary>' +
+      '<div class="small" style="white-space:pre-wrap;margin-top:5px">' + esc(note) + '</div></details>';
+  }
+
+  return '<tr>' +
+    '<td><b>' + esc(p.name) + '</b>' +
+      (p.phone ? '<br><span class="small" dir="ltr">' + esc(p.phone) + '</span>' : '') +
+      (p.region ? '<br><span class="small">📍 ' + esc(p.region) + '</span>' : '') +
+      (x.region && x.region !== p.region ? '<br><span class="small">📍 ' + esc(x.region) + '</span>' : '') +
+    '</td>' +
+    '<td class="small">' + esc(ROLE_AR[x.application_type] || x.application_type || '?') + '</td>' +
+    '<td class="small">' + esc(when) + '</td>' +
+    '<td class="small">' + st(x.status) + '</td>' +
+    '<td>' + noteCell + '</td>' +
+    '<td><div class="actions" style="display:flex;gap:5px;flex-wrap:wrap">' +
+      (x.status !== 'approved'    ? '<button class="btn" onclick="reviewApp(\'' + esc(x.id) + '\',\'approved\')">✓ اعتماد</button>' : '') +
+      (x.status !== 'rejected'    ? '<button class="btn danger" onclick="reviewApp(\'' + esc(x.id) + '\',\'rejected\')">✕ رفض</button>' : '') +
+      (x.status !== 'under_review'? '<button class="btn alt" onclick="reviewApp(\'' + esc(x.id) + '\',\'under_review\')">👁 قيد المراجعة</button>' : '') +
+      (x.status === 'approved'     ? '<button class="btn gold" onclick="issueCode(\'' + esc(x.user_id) + '\')">🎫 إصدار بطاقة الانتساب</button>' : '') +
+    '</div></td></tr>';
+}
+
+function renderApps() {
+  let list = APP.apps;
+
+  if (appFilter) list = list.filter(function (x) { return (x.status || 'pending') === appFilter; });
+  if (APP_STATE.type)   list = list.filter(function (x) { return x.application_type === APP_STATE.type; });
+  if (APP_STATE.region) list = list.filter(function (x) {
+    const p = profOf(x.user_id);
+    return x.region === APP_STATE.region || p.region === APP_STATE.region;
+  });
+  if (APP_STATE.q) {
+    const q = APP_STATE.q.toLowerCase();
+    list = list.filter(function (x) {
+      const p = profOf(x.user_id);
+      return [p.name, p.phone, p.region, x.region, x.application_type, x.status, x.notes].some(function (v) {
+        return v && String(v).toLowerCase().indexOf(q) >= 0;
+      });
+    });
+  }
+
+  const c = appCounts();
+  const total = APP_STATE.total === null ? '?' : APP_STATE.total;
+  $('appCount').innerHTML = 'محمّل <b>' + APP.apps.length + '</b> من ' + total +
+    ' · يعرض <b>' + list.length + '</b>' +
+    ' · ⏳ انتظار <b>' + c.pending + '</b>' +
+    ' · 👁 قيد المراجعة ' + c.under_review +
+    ' · ✓ معتمد ' + c.approved +
+    ' · ✕ مرفوض ' + c.rejected;
+
+  const more = $('appMore');
+  if (more) more.disabled = (APP_STATE.total !== null && APP.apps.length >= APP_STATE.total);
+
+  if (!list.length) {
+    $('appList').innerHTML = '<div class="notice">' +
+      (APP.apps.length ? 'لا يوجد طلب يطابق البحث أو الفلتر.' : 'لا توجد طلبات في هذه الحالة بعد.') + '</div>';
+    return;
+  }
+
+  $('appList').innerHTML = '<div class="scroll"><table><thead><tr>' +
+    '<th>مقدّم الطلب</th><th>النوع</th><th>التاريخ</th><th>الحالة</th><th>رسالة مقدّم الطلب</th><th>إجراء</th>' +
+    '</tr></thead><tbody>' + list.map(appRow).join('') + '</tbody></table></div>';
+}
+
+async function loadApplications(append) {
+  const from = append ? APP.apps.length : 0;
+  const to = from + APP_PAGE - 1;
+  const [a, p] = await Promise.all([
+    db.from('applications').select('*', { count: 'exact' })
+      .order('created_at', { ascending: false }).range(from, to),
+    db.from('profiles').select('id,first_name,last_name,phone,role,region,status').limit(5000)
   ]);
-  APP.apps   = a.data||[];
-  APP.profiles = p.data||[];
-  if(a.error){ $('appList').innerHTML='<div class="err">تعذر تحميل الطلبات: '+esc(a.error.message)+'</div>'; return; }
+
+  if (a.error) {
+    $('appList').innerHTML = '<div class="err">تعذر تحميل الطلبات: ' + esc(a.error.message) + '</div>';
+    return;
+  }
+
+  APP.apps = append ? APP.apps.concat(a.data || []) : (a.data || []);
+  APP.profiles = p.data || [];
+  if (typeof a.count === 'number') APP_STATE.total = a.count;
+
+  appTypeOptions();
+  appRegionOptions();
   renderApps();
 }
 
-function renderApps(){
-  const list=APP.apps.filter(x=>!appFilter||x.status===appFilter);
-  if(!list.length){
-    $('appList').innerHTML='<div class="notice">لا توجد طلبات في هذه الحالة.</div>';
-    return;
-  }
-  $('appList').innerHTML='<div class="scroll"><table><thead><tr>'+
-    '<th>المتقدم</th><th>النوع</th><th>الحالة</th><th>التاريخ</th><th>إجراء</th>'+
-    '</tr></thead><tbody>'+list.map(x=>{
-      const p=profOf(x.user_id);
-      return '<tr>'+
-        '<td><b>'+esc(p.name)+'</b>'+
-          (p.phone?'<br><span class="small" dir="ltr">'+esc(p.phone)+'</span>':'')+
-          (p.region?'<br><span class="small">📍'+esc(p.region)+'</span>':'')+
-          (x.notes?'<br><span class="small">'+esc(String(x.notes).slice(0,120))+'</span>':'')+
-        '</td>'+
-        '<td class="small">'+esc(ROLE_AR[x.application_type]||x.application_type||'—')+'</td>'+
-        '<td>'+st(x.status)+'</td>'+
-        '<td class="small">'+esc(String(x.created_at||'').slice(0,10))+'</td>'+
-        '<td><div class="actions" style="display:flex;gap:5px;flex-wrap:wrap">'+
-          (x.status!=='approved' ? '<button class="btn" onclick="reviewApp(\''+x.id+'\',\'approved\')">✓ قبول</button>':'')+
-          (x.status!=='rejected' ? '<button class="btn danger" onclick="reviewApp(\''+x.id+'\',\'rejected\')">✕ رفض</button>':'')+
-          (x.status!=='under_review'? '<button class="btn alt" onclick="reviewApp(\''+x.id+'\',\'under_review\')">مراجعة</button>':'')+
-          (x.status==='approved'? '<button class="btn gold" onclick="issueCode(\''+x.user_id+'\')">🎫 إصدار باركود</button>':'')+
-        '</div></td></tr>';
-    }).join('')+'</tbody></table></div>';
-}
-
+if ($('appQ'))      $('appQ').addEventListener('input',  function (e) { APP_STATE.q = e.target.value.trim(); renderApps(); });
+if ($('appType'))   $('appType').addEventListener('change', function (e) { APP_STATE.type = e.target.value; renderApps(); });
+if ($('appRegion')) $('appRegion').addEventListener('change', function (e) { APP_STATE.region = e.target.value; renderApps(); });
+if ($('appMore'))   $('appMore').addEventListener('click',  function () { loadApplications(true); });
 window.reviewApp=async(id,status)=>{
   let note=null;
   if(status==='rejected') note=prompt('سبب الرفض (يظهر للمنتسب):','');
