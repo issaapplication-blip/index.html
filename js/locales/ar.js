@@ -36,7 +36,7 @@
     'home.cta.wa.sub': 'رد مباشر',
     'home.cta.bot': 'اسأل الوكيل',
     'home.cta.bot.sub': 'توجيه فوري',
-    'home.install': 'تثبيت التطبيق',
+    'home.install': '📲 تثبيت التطبيق',
 
     'home.pick.title': 'اختر ما تحتاجه',
     'home.pick.1.t': 'رعاية كبار السن',

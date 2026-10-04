@@ -52,6 +52,40 @@ const RAFIQ_I18N = (function () {
     try { localStorage.setItem(KEY, code); } catch (e) { /* private mode */ }
   }
 
+  /* ---------- which language does this visitor actually read? ----------
+
+     A member who opens the site on a phone set to French should not
+     have to hunt for the button. On the very first visit the browser's
+     own language list decides, and the answer is remembered from then
+     on so the site never flip-flops between visits.
+
+     The whole list is walked, not just the first entry. A phone set to
+     Spanish with English listed second gets English, which is a
+     language that person actually reads; dropping them into Arabic
+     instead would be worse. Only when nothing in the list is
+     supported does it fall back to Arabic, the source language. */
+  var detected = null;
+
+  function detect() {
+    var list = [];
+    try {
+      if (navigator.languages && navigator.languages.length) {
+        list = Array.prototype.slice.call(navigator.languages);
+      }
+    } catch (e) { /* older browser */ }
+    try { if (navigator.language) list.push(navigator.language); } catch (e) {}
+
+    for (var i = 0; i < list.length; i++) {
+      var raw = String(list[i] || '').toLowerCase().replace(/_/g, '-');
+      if (!raw) continue;
+      // "fr-CA" -> "fr"; an exact match on the full tag wins first
+      if (isKnown(raw)) { detected = raw; return raw; }
+      var base = raw.split('-')[0];
+      if (isKnown(base)) { detected = base; return base; }
+    }
+    return DEFAULT;
+  }
+
   function loadScript(code) {
     if (bundles[code]) return Promise.resolve(bundles[code]);
     return new Promise(function (resolve) {
@@ -302,9 +336,22 @@ const RAFIQ_I18N = (function () {
 
   function start() {
     var saved = read();
-    var want = (saved && isKnown(saved)) ? saved : DEFAULT;
+    var auto = false;
+    var want;
+    if (saved && isKnown(saved)) {
+      want = saved;                     // an explicit choice always wins
+    } else {
+      want = detect();                  // first visit: follow the browser
+      auto = detected !== null;
+      write(want);                      // and remember it from now on
+    }
     buildButton();
-    return loadScript(want).then(function () { return setLanguage(want); });
+    return loadScript(want).then(function () {
+      var r = setLanguage(want);
+      r.auto = auto;
+      r.detected = detected;
+      return r;
+    });
   }
 
   return {
@@ -315,9 +362,11 @@ const RAFIQ_I18N = (function () {
     translate: translate,
     langMeta: langMeta,
     isKnown: isKnown,
+    detect: detect,
     LANGS: LANGS,
     get current() { return current; },
-    version: '1'
+    get detected() { return detected; },
+    version: '2'
   };
 })();
 

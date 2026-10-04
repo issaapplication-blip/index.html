@@ -53,7 +53,15 @@ th{color:var(--muted);font-size:11px;font-weight:800}
 </style>
 <style>.logo-fallback{display:inline-block;font-weight:900;color:#087f58;font-size:20px;letter-spacing:.5px}</style>
 <style>body{overflow-x:hidden}nav.card{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:12px}nav.card a.btn{flex:0 0 auto;white-space:nowrap;font-size:14px;padding:10px 14px}.logo{display:block;width:min(150px,42vw)!important;height:auto!important;margin:0 auto 10px!important;background:#fff;border-radius:14px;padding:6px;box-shadow:0 4px 16px rgba(0,0,0,.07)}.brand-logo{display:block;width:min(190px,55vw)!important;height:auto!important;margin:0 auto 10px!important;background:#fff;border-radius:14px;padding:6px}h1{font-size:24px}article.card h1,section.card h1{font-size:22px}@media(max-width:520px){nav.card{gap:6px}nav.card a.btn{font-size:13px;padding:9px 11px;flex:1 1 calc(50% - 3px);text-align:center}}</style>
-<style>.item h2 a,.item h3 a{display:inline-block;background:#087f58;color:#fff!important;text-decoration:none;border-radius:10px;padding:9px 14px;margin:4px 0;font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(8,127,88,.22)}.item h2 a:hover,.item h3 a:hover{background:#0b9b6b}</style>
+<style>.item h2 a,.item h3 a{display:inline-block;background:#087f58;color:#fff!important;text-decoration:none;border-radius:10px;padding:9px 14px;margin:4px 0;font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(8,127,88,.22)}.item h2 a:hover,.item h3 a:hover{background:#0b9b6b}/* document review toolbar */
+.docbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.docbar input,.docbar select{flex:1 1 190px;min-width:150px;margin:0}
+.docbar button{flex:0 0 auto}
+.docbar input[type=search]::-webkit-search-cancel-button{cursor:pointer}
+#docPrev{margin-top:12px}
+#docPrev iframe{display:block}
+#docCount{margin:6px 0 10px}
+table td,table th{vertical-align:top}</style>
 <meta name="description" content="لوحة مراجعة طلبات RAFIQ.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://rafiq-o6qd.onrender.com/dashboard.html">
@@ -162,7 +170,21 @@ th{color:var(--muted);font-size:11px;font-weight:800}
       <div id="careList"></div>
 
       <h2 style="margin-top:20px">📄 المستندات المرفوعة</h2>
-      <div id="docList"></div>
+      <div class="docbar">
+  <input id="docQ" type="search" placeholder="ابحث باسم الملف أو النوع أو اسم صاحب الملف أو رقمه" aria-label="بحث في المستندات">
+  <select id="docF" aria-label="فلتر الحالة">
+    <option value="">كل الحالات</option>
+    <option value="pending">⏳ في الانتظار</option>
+    <option value="verified">✓ معتمد</option>
+    <option value="rejected">✕ مرفوض</option>
+    <option value="quarantined">⏸ محجوز</option>
+  </select>
+  <select id="docT" aria-label="فلتر النوع"><option value="">كل الأنواع</option></select>
+  <button class="btn alt" id="docMore" type="button">تحميل المزيد</button>
+</div>
+<p class="small" id="docCount"></p>
+<div id="docList"></div>
+<div id="docPrev"></div>
     </div>
 
     <!-- PARTNERS -->
@@ -598,40 +620,156 @@ async function loadCare(){
     : '<div class="notice">لا توجد طلبات رعاية معلّقة.</div>';
 }
 
-async function loadDocs(){
-  const {data,error}=await db.from('documents')
-    .select('id,user_id,document_type,file_name,mime_type,file_size,verification_status,storage_path,created_at')
-    .order('created_at',{ascending:false}).limit(100);
-  if(error){ $('docList').innerHTML='<div class="err">تعذر تحميل المستندات: '+esc(error.message)+'</div>'; return; }
-  APP.docs=data||[];
-  if(!APP.docs.length){ $('docList').innerHTML='<div class="notice">لا توجد مستندات مرفوعة بعد.</div>'; return; }
-  $('docList').innerHTML='<div class="scroll"><table><thead><tr><th>الملف</th><th>النوع</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>'+
-    APP.docs.map(d=>'<tr><td class="small">'+esc(d.file_name||d.document_type||'—')+
-      (d.file_size?'<br>'+Math.round(d.file_size/1024)+' KB':'')+'</td>'+
-      '<td class="small">'+esc(d.document_type||'—')+'</td>'+
-      '<td>'+st(d.verification_status)+'</td>'+
-      '<td><div class="actions" style="display:flex;gap:5px;flex-wrap:wrap">'+
-        '<button class="btn alt" onclick="openDoc(\''+encodeURIComponent(d.storage_path)+'\')">فتح</button>'+
-        '<button class="btn" onclick="reviewDoc(\''+d.id+'\',\'verified\')">✓</button>'+
-        '<button class="btn danger" onclick="reviewDoc(\''+d.id+'\',\'rejected\')">✕</button>'+
-      '</div></td></tr>').join('')+'</tbody></table></div>';
+/* ==========================================================
+   Document review.
+
+   The old panel showed the newest hundred files, gave no way to
+   filter or search, never named the person who uploaded anything,
+   and opened each file in a new tab. Clearing a real queue with
+   that is guesswork.
+
+   What this replaces:
+     - every document, paged, with the true total shown
+     - who uploaded it, by name, not a UUID
+     - filter by review status and by document type
+     - search across file name, type and the person's name
+     - open the file in place, with the link lifetime stated
+   ========================================================== */
+
+const DOC_PAGE = 200;
+const DOC_STATE = { total: null, filter: '', q: '' };
+
+function docTypeOptions() {
+  const sel = $('docT');
+  if (!sel) return;
+  const seen = {};
+  APP.docs.forEach(function (d) { if (d.document_type) seen[d.document_type] = 1; });
+  const keys = Object.keys(seen).sort();
+  const sig = keys.join('|');
+  if (sel.dataset.sig === sig) return;
+  sel.innerHTML = '<option value="">كل الأنواع</option>' +
+    keys.map(function (k) { return '<option value="' + esc(k) + '">' + esc(k) + '</option>'; }).join('');
+  sel.dataset.sig = sig;
 }
 
-window.reviewDoc=async(id,status)=>{
-  const {error}=await db.rpc('admin_review_document',{p_document_id:id,p_status:status});
-  if(error){ msg('تعذر: '+error.message); return; }
-  msg('تم تحديث المستند.',true);
-  load();
+function docRow(d) {
+  const p = profOf(d.user_id);
+  const name = d.file_name || d.document_type || '—';
+  const size = d.file_size ? Math.round(d.file_size / 1024) + ' KB' : '';
+  const when = (d.created_at || '').slice(0, 16).replace('T', ' ');
+  return '<tr>' +
+    '<td class="small"><b>' + esc(name) + '</b>' +
+      (size ? '<br>' + esc(size) : '') +
+      (d.mime_type ? '<br>' + esc(d.mime_type) : '') + '</td>' +
+    '<td class="small">' + esc(d.document_type || '—') + '</td>' +
+    '<td class="small">' + esc(p.name) + (p.role ? '<br>' + esc(p.role) : '') +
+      (p.phone ? '<br>' + esc(p.phone) : '') + '</td>' +
+    '<td class="small">' + esc(when) + '</td>' +
+    '<td>' + st(d.verification_status) + '</td>' +
+    '<td><div class="actions" style="display:flex;gap:5px;flex-wrap:wrap">' +
+      '<button class="btn alt" onclick="previewDoc(\'' + encodeURIComponent(d.storage_path || '') + '\')">عرض</button>' +
+      '<button class="btn" onclick="reviewDoc(\'' + esc(d.id) + '\',\'verified\')" title="اعتماد">✓ اعتماد</button>' +
+      '<button class="btn alt" onclick="reviewDoc(\'' + esc(d.id) + '\',\'quarantined\')" title="حجز">⏸ حجز</button>' +
+      '<button class="btn danger" onclick="reviewDoc(\'' + esc(d.id) + '\',\'rejected\')" title="رفض">✕ رفض</button>' +
+    '</div></td></tr>';
+}
+
+function drawDocs() {
+  let list = APP.docs;
+  if (DOC_STATE.filter) {
+    list = list.filter(function (d) { return (d.verification_status || 'pending') === DOC_STATE.filter; });
+  }
+  if (DOC_STATE.q) {
+    const q = DOC_STATE.q.toLowerCase();
+    list = list.filter(function (d) {
+      const p = profOf(d.user_id);
+      return [d.file_name, d.document_type, d.mime_type, p.name, p.phone].some(function (v) {
+        return v && String(v).toLowerCase().indexOf(q) >= 0;
+      });
+    });
+  }
+
+  const counts = { pending: 0, verified: 0, rejected: 0, quarantined: 0 };
+  APP.docs.forEach(function (d) {
+    const k = d.verification_status || 'pending';
+    if (counts[k] !== undefined) counts[k]++;
+  });
+
+  const total = DOC_STATE.total === null ? '?' : DOC_STATE.total;
+  $('docCount').innerHTML = 'محمّل <b>' + APP.docs.length + '</b> من ' + total +
+    ' · يعرض <b>' + list.length + '</b>' +
+    ' · ⏳ في الانتظار <b>' + counts.pending + '</b>' +
+    ' · ✓ معتمد ' + counts.verified +
+    ' · ✕ مرفوض ' + counts.rejected +
+    ' · ⏸ محجوز ' + counts.quarantined;
+
+  const more = $('docMore');
+  if (more) more.disabled = (DOC_STATE.total !== null && APP.docs.length >= DOC_STATE.total);
+
+  if (!list.length) {
+    $('docList').innerHTML = '<div class="notice">' +
+      (APP.docs.length ? 'لا يوجد ملف يطابق البحث أو الفلتر.' : 'لا توجد مستندات مرفوعة بعد.') + '</div>';
+    return;
+  }
+
+  $('docList').innerHTML = '<div class="scroll"><table><thead><tr>' +
+    '<th>الملف</th><th>النوع</th><th>صاحب الملف</th><th>التاريخ</th><th>الحالة</th><th>إجراء</th>' +
+    '</tr></thead><tbody>' + list.map(docRow).join('') + '</tbody></table></div>';
+}
+
+async function loadDocs(append) {
+  const from = append ? APP.docs.length : 0;
+  const to = from + DOC_PAGE - 1;
+  const { data, error, count } = await db.from('documents')
+    .select('id,user_id,document_type,file_name,mime_type,file_size,verification_status,storage_path,created_at', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(from, to);
+
+  if (error) {
+    $('docList').innerHTML = '<div class="err">تعذر تحميل المستندات: ' + esc(error.message) + '</div>';
+    return;
+  }
+  APP.docs = append ? APP.docs.concat(data || []) : (data || []);
+  if (typeof count === 'number') DOC_STATE.total = count;
+
+  docTypeOptions();
+  drawDocs();
+}
+
+/* Open the file in place. The signed link is short-lived by design -
+   a document that stays reachable after the manager closes the tab
+   would be a document anyone with the URL could open. */
+window.previewDoc = async function (enc) {
+  const path = decodeURIComponent(enc || '');
+  if (!path) return msg('لا يوجد مسار مخزّن لهذا الملف.');
+  const { data, error } = await db.storage.from('private_documents').createSignedUrl(path, 600);
+  if (error) return msg('تعذر فتح المستند: ' + error.message);
+  const url = esc(data.signedUrl);
+  $('docPrev').innerHTML =
+    '<div class="row" style="margin-bottom:8px"><b>معاينة — الرابط صالح لمدة ١٠ دقائق فقط</b>' +
+    '<span class="actions">' +
+      '<a class="btn alt" href="' + url + '" target="_blank" rel="noopener noreferrer">فتح في تبويب جديد</a>' +
+      '<button class="btn alt" onclick="closePreview()">إغلاق</button>' +
+    '</span></div>' +
+    '<iframe src="' + url + '" title="preview" ' +
+    'style="width:100%;height:440px;border:1px solid #dce8e2;border-radius:12px;background:#fff"></iframe>';
+  try { $('docPrev').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
 };
 
-window.openDoc=async enc=>{
-  const path=decodeURIComponent(enc);
-  const {data,error}=await db.storage.from('private_documents').createSignedUrl(path,300);
-  if(error){ msg('تعذر فتح المستند: '+error.message); return; }
-  window.open(data.signedUrl,'_blank','noopener,noreferrer');
-};
+window.closePreview = function () { $('docPrev').innerHTML = ''; };
 
-$('appFilter').addEventListener('click',e=>{
+if ($('docF')) $('docF').addEventListener('change', function (e) { DOC_STATE.filter = e.target.value; drawDocs(); });
+if ($('docT')) $('docT').addEventListener('change', function (e) { DOC_STATE.filter = DOC_STATE.filter; drawDocs(); });
+if ($('docQ')) $('docQ').addEventListener('input', function (e) { DOC_STATE.q = e.target.value.trim(); drawDocs(); });
+if ($('docMore')) $('docMore').addEventListener('click', function () { loadDocs(true); });
+
+window.reviewDoc = async function (id, status) {
+  const { error } = await db.rpc('admin_review_document', { p_document_id: id, p_status: status });
+  if (error) { msg('تعذر: ' + error.message); return; }
+  msg('تم تحديث المستند.', true);
+  await loadDocs(false);
+};
+addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b)return;
   document.querySelectorAll('#appFilter button').forEach(x=>x.classList.toggle('on',x===b));
   appFilter=b.dataset.f;
@@ -737,5 +875,5 @@ document.addEventListener("DOMContentLoaded",function(){
 <!-- language engine: one button, five languages -->
 <script src="./js/i18n.js?v=72"></script>
 <script src="./js/locales/ar.js?v=72"></script>
-<script>RAFIQ_I18N.start();</script></body>
+<script>RAFIQ_I18N.start();</script><div style="text-align:center;margin:16px 0"><button class="btn alt" type="button" data-rafiq-install data-i18n="home.install">📲 تثبيت التطبيق</button><p data-rafiq-install-hint class="small" hidden style="margin:12px auto 0;max-width:560px;text-align:center"></p></div></body>
 </html>

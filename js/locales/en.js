@@ -33,7 +33,7 @@
     'home.cta.wa.sub': 'Direct reply',
     'home.cta.bot': 'Ask the assistant',
     'home.cta.bot.sub': 'Instant guidance',
-    'home.install': 'Install the app',
+    'home.install': '📲 Install the app',
 
     'home.pick.title': 'Choose what you need',
     'home.pick.1.t': 'Elderly care',

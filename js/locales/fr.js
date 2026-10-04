@@ -31,7 +31,7 @@
     'home.cta.wa.sub': 'Réponse directe',
     'home.cta.bot': "Demander à l’assistant",
     'home.cta.bot.sub': 'Orientation immédiate',
-    'home.install': "Installer l’application",
+    'home.install': '📲 Installer l’application',
 
     'home.pick.title': 'Choisissez ce dont vous avez besoin',
     'home.pick.1.t': 'Soins aux personnes âgées',

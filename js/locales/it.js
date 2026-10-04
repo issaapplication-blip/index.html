@@ -31,7 +31,7 @@
     'home.cta.wa.sub': 'Risposta diretta',
     'home.cta.bot': 'Chiedi all’assistente',
     'home.cta.bot.sub': 'Orientamento immediato',
-    'home.install': 'Installa l’app',
+    'home.install': '📲 Installa l’app',
 
     'home.pick.title': 'Scegli ciò che ti serve',
     'home.pick.1.t': 'Assistenza agli anziani',

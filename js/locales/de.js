@@ -31,7 +31,7 @@
     'home.cta.wa.sub': 'Direkte Antwort',
     'home.cta.bot': 'Assistenten fragen',
     'home.cta.bot.sub': 'Sofortige Beratung',
-    'home.install': 'App installieren',
+    'home.install': '📲 App installieren',
 
     'home.pick.title': 'Wählen Sie, was Sie brauchen',
     'home.pick.1.t': 'Pflege älterer Menschen',

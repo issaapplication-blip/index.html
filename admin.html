@@ -42,9 +42,9 @@ input,textarea{width:100%;padding:10px;border:1px solid #cbdad3;border-radius:9p
 <h2>🔐 دخول المدير</h2>
 <label>البريد الإلكتروني<input id="email" type="email" autocomplete="username"></label>
 <label>كلمة المرور<input id="password" type="password" autocomplete="current-password"></label>
-<div class="actions"><button class="btn" id="login">دخول</button><a class="btn alt" href="./app.html">العودة إلى التسجيل</a></div>
+<div class="actions"><button class="btn" id="login">دخول</button><a class="btn alt" href="./app.html">العودة إلى التسجيل</a><button class="btn alt" type="button" data-rafiq-install data-i18n="home.install">📲 تثبيت التطبيق</button></div>
 <div id="authMsg"></div>
-</section>
+</section><p data-rafiq-install-hint class="small" hidden style="margin:12px auto 0;max-width:560px;text-align:center"></p>
 
 <section class="card hidden" id="dashboard">
 <div class="row"><div><h2>📋 الطلبات والملفات</h2><p class="small" id="who"></p></div><button class="btn alt" id="logout">تسجيل الخروج</button></div>
@@ -71,10 +71,10 @@ async function requireAdmin(){
 async function load(){
  if(!await requireAdmin()){ $('dashboard').classList.add('hidden');$('auth').classList.remove('hidden'); return; }
  $('auth').classList.add('hidden');$('dashboard').classList.remove('hidden');
- const {data:apps,error:ae}=await db.from('applications').select('id,user_id,application_type,status,notes,created_at,updated_at').order('created_at',{ascending:false}).limit(100);
+ const {data:apps,error:ae}=await db.from('applications').select('id,user_id,application_type,status,notes,created_at,updated_at').order('created_at',{ascending:false}).limit(1000);
  if(ae){msg('تعذر تحميل الطلبات: '+ae.message);return}
- $('applications').innerHTML=apps.map(a=>'<article class="item"><div class="row"><strong>'+esc(a.application_type)+'</strong><span class="status">'+esc(a.status)+'</span></div><p class="small">ID: '+esc(a.id)+'<br>المستخدم: '+esc(a.user_id)+'<br>'+esc(a.created_at)+'</p><p>'+esc(a.notes||'لا توجد ملاحظات')+'</p><div class="actions"><button class="btn" onclick="reviewApp(\''+a.id+'\',\'approved\')">✓ موافقة</button><button class="btn danger" onclick="reviewApp(\''+a.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="reviewApp(\''+a.id+'\',\'review\')">مراجعة</button></div></article>').join('')||'<p>لا توجد طلبات.</p>';
- const {data:docs,error:de}=await db.from('documents').select('id,user_id,document_type,file_name,mime_type,file_size,verification_status,storage_path,created_at').order('created_at',{ascending:false}).limit(100);
+ $('applications').innerHTML=apps.map(a=>'<article class="item"><div class="row"><strong>'+esc(a.application_type)+'</strong><span class="status">'+esc(a.status)+'</span></div><p class="small">ID: '+esc(a.id)+'<br>المستخدم: '+esc(a.user_id)+'<br>'+esc(a.created_at)+'</p><p>'+esc(a.notes||'لا توجد ملاحظات')+'</p><div class="actions"><button class="btn" onclick="reviewApp(\''+a.id+'\',\'approved\')">✓ موافقة</button><button class="btn danger" onclick="reviewApp(\''+a.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="reviewApp(\''+a.id+'\',\'under_review\')">مراجعة</button></div></article>').join('')||'<p>لا توجد طلبات.</p>';
+ const {data:docs,error:de}=await db.from('documents').select('id,user_id,document_type,file_name,mime_type,file_size,verification_status,storage_path,created_at').order('created_at',{ascending:false}).limit(1000);
  if(de){$('documents').innerHTML='<div class="err">تعذر تحميل الوثائق: '+esc(de.message)+'</div>';return}
  $('documents').innerHTML=docs.map(d=>'<article class="item"><strong>'+esc(d.file_name)+'</strong><p class="small">'+esc(d.document_type)+' · '+esc(d.verification_status)+'<br>المستخدم: '+esc(d.user_id)+'<br>'+esc(d.storage_path)+'</p><div class="actions"><button class="btn" onclick="reviewDoc(\''+d.id+'\',\'approved\')">✓ اعتماد</button><button class="btn danger" onclick="reviewDoc(\''+d.id+'\',\'rejected\')">✕ رفض</button><button class="btn alt" onclick="openDoc(\''+encodeURIComponent(d.storage_path)+'\')">فتح الوثيقة</button></div></article>').join('')||'<p>لا توجد وثائق.</p>';
 }
@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded",function(){
 });
 </script>
 <!-- language engine: one button, five languages -->
+<script src="/install-app.js?v=72" defer></script>
 <script src="./js/i18n.js?v=72"></script>
 <script src="./js/locales/ar.js?v=72"></script>
 <script>RAFIQ_I18N.start();</script></body>

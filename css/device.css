@@ -242,6 +242,40 @@ html[lang="fr"] img[src*="rafig-logo"],
 html[lang="it"] img[src*="rafig-logo"],
 html[lang="de"] img[src*="rafig-logo"] { width: min(230px, 56vw); }
 
+/* ==========================================================
+   Tap targets.
+
+   iOS treats anything under 44x44 CSS pixels as a small target and
+   users routinely mis-tap them. Several of the page stylesheets set
+   their buttons to 39-41px, which is below the threshold, so the
+   floor is enforced here rather than left to each page.
+
+   Anchors need flex centring because an inline-block anchor sits its
+   text on the text baseline; a real <button> already centres its own
+   content, so it only needs the height.
+   ========================================================== */
+
+a.btn,
+button.btn,
+.btn.install,
+[data-rafiq-install] {
+  min-height: 44px;
+}
+
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (max-width: 420px) {
+  a.btn,
+  button.btn,
+  .btn.install,
+  [data-rafiq-install] { min-height: 46px; }
+}
+
 /* shown only on a page that has no translation yet */
 .ra-untranslated {
   margin: 0 0 14px;
