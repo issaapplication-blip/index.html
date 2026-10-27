@@ -11,3 +11,7 @@ Disallow: /migrations/
 Disallow: /supabase/
 Disallow: /docs/
 Disallow: /_tools/
+Disallow: /ops/
+Disallow: /tests/
+Disallow: /.github/
+Sitemap: https://index-html.issaapplication.workers.dev/sitemap.xml
