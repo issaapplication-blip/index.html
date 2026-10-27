@@ -43,3 +43,22 @@ auto-reply.mjs
 
 PASTE-THIS-IN-KAPSO.txt
 PASTE-IN-KAPSO.txt
+.dev.vars
+.dev.vars*
+.wrangler/**
+*.pem
+*.key
+*.crt
+*.sqlite
+*.db
+*.log
+*.zip
+coverage/**
+.coverage
+.pytest_cache/**
+.venv/**
+venv/**
+backups/**
+backup/**
+private/**
+storage/**
