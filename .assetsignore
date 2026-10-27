@@ -8,7 +8,6 @@ supabase/**
 tests/**
 test/**
 ops/**
-scripts/**
 integrations/**
 .env
 .env.*
@@ -41,3 +40,6 @@ auto-reply.mjs
 *.jsonc
 *.map
 *.md
+
+PASTE-THIS-IN-KAPSO.txt
+PASTE-IN-KAPSO.txt
