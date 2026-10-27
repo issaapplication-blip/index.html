@@ -1,272 +1,84 @@
-# RAFIQ | رفيق — دليل التشغيل والإطلاق
+# RAFIQ | رفيق — Phase 1 deployment and operations
 
-منصة رعاية منزلية وخدمات صحية في لبنان.
-الموقع: **https://rafiq-o6qd.onrender.com**
+This repository contains the static web application and Supabase Edge Function source. Deployment status must be verified from the actual provider; a green CI run or a local preview is not proof of live service.
 
----
+## Non-negotiable operating rules
 
-## 1) ما الذي يعمل الآن (متحقَّق منه بالاختبار)
+- Do not use Render. Do not restart or configure the legacy Render service.
+- Keep the existing Supabase project `qmuxaehrahfsnabyjens`; do not create a project or migrate data.
+- Never disable Supabase email confirmation as a workaround for HTTP 429. Check Auth logs, rate limits, SMTP/provider settings, and current project limits first.
+- Never put tokens, API keys, service-role keys, private phone numbers, or customer data in Git, client-side files, logs, or chat.
+- Do not enable outbound WhatsApp replies, broadcasts, or marketing until tests pass and the owner explicitly approves live messaging.
+- Use Telegram Bot API and official Meta WhatsApp Business Platform or an authorized Kapso integration only. No WhatsApp Web or Baileys.
+- Do not run production migrations until the schema, impact, backup/rollback, and owner approval have been reviewed.
 
-| المجال | الحالة | كيف تم التحقق |
-|---|---|---|
-| 27 صفحة HTML | ✅ 200 | طلب مباشر لكل صفحة |
-| 14 أصل (شعار، أيقونات، JS) | ✅ 200 | طلب مباشر + نوع المحتوى |
-| الشعار `assets/rafig-logo.png` | ✅ 512×512 في كل الصفحات | `naturalWidth` في المتصفح |
-| لا تمرير أفقي على أي مقاس | ✅ | قياس `scrollWidth` مقابل `viewport` |
-| لا أخطاء JavaScript | ✅ 0 | console على 7 صفحات |
-|GSee / FAQ Schema | ✅ FAQPage (10 أسئلة) + MedicalBusiness | قراءة `application/ld+json` |
-| sitemap / robots | ✅ 21 رابط + استبعاد الإداري | فحص الملفات |
-| PWA | ✅ manifest + sw v68 + 3 أيقونات | تسجيل Service Worker |
-| الوكيل (المتصفح) | ✅ **27/27** اختبار | `live/_test/agent-tests.html` |
-| الوكيل (واتساب) | ✅ نفس brain | `auto-reply.mjs` يستورد نفس الملفات |
-| استقبال الطلب (نموذج) | ✅ يصل Supabase | اختبار حقيقي |
-| **التسجيل بالبريد** | 🔴 **محجوب** | `429 email rate limit exceeded` |
+## Current architecture and Phase 1 gate
 
----
+### Static frontend
 
-## 2) 🔴 العائق الوحيد المتبقي: التسجيل محجوب
+The repository includes `.github/workflows/pages.yml`, which can deploy the static frontend to GitHub Pages. This is a candidate free host for the frontend only; it does not host a persistent webhook worker or replace Supabase Edge Functions.
 
-Supabase أوقف إنشاء الحسابات:
+Before calling the frontend live, verify all of the following:
+1. GitHub Pages is enabled for this repository and the workflow completed successfully.
+2. The deployed URL is visible in the Pages environment/deployment record.
+3. The homepage, app, admin, dashboard, barcode, assets, manifest, service worker, and client-side routes load from that URL.
+4. Canonical, Open Graph, sitemap, and app links use the verified production URL; do not guess the URL.
+5. No production page or configuration falls back to Render.
 
-```
-POST /auth/v1/signup  ->  429  "email rate limit exceeded"
-```
+Workflow: https://github.com/issaapplication-blip/index.html/actions/workflows/pages.yml
 
-**السبب:** المصادقة بالبريد مفعّلة مع «تأكيد البريد»، والباقة المجانية تضع حداً
-بسيطاً على عدد رسائل البريد الإلكتروني المرسلة.
+### Supabase
 
-**الحل — دقيقة واحدة في لوحة Supabase:**
+Project: https://supabase.com/dashboard/project/qmuxaehrahfsnabyjens
 
-```
-Supabase Dashboard
-  -> Authentication
-  -> Sign In / Providers
-  -> Email
-  -> Confirm email        ❌  أطفئه
-  -> Save
-```
+The existing `rafiq-agent` Edge Function is not the same as a working Telegram webhook. Verify the deployed function list and code. The Telegram endpoint previously returned HTTP 503; it is not considered repaired until the cause is identified in logs, the deployed function is corrected, and an authorized test update completes end-to-end.
 
-بعد الإطفاء لا تُرسَل أي رسالة تأكيد، فيرتفع الحد ولا يُحظر التسجيل.
-هذا آمن هنا لأن **كل طلب يراجعه المدير قبل القبول** — لا يوجد وصول بلا مراجعة.
+Do not assume that `telegram-webhook` exists in this repository: inspect the live project and the actual deployed source first. Do not deploy an unreviewed replacement or invent tables/RPCs. Use only secrets stored in Supabase's function secrets.
 
-> إن أُريد إبقاء التأكيد: ارفع باقة Supabase، أو انتظر إعادة ضبط الحد.
+### Telegram acceptance test
 
-حتى يُحل ذلك، يعرض الموقع رسالة واضحة مع زر واتساب البديل (مُفعَّل ومُختبَر).
+After repairing the live function and verifying its secrets:
+1. Verify the configured webhook URL and error state without printing the bot token.
+2. Verify the Telegram secret header is required and invalid requests are rejected.
+3. Use one private test message only after owner approval.
+4. Confirm the test request is saved exactly once.
+5. Confirm the manager group receives the notification.
+6. Confirm the bot replies to the test user.
+7. Confirm failures are observable and do not produce a false success message.
+8. Do not broadcast to the public channel during testing.
 
----
+### WhatsApp acceptance test
 
-## 3) خطوات النشر
+WhatsApp remains disabled for automatic outbound messages until the official provider, webhook URL, signature verification, phone-number ID, and permissions are confirmed. Use the official Meta WhatsApp Business Platform or an authorized Kapso integration only.
 
-### الطريقة أ — GitHub (3 دقائق)
+Do not start `auto-reply.mjs` in live mode during setup. A dry-run or mock test must not send customer messages. Verify inbound delivery and signature handling first, then test one private test conversation after explicit owner approval. Keep channel publishing manual unless an official, account-authorized API is confirmed.
 
-1. أنشئ رمزاً: <https://github.com/settings/tokens/new>
-   - Note: `RAFIQ` · Expiration: `30 days` · Scope: **`repo`**
-2. انسخ الرمز.
-3. **زر الفأرة الأيمن** على `PUBLISH.bat` ← **تشغيل كمسؤول** ← اسم المستخدم + الرمز.
-4. Render يعيد النشر تلقائياً (GitHub → Build).
+## Security and privacy rules
 
-### الطريقة ب — رفع ZIP (5 دقائق)
+- The only agent escalation contact is +961 81 506 299.
+- The financial transfer number must never be shown to the agent, members, customers, or public source.
+- Do not publish provider phone numbers or private customer details.
+- The agent must not give medical advice, diagnose, prescribe, handle money, invent prices/availability, or promise provider approval.
+- Dentist, nutritionist, speech therapy, labs, imaging, and medical equipment remain labelled “انتظرونا قريبًا” until officially enabled.
+- CV prices: promotional CV $25, cover letter $10, bundle $35; normal prices $35/$16/$51; extra language +$20 promotional or +$28 normal. Whish Money only. Confirm with the manager before payment; never request or process a transfer.
+- Keep the approved RAFIQ logo unchanged. The PWA must work without an APK.
 
-`RAFIQ-FINAL.zip` جاهز. في **Render → Shell**:
+## Rollback and change control
 
-```bash
-cd /opt/render/project/src
-unzip -o /tmp/RAFIQ-FINAL.zip -d /opt/render/project/src
-# أو: ارفع الملف من Files ثم:
-ls -la
-```
+- Make changes on a feature/fix branch and open a PR; never push directly to `main`.
+- Review the diff, tests, migration impact, deployment settings, and secrets before merge.
+- For deployment changes, record the previous workflow/configuration and verified URL before switching traffic.
+- Do not switch live webhooks until the replacement is healthy and a rollback path is documented.
+- Roll back the branch/deployment if health checks, security checks, or the approved test fail. Do not roll back by deleting data.
 
-ثم **Restart** من لوحة Render.
+## Phase 1 completion gate
 
-### بعد النشر — تحقّق (دقيقة)
+Phase 1 is complete only when dated evidence proves:
+- the static frontend is published on a verified free host without Render dependencies;
+- the Telegram webhook returns a successful response to a valid authorized update and rejects invalid signatures;
+- the request is saved once, delivered to the correct manager group, and acknowledged to the test user;
+- the official WhatsApp integration is configured and signature-verified, with outbound messaging still disabled until explicit approval;
+- tests, security checks, and rollback instructions pass review;
+- no secrets or provider phone numbers are exposed.
 
-```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/dashboard.html   # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/barcode.html     # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/js/rafiq-kb.js  # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/assets/rafig-logo.png # 200
-```
-
-إن بقيت `404`، فالخادم المُشغَّل على Render يستخدم
-قائمة مسارات ثابتة — راجع `server.js` داخل الخدمة وأضف المسارات المفقودة.
-
-### على الهاتف
-
-الشاشة السوداء القديمة سببها `sw.js` مكسور مخزَّن في الذاكرة المؤقتة.
-بعد النشر:
-
-1. Chrome ← `rafiq-o6qd.onrender.com` ← ⚙️ ← **حذف بيانات الموقع**.
-2. احذف التطبيق المثبَّت إن وُجد، ثم أعد فتح الموقع.
-3. ⋮ ← **تثبيت التطبيق / إضافة إلى الشاشة الرئيسية**.
-
----
-
-## 4) قواعد Supabase — شغّلها مرة واحدة
-
-في **Supabase → SQL Editor**، شغّل بالترتيب:
-
-```
-supabase/migrations/20260927_barcode_and_commission.sql
-supabase/migrations/20260927_barcode_and_commission_rls.sql
-supabase/migrations/20260927_manager_dashboard.sql
-supabase/migrations/20260927_manager_barcode.sql
-supabase/migrations/20260927_privacy_gate.sql
-supabase/migrations/20260927_public_visibility.sql
-```
-
-كلها **إضافة فقط** — لا تحذف جدولاً ولا بيانات.
-لوحة المراجعة تعمل قبلها بفضل الإحصاءات الاحتياطية.
-
----
-
-## 5) الوكيل
-
-### طبقاته
-
-```
-1. guard      قواعد السلامة          — دائماً
-2. RAFIQ_KB   15 جواباً مُراجَعاً     — دائماً، فوري، بلا إنترنت
-3. OpenAI     ذكاء أعمق               — فقط عند وجود مفتاح
-```
-
-الطبقة 2 وحدها تجيب على كل السيناريوهات. وOpenAI تحسين لا شرط.
-إن تعطّل، الوكيل **لا يسكت أبداً**.
-
-### أين تُفتح الطبقة 3
-
-**Supabase → Edge Functions → rafiq-agent → Secrets:**
-
-| الاسم | مطلوب؟ | القيمة |
-|---|---|---|
-| `OPENAI_API_KEY` | اختياري | `sk-…` |
-| `OPENAI_MODEL` | اختياري | `gpt-4o-mini` |
-
-ثم **Deploy** الدالة `supabase/functions/rafiq-agent/index.ts`.
-
-### ما لا يفعله الوكيل أبداً
-
-- لا يشخّص ولا يصف دواءً ولا يغيّر علاجاً
-- لا يخترع سعراً ولا خصماً ولا وقتاً متاحاً
-- لا يوافق على مقدم خدمة ولا يوقّع عقداً
-- لا يتعامل مع أموال ولا يذكر الرقم المالي
-- لا يعطي رقم هاتف لمقدم خدمة
-- الحالات الطارئة → إسعاف 112 + المدير
-- كل ما عداه → المدير على **81 506 299**
-
-### الاختبار
-
-```
-http://127.0.0.1/_test/agent-tests.html     # 27/27
-```
-
----
-
-## 6) واتساب — الرد التلقائي 24/7
-
-```bash
-npm i
-KAPSO_API_KEY=…  KAPSO_PHONE_NUMBER_ID=1324609540731383  node auto-reply.mjs
-```
-
-| المتغيّر | مطلوب؟ |
-|---|---|
-| `KAPSO_API_KEY` | ✅ |
-| `KAPSO_PHONE_NUMBER_ID` | ✅ `1324609540731383` |
-| `OPENAI_API_KEY` | اختياري |
-| `POLL_MS` | اختياري، افتراضياً 20000 |
-
-> ⚠️ **مفاتيح Kapso الحالية مكشوفة.** احذفها وأنشئ جديدة قبل التشغيل.
-> الرقم المالي `{{FINANCIAL_NUMBER}}` للتحويلات فقط — محجوب في الكود ولا يُرسل إليه شيء.
-
----
-
-## 7) أشياء يجب تغييرها قبل الإطلاق
-
-| # | الأمر | لماذا |
-|---|---|---|
-| 1 | إطفاء «Confirm email» في Supabase | التسجيل محجوب الآن بـ 429 |
-| 2 | تدوير مفاتيح Kapso | مكشوفة في المحادثة |
-| 3 | `supabase/config.toml`: `verify_jwt = false` للدالة | يمنع خطأ 401 على نداءات المتصفح |
-| 4 | إدراج الأرقام على `index.html` و`app.html` | الرقم الأول للطلب مفقود |
-| 5 | تسمية Display Name لرقم Meta | يجب أن تكون `RAFIQ \| رفيق` |
-| 6 | إكمال التحقق التجاري في Meta | البند 6 من 7 |
-
-### `supabase/config.toml`
-
-```toml
-[functions.rafiq-agent]
-verify_jwt = false
-```
-
----
-
-## 8) بنية الملفات
-
-```
-/                      الصفحة الرئيسية (server.js يخدم "/" من home.html)
-index.html             يحوّل تلقائياً إلى "/" — لا يربطه أي رابط داخلي
-faq.html               الأسئلة الشائعة + FAQ Schema
-app.html               التسجيل والطلب (عائلات + مهنيون)
-agent.html             مساعد رفيق
-dashboard.html         لوحة المراجعة (مدير)
-admin.html             دخول المدير
-barcode.html           بطاقة مقدم الخدمة
-services.html regions.html guide*.html elderly-care.html …
-js/rafiq-kb.js         قاعدة المعرفة — 15 جواباً
-js/rafiq-agent.js      طبقة السلامة + استخراج البيانات + OpenAI
-js/rafiq-welcome.js    رسائل ترحيب يومية (4 أدوار)
-auto-reply.mjs         عامل واتساب
-supabase/functions/    دالة الوكيل على الخادم
-supabase/migrations/   7 ترحيلات — شغّلها مرة واحدة
-_test/agent-tests.html 27 اختباراً للوكيل  (لا يُنشر)
-```
-
----
-
-## 9) الأرقام
-
-| | |
-|---|---|
-| استقبال العملاء / المدير | **+961 81 506 299** |
-| التحويلات المالية فقط | **ليس في هذا المستودع إطلاقاً** — انظر «زرع الأرقام الخاصة» |
-
-CV احترافي: ‎$25‎ / Cover Letter ‎$10‎ / الاثنان ‎$35‎ (بدل ‎$35‎/‎$16‎/‎$51‎)
-لغة إضافية ‎+$20‎. الدفع عبر **Whish Money** فقط.
-
----
-
-## 10) زرع الأرقام الخاصة
-
-المستودع **عام**. لذلك لا يحتوي أي رقم مالي، ولا يوجد في الكود
-قائمة أرقام ممنوعة — المنع مبني على قاعدة معكوسة:
-
-> **رقم المراسلات `81 506 299` هو الرقم الوحيد الذي يجوز للوكيل نطقه.
-> أي رقم آخر يُحذف من كل رد قبل الإرسال.**
-
-### أ) منع الرقم المالي من الدخول إلى قاعدة البيانات
-
-بعد تشغيل `supabase/migrations/20260927_privacy_gate.sql`،
-نفّذ مرة واحدة في **Supabase → SQL Editor** (استبدل `XXXXXXX` بالأرقام):
-
-```sql
-update public.platform_settings
-   set value = 'XXXXXXX'
- where key = 'blocked_phone_digits';
-```
-
-الجدول `platform_settings` محمي بـ RLS: **لا يقرأه إلا المدير**، ولا يوجد فيه أي سرّ آخر.
-
-### ب) الرقم المالي في لوحة المدير
-
-ليس في الكود. اضغط على العبارة `يُضبط من لوحة المدير` في تبويب العمولات، فيُطلب منك الرقم ويُحفظ في `localStorage` على جهازك فقط — **لا يُرفع إلى أي خادم ولا يُنشر**.
-
-### ج) أرقام واتساب الممنوعة
-
-عند تشغيل `auto-reply.mjs` على Render، اضبط:
-
-```
-RAFIQ_BLOCKED_NUMBERS=<الأرقام الخاصة مفصولة بفاصلة>
-KAPSO_PHONE_NUMBER=1324609540731383
-```
-
-`auto-reply.mjs` يرفض إرسال أي رسالة إلى رقم في هذه القائمة أو إلى رقم المنصة نفسه.
+Only after the owner accepts this gate may Phase 2 platform features begin.

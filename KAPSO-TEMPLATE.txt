@@ -1,78 +1,48 @@
-RAFIQ | رفيق — قالب طلب جاهز (Kapso API)
+RAFIQ | رفيق — قالب إعداد Kapso (مراجعة فقط؛ لا تفعّل الإرسال)
 ==========================================================
 
-⚠️ هذا قالب للتطوير فقط. المفتاح في متغيرات البيئة على Kapso،
-ولا يُكتب داخل الكود ولا يُرسل في أي محادثة.
+هذا القالب لا يفعّل إرسال الرسائل. أبقِ الردود الآلية والبث والتسويق متوقفة
+حتى ينجح اختبار التكامل الرسمي ويوافق المالك صراحةً على التشغيل الحي.
 
-==========================================================
-1) متغيرات البيئة (تُضبط في Kapso أو في جهازك)
-==========================================================
-KAPSO_API_KEY=ضع_المفتاح_الجديد_هنا
-KAPSO_PHONE_NUMBER_ID=رقم_الـPhone_الذي_يظهره_Kapso
-KAPSO_API_URL=https://api.kapso.ai     (انسخه من صفحة API)
+## أسرار البيئة — في مخزن Kapso فقط، لا في Git أو الرسائل
+KAPSO_API_KEY=SET_IN_PROVIDER_SECRET_STORE
+KAPSO_PHONE_NUMBER_ID=SET_FROM_VERIFIED_BUSINESS_ACCOUNT
+KAPSO_API_URL=https://api.kapso.ai
 
-==========================================================
-2) قائمة الخدمات (يستخدمها Kapso)
-==========================================================
-RAFIQ_PHONE=+96181506299
-
-RAFIQ_SERVICES=[
-  {"key":"elderly",  "ar":"رعاية كبار السن"},
-  {"key":"patient",  "ar":"رعاية المرضى"},
-  {"key":"nursing",  "ar":"التمريض المنزلي"},
-  {"key":"caregiver","ar":"مقدمو الرعاية"},
-  {"key":"physio",   "ar":"العلاج الفيزيائي"},
-  {"key":"dental",   "ar":"أطباء أسنان"},
-  {"key":"nutrition","ar":"اختصاصيو تغذية"},
-  {"key":"speech",   "ar":"اختصاصيو نطق"},
-  {"key":"lab",      "ar":"المختبرات ومراكز الأشعة"},
-  {"key":"equipment","ar":"المعدات الطبية"},
-  {"key":"cv",       "ar":"خدمة السيرة الذاتية"}
-]
-
-RAFIQ_FINANCIAL_NUMBER={{FINANCIAL_NUMBER}}
+## بيانات RAFIQ العامة
 RAFIQ_REVIEW_NUMBER=+96181506299
+RAFIQ_PUBLIC_SITE_URL=SET_ONLY_AFTER_FREE_HOST_IS_VERIFIED
 
-RAFIQ_RULES={
-  "no_approval": true,
-  "no_contract": true,
-  "no_money": true,
-  "no_medical_advice": true,
-  "no_phone_before_approval": true,
-  "escalate_all_financial": true,
-  "reply_lang": "ar"
-}
+لا تضف رقم التحويلات المالية أو أرقام مقدمي الخدمة أو أرقام العملاء إلى هذا القالب.
+لا تضف أي سجل شريك أو هاتف خاص إلى قاعدة معرفة الوكيل أو أي ملف عام.
 
-==========================================================
-3) الجهة: الإرسال فقط بعد موافقة المدير
-==========================================================
+## الخدمات النشطة فقط
+- رعاية كبار السن
+- رعاية المرضى
+- التمريض المنزلي
+- مقدمو الرعاية
+- العلاج الفيزيائي المنزلي
+- خدمة السيرة الذاتية
 
-RAFIQ_PARTNERS=[
-  {"name":"مختبرات ميدل إيست","phone":"+96181463485","type":"lab","area":"طرابلس","contracted":false,"published":false,"commission":0.20},
-  {"name":"Midtown","phone":"+96181812242","type":"lab","contracted":false,"published":false,"commission":0.20},
-  {"name":"CEMA","phone":"+96178837501","type":"imaging","contracted":false,"published":false,"commission":0.20},
-  {"name":"مختبرات داغر الطبية الحديثة","phone":"+96176744999","type":"lab","contracted":false,"published":false,"commission":0.20},
-  {"name":"د. هيثم سلطية","phone":"+96171823764","type":"imaging","contracted":false,"published":false,"commission":0.20},
-  {"name":"د. بلال حسين","phone":"+9613351486","type":"physio","contracted":false,"published":false,"commission":0.20},
-  {"name":"سامي ضاحي","phone":"+9613123294","type":"physio","contracted":false,"published":false,"commission":0.20},
-  {"name":"د. رامي مواس","phone":"+9613161885","type":"physio","contracted":false,"published":false,"commission":0.20},
-  {"name":"عماد","phone":"+96170966571","type":"physio","contracted":false,"published":false,"commission":0.20},
-  {"name":"علي","phone":"+96170256128","type":"nurse","contracted":false,"published":false,"commission":0.20},
-  {"name":"ليال","phone":"+96176173801","type":"nurse","contracted":false,"published":false,"commission":0.20},
-  {"name":"نيبال","phone":"+96171114462","type":"nurse","contracted":false,"published":false,"commission":0.20},
-  {"name":"الين مظلوم","phone":"+96170000000","type":"nurse","contracted":false,"published":false,"commission":0.20},
-  {"name":"مركز الدكتور جهاد اليوسف — DMC","phone":"+96178982153","type":"equipment","contracted":false,"published":false,"commission":0.20},
-  {"name":"د. عدنان مواس","phone":"+9613321659","type":"equipment","contracted":false,"published":false,"commission":0.20},
-  {"name":"أنور الحصني — Quality Med","phone":"+9613183372","type":"equipment","contracted":false,"published":false,"commission":0.20},
-  {"name":"دياب","phone":"+96170157300","type":"equipment","contracted":false,"published":false,"commission":0.20}
-]
+الخدمات التالية يجب أن تبقى موسومة «انتظرونا قريبًا» حتى اعتمادها رسميًا:
+أطباء الأسنان، اختصاصيو التغذية، اختصاصيو النطق، المختبرات، التصوير الطبي،
+والمعدات الطبية.
 
-==========================================================
-4) القاعدة الذهبية
-==========================================================
-- contracted=false  →  لا رقم، لا إعلان، لا عمولة
-- contracted=true   →  يظهر بالباركود ويبدأ احتساب العمولة
-- published=true    →  يظهر اسمه وخدماته للمنتسبين
-- كل تحويل مالي → المدير فقط على 81 506 299
-- الرقم {{FINANCIAL_NUMBER}} → لا يُذكر ولا يُطلب منه شيء
+## قواعد الوكيل
+- لا تقدم نصيحة طبية أو تشخيصًا أو وصف دواء.
+- لا تتعامل مع الأموال ولا تطلب تحويلًا ولا تؤكد استلام مبلغ.
+- لا تخترع أسعارًا أو توفرًا أو مواعيد أو موافقات.
+- لا تكشف رقم هاتف أي مقدم خدمة أو أسرة.
+- لا توافق على مقدم خدمة أو عقد؛ القرار للإدارة.
+- حوّل الاستفسارات الحساسة أو غير الواضحة إلى الإدارة على +961 81 506 299.
+- لا ترسل رسائل صادرة أو ردودًا آلية أو بثًا قبل اجتياز الاختبارات وموافقة المالك.
+- استخدم WhatsApp Business Platform الرسمي أو تكامل Kapso مصرحًا به فقط.
+- لا تستخدم WhatsApp Web أو Baileys أو جلسات QR غير رسمية.
+
+## اختبار ما قبل التشغيل
+1. تأكد من توقيع Webhook والتحقق منه.
+2. اختبر طلبًا اصطناعيًا دون إرسال رسالة إلى عميل.
+3. تحقق من منع التكرار وتسجيل الأخطاء.
+4. اختبر محادثة خاصة واحدة بحساب اختبار بعد موافقة المالك.
+5. أبقِ الإرسال الحي معطلًا حتى الموافقة الصريحة.
 ==========================================================

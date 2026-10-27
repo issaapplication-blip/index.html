@@ -38,8 +38,7 @@ const PHONE_ID  = process.env.KAPSO_PHONE_NUMBER_ID;
 
 const AGENT_URL = process.env.RAFIQ_AGENT_URL ||
   "https://qmuxaehrahfsnabyjens.supabase.co/functions/v1/rafiq-agent";
-const ANON_KEY  = process.env.SUPABASE_ANON_KEY ||
-  "sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD";
+const ANON_KEY  = process.env.SUPABASE_ANON_KEY || "";
 
 /* Never message a number that is not a customer. The business number is the
    only line the platform may ever write to, and the private lines are supplied
@@ -215,7 +214,11 @@ const absorb = (phone, text) => {
 /* `seen` is persisted so a restart cannot reply twice to the same message */
 const SEEN_FILE = process.env.KAPSO_SEEN_FILE ||
   path.join(here, ".rafiq-seen.json");
-const DRY_RUN = process.env.KAPSO_DRY_RUN === "1";
+// Fail closed: live replies require two explicit deployment flags after tests and owner approval.
+const LIVE_SEND_APPROVED =
+  process.env.RAFIQ_ENABLE_LIVE_SEND === "1" &&
+  process.env.RAFIQ_LIVE_SEND_APPROVED === "1";
+const DRY_RUN = !LIVE_SEND_APPROVED || process.env.KAPSO_DRY_RUN === "1";
 
 let seen = new Set();
 try {
@@ -293,9 +296,12 @@ async function tick() {
 }
 
 if (DRY_RUN) {
-  dryRun();
+  // Do not query real conversations or send messages by default.
+  console.log("RAFIQ WhatsApp live sending is disabled. No provider calls or messages were made.");
+  console.log("After security review, automated tests, and explicit owner approval, set both");
+  console.log("RAFIQ_ENABLE_LIVE_SEND=1 and RAFIQ_LIVE_SEND_APPROVED=1 to enable live polling.");
 } else {
-  console.log("RAFIQ auto-reply started; poll every", POLL_MS, "ms");
+  console.log("RAFIQ auto-reply live mode explicitly enabled; poll every", POLL_MS, "ms");
   tick();
   setInterval(tick, POLL_MS);
 }

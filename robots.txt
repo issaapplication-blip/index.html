@@ -11,6 +11,7 @@ Disallow: /migrations/
 Disallow: /supabase/
 Disallow: /docs/
 Disallow: /_tools/
-
-
-Sitemap: https://rafiq-o6qd.onrender.com/sitemap.xml
+Disallow: /ops/
+Disallow: /tests/
+Disallow: /.github/
+Sitemap: https://index-html.issaapplication.workers.dev/sitemap.xml
