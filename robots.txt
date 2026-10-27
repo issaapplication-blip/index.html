@@ -13,4 +13,4 @@ Disallow: /docs/
 Disallow: /_tools/
 
 
-Sitemap: https://rafiq-o6qd.onrender.com/sitemap.xml
+Sitemap: https://index-html.issaapplication.workers.dev/sitemap.xml
