@@ -112,4 +112,22 @@ document.addEventListener("DOMContentLoaded",function(){
 <!-- language engine: one button, five languages -->
 <script src="./i18n.js?v=72"></script>
 <script src="./js/locales/ar.js?v=72"></script>
-<script>RAFIQ_I18N.start();</script></body></html>
+<script>
+/* Keep the page readable in Arabic if a translation bundle is unavailable. */
+(function () {
+  function keepArabicFallback() {
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+  }
+  try {
+    if (!window.RAFIQ_I18N || typeof window.RAFIQ_I18N.start !== 'function') {
+      keepArabicFallback();
+      return;
+    }
+    var startup = window.RAFIQ_I18N.start();
+    if (startup && typeof startup.catch === 'function') startup.catch(keepArabicFallback);
+  } catch (_) {
+    keepArabicFallback();
+  }
+})();
+</script></body></html>
