@@ -1,0 +1,4 @@
+# Keep legacy extensionless URLs working while canonical links use .html
+/app /app.html 301
+/services /services.html 301
+/agent /agent.html 301
