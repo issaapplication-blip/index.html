@@ -87,7 +87,7 @@ var WORDS={
 "العربية: اللغة الأم؛ الإنجليزية: أساسي...":["Arabic: native; English: basic...","Arabe : langue maternelle ; anglais : débutant..."]
 };
 var originals=new WeakMap();
-function currentLang(){return (window.RAFIQ_I18N&&RAFIQ_I18N.current)||localStorage.getItem("rafiq.lang")||"ar";}
+function currentLang(){try{return (window.RAFIQ_I18N&&RAFIQ_I18N.current)||localStorage.getItem("rafiq.lang")||"ar";}catch(_){return (window.RAFIQ_I18N&&RAFIQ_I18N.current)||"ar";}}
 function tr(s,lang){var v=WORDS[s];return v?(lang==="en"?v[0]:lang==="fr"?v[1]:s):s;}
 function translatePage(lang){
  var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentElement;if(!p||p.closest("script,style,textarea,option[data-no-translate],.ra-lang,.rafiq-site-header,.rafiq-menu"))return NodeFilter.FILTER_REJECT;return n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
