@@ -135,7 +135,7 @@ function build(){
  function attachLang(){var w=document.querySelector(".ra-lang");if(w&&w.parentElement!==langSlot){langSlot.appendChild(w);w.setAttribute("aria-label","اختيار اللغة");}labelUI(currentLang());}
  var observer=new MutationObserver(attachLang);observer.observe(document.body,{childList:true,subtree:true});attachLang();
  var originals=new WeakMap();
- var wordWalker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentElement;if(!p||p.closest("script,style,textarea,option,.ra-lang,.rafiq-site-header,.rafiq-nav-pop,.rafiq-settings-dialog"))return NodeFilter.FILTER_REJECT;return n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+ var wordWalker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentElement;if(!p||p.closest("script,style,textarea,option,[data-i18n],.ra-lang,.rafiq-site-header,.rafiq-nav-pop,.rafiq-settings-dialog"))return NodeFilter.FILTER_REJECT;return n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
  var nodes=[];var node;while((node=wordWalker.nextNode())){originals.set(node,node.nodeValue);nodes.push(node);}
  function applyWords(lang){nodes.forEach(function(n){if(!n.isConnected)return;var raw=originals.get(n)||"",lead=(raw.match(/^\\s*/)||[""])[0],tail=(raw.match(/\\s*$/)||[""])[0];n.nodeValue=lead+tr(raw.trim(),lang)+tail;});labelUI(lang);}
  document.addEventListener("rafiq:i18n",function(e){var lang=e.detail&&e.detail.lang||currentLang();applyWords(lang);});
