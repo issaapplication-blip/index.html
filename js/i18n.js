@@ -1,7 +1,7 @@
 /* ==========================================================
    RAFIQ | رفيق — language engine
    ------------------------------------------------------------
-   One button at the top-left of every page, five languages.
+   One shared header on every page, three languages.
 
    Design rules, in order of importance:
      1. Never show a blank string. Anything with no translation
@@ -26,9 +26,7 @@ const RAFIQ_I18N = (function () {
     { code: 'ar', label: 'العربية',  flag: '🇱🇧', dir: 'rtl' },
     { code: 'en', label: 'English',  flag: '🇬🇧', dir: 'ltr' },
     { code: 'fr', label: 'Français', flag: '🇫🇷', dir: 'ltr' },
-    { code: 'it', label: 'Italiano', flag: '🇮🇹', dir: 'ltr' },
-    { code: 'de', label: 'Deutsch', flag: '🇩🇪', dir: 'ltr' }
-  ];
+    ];
 
   var DEFAULT = 'ar';
   var KEY = 'rafiq.lang';
