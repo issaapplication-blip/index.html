@@ -17,7 +17,7 @@
 
 /* Cache-buster. install-app.js defines RAFIQ_VERSION, but the language
    engine must work on pages that never load it, so we fall back. */
-if (typeof globalThis.RAFIQ_VERSION === 'undefined') globalThis.RAFIQ_VERSION = '72';
+if (typeof globalThis.RAFIQ_VERSION === 'undefined') globalThis.RAFIQ_VERSION = '74';
 
 const RAFIQ_I18N = (function () {
   'use strict';
