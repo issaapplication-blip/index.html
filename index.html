@@ -119,13 +119,20 @@ footer a:hover{text-decoration:underline}
 <style>.item h2 a,.item h3 a{display:inline-block;background:#087f58;color:#fff!important;text-decoration:none;border-radius:10px;padding:9px 14px;margin:4px 0;font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(8,127,88,.22)}.item h2 a:hover,.item h3 a:hover{background:#0b9b6b}
 </style>
 <link rel="stylesheet" href="./css/device.css?v=72">
-</head>
-<body data-i18n-title="home.title"><main>
+<style>
+.cv-ad{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 14px;padding:22px;border-radius:22px;background:linear-gradient(120deg,#075d43,#0b9468);color:#fff;text-decoration:none;box-shadow:0 12px 30px #087f5833}
+.cv-ad h2{color:#fff;font-size:clamp(21px,3vw,30px);margin:0 0 4px}.cv-ad p{margin:0;color:#e7fff4}.cv-ad .cv-ad-icon{font-size:38px}.cv-ad-cta{background:#fff;color:#087f58;padding:10px 16px;border-radius:11px;font-weight:900;white-space:nowrap}
+.hero-copy{max-width:760px;margin:10px auto 18px;font-size:17px;color:#52675e;line-height:1.9}.home-hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.home-hero-actions a{min-width:210px;text-decoration:none;border-radius:14px;padding:14px 20px;font-weight:900}.home-hero-actions .family{background:#087f58;color:white}.home-hero-actions .provider{background:#f0f7f3;color:#087f58;border:1px solid #cfe4d8}
+.home-categories,.home-process,.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.home-category{background:#fff;border:1px solid #dce8e2;border-radius:16px;padding:16px;text-decoration:none;color:inherit;box-shadow:0 4px 14px #0000000a}.home-category .emoji{font-size:28px;display:block}.home-category b,.trust-grid b{color:#087f58;display:block}.home-category span:last-child{font-size:13px;color:#61746b}.home-process article,.trust-grid article{padding:15px;border-radius:14px;background:#f0f7f3}.home-process strong{color:#087f58;display:block}.trust-grid{margin-top:10px}
+@media(max-width:600px){.cv-ad{padding:16px;flex-wrap:wrap}.cv-ad .cv-ad-cta{width:100%;text-align:center}.hero-copy{font-size:15px}.home-hero-actions{display:grid;grid-template-columns:1fr}.home-hero-actions a{min-width:0}.home-categories{grid-template-columns:repeat(2,minmax(0,1fr))}.home-category{padding:12px}.home-category b{font-size:14px}.home-category span:last-child{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.home-category{transition:none}}
+</style>\n</head>
+<body data-i18n-title="home.title"><main>\n<a class="cv-ad" href="./cv-builder.html"><span class="cv-ad-icon" aria-hidden="true">📄</span><span style="flex:1"><h2>أنشئ سيرتك الذاتية (CV) ورسالة التقديم مجاناً</h2><p>أدخل خبرتك ومهاراتك وبيانات التواصل، واحصل على مستند متوافق مع أنظمة ATS.</p></span><span class="cv-ad-cta">ابدأ الآن ←</span></a>
 <section class="brand" aria-label="RAFIQ">
   <img class="logo" src="./assets/rafig-logo.png?v=20260928" alt="RAFIQ - منصة رعاية منزلية" width="512" height="512" decoding="async" fetchpriority="high">
   <h1 data-i18n="home.h1">رفيق | RAFIQ</h1>
   <p class="tagline" data-i18n="home.tagline">نصل بالحب والأمان لرعاية العائلة</p>
-  <p class="who" data-i18n="home.who">منصة رعاية منزلية وخدمات صحية في لبنان · مدير المنصة</p>
+  <p class="who" data-i18n="home.who">منصة رعاية منزلية وخدمات صحية في لبنان</p>\n<p class="hero-copy">منصة لبنانية تنظّم خدمات الرعاية المنزلية والصحية، وتربط العائلات بمقدّمي الرعاية والممرضين والمعالجين والجهات الصحية، بعد مراجعة الطلبات من إدارة رفيق.</p><div class="home-hero-actions"><a class="family" href="./app.html">👨‍👩‍👧 اطلب رعاية لأهلك</a><a class="provider" href="./caregivers.html">🤝 انضم كمقدّم خدمة</a></div>
 
   <!-- ============ 2) THE THREE THINGS THAT MATTER, biggest first ============ -->
   <div class="cta">
@@ -138,7 +145,17 @@ footer a:hover{text-decoration:underline}
   </div>
   <p id="installHint" data-rafiq-install-hint class="small" hidden style="margin:10px auto 0;max-width:520px"></p>
 </section>
-<nav class="card" aria-labelledby="pickTitle">
+<section class="card"><h2>خدمات وفئات رفيق</h2><div class="home-categories">
+<a class="home-category" href="./home-nursing.html"><span class="emoji">🩺</span><b>الممرضون والممرضات</b><span>تمريض منزلي ومتابعة وفق الاختصاص.</span></a>
+<a class="home-category" href="./caregivers.html"><span class="emoji">🤝</span><b>مقدمو الرعاية</b><span>رعاية كبار السن والمرضى ومساندة الأسرة.</span></a>
+<a class="home-category" href="./physiotherapy.html"><span class="emoji">🧑‍🦽</span><b>المعالجون الفيزيائيون</b><span>تأهيل وتمارين علاجية منزلية.</span></a>
+<a class="home-category" href="./services.html"><span class="emoji">👨‍⚕️</span><b>الأطباء</b><span>خدمات الأطباء ضمن شبكة الخدمات.</span></a>
+<a class="home-category" href="./services.html"><span class="emoji">🧪</span><b>المختبرات</b><span>التحاليل — انتظرونا قريبًا.</span></a>
+<a class="home-category" href="./services.html"><span class="emoji">🩻</span><b>مراكز الأشعة</b><span>التصوير الطبي — انتظرونا قريبًا.</span></a>
+<a class="home-category" href="./services.html"><span class="emoji">🦽</span><b>المعدات الطبية</b><span>معدات الرعاية — انتظرونا قريبًا.</span></a>
+<a class="home-category" href="./app.html"><span class="emoji">🏡</span><b>العائلات</b><span>قدّم طلب رعاية لأحد أفراد العائلة.</span></a>
+<a class="home-category" href="./members.html"><span class="emoji">🎫</span><b>المنتسبون</b><span>تابعوا التقديمات والاستفادة من خدمات المنصة.</span></a>
+</div></section>\n<nav class="card" aria-labelledby="pickTitle">
   <h2 id="pickTitle" data-i18n="home.pick.title">اختر ما تحتاجه</h2>
   <div class="pick">
     <a href="./elderly-care.html"><span class="rank">1</span><span class="ic" aria-hidden="true">👴</span><span class="t" data-i18n="home.pick.1.t">رعاية كبار السن</span><span class="d" data-i18n="home.pick.1.d">رعاية يومية وليلية ومساعدة للأشخاص غير المستقلين.</span></a>
@@ -207,7 +224,7 @@ footer a:hover{text-decoration:underline}
 
 <footer class="card small">
 <span data-i18n="footer.rights">© RAFIQ | رفيق للخدمات · نصل بالحب والأمان لرعاية العائلة</span> · issaapplication@gmail.com<br>
-<a href="./services.html" data-i18n="nav.services">الخدمات</a> · <a href="./about.html" data-i18n="nav.about">عن المنصة</a> · <a href="./faq.html" data-i18n="nav.faq">الأسئلة الشائعة</a> · <a href="./guide.html" data-i18n="nav.guide">الدليل</a> · <a href="./regions.html" data-i18n="nav.regions">المناطق</a>
+<a href="./services.html" data-i18n="nav.services">الخدمات</a> · <a href="./about.html" data-i18n="nav.about">عن المنصة</a> · <a href="./faq.html" data-i18n="nav.faq">الأسئلة الشائعة</a> · <a href="./guide.html" data-i18n="nav.guide">الدليل</a> · <a href="./regions.html" data-i18n="nav.regions">المناطق</a> · <a href="./cv-builder.html">إنشاء CV مجاناً</a> · <a href="https://t.me/+a7CDblNyGKw1Yjg8" target="_blank" rel="noopener">قناة Telegram</a> · <a href="https://whatsapp.com/channel/0029Vb90gxSC6Zvj6gjLWs1K" target="_blank" rel="noopener">قناة WhatsApp</a>
 </footer>
 </main>
 <script src="/install-app.js?v=73" defer></script>
