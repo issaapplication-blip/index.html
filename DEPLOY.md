@@ -42,3 +42,13 @@ Open Cloudflare Dashboard → Workers & Pages → `index-html` → Builds, selec
 7. Obtain explicit approval before merging or deploying.
 
 A successful local test or GitHub test run is not proof that the production Worker or Supabase deployment is ready.
+## Repository topology — integration is not yet proven
+
+There are two separate GitHub repositories:
+
+- Frontend draft: `issaapplication-blip/index.html` (PR #15; static pages are at repository root).
+- Backend/Cloudflare Pages project: `issaapplication-blip/-` (its documented build copies `public/` to `dist/` and supplies `functions/api/*` routes).
+
+The backend repository's deployment guide identifies the Pages source as `issaapplication-blip/-`. PR #15 is in the other repository and is not automatically included in that Pages build. The current `index-html.issaapplication.workers.dev` URL is a Workers hostname; it has not been proven to be the same deployment as the Pages project described in the backend repository.
+
+Do not assume that same-origin form routes such as `/api/public/intake` exist on the frontend-only Worker. The Pages Functions proxy exists in the backend repository. Confirm the Cloudflare service's connected repository and build configuration before integrating or changing routes.
