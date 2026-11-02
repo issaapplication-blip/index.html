@@ -51,7 +51,8 @@
       "keys": [
         "رعاية كبار السن",
         "elderly care",
-        "personnes âgées"
+        "personnes âgées",
+        "لكبار السن"
       ],
       "ar": "تنظم رفيق طلبات الرعاية المنزلية لكبار السن، مثل المساعدة في الاحتياجات اليومية والمرافقة. تُراجع الإدارة الطلب قبل أي مطابقة.",
       "en": "RAFIQ coordinates home-care requests for older adults, including daily-living support and companionship. The administration reviews each request before matching.",
@@ -62,7 +63,8 @@
       "keys": [
         "رعاية المرضى",
         "patient care",
-        "soins aux patients"
+        "soins aux patients",
+        "ترعون المرضى"
       ],
       "ar": "يمكن تقديم طلب رعاية منزلية للمريض وفق احتياجات الأسرة وتعليمات الطبيب. رفيق لا تقدم تشخيصاً أو علاجاً طبياً.",
       "en": "You can submit a home-care request for a patient based on the family’s needs and the treating clinician’s instructions. RAFIQ does not diagnose or provide medical treatment.",
@@ -87,7 +89,8 @@
         "علاج فيزيائي",
         "العلاج الفيزيائي",
         "physiotherapy",
-        "kinésithérapie"
+        "kinésithérapie",
+        "علاجا فيزيائيا"
       ],
       "ar": "تنظم رفيق طلبات العلاج الفيزيائي المنزلي وإعادة التأهيل الحركي، وفق التقييم المهني وتوصيات الفريق المعالج.",
       "en": "RAFIQ coordinates home physiotherapy and mobility rehabilitation requests, subject to professional assessment and the treating team’s recommendations.",
@@ -173,7 +176,8 @@
         "الممرضات",
         "nurses apply",
         "infirmiers",
-        "ممرض"
+        "ممرض",
+        "كيف أنضم"
       ],
       "ar": "يمكن للممرضين والممرضات تقديم طلب انضمام مع المؤهلات والترخيص المهني الساري عند انطباقه. يخضع كل ملف لمراجعة الإدارة.",
       "en": "Nurses may apply with their qualifications and, where applicable, a valid professional licence. Every profile is reviewed by the administration.",
@@ -184,7 +188,8 @@
       "keys": [
         "معالج فيزيائي",
         "physiotherapist",
-        "kinésithérapeute"
+        "kinésithérapeute",
+        "أستطيع التسجيل"
       ],
       "ar": "يمكن للمعالجين الفيزيائيين تقديم ملفاتهم مع المؤهلات والترخيص المهني والتخصص ومناطق العمل.",
       "en": "Physiotherapists may submit profiles with their qualifications, professional licence, specialty and service areas.",
@@ -273,7 +278,8 @@
         "هل تقبلون تلقائيا",
         "هل يتم القبول",
         "approval",
-        "acceptation"
+        "acceptation",
+        "القبول تلقائي"
       ],
       "ar": "لا. إرسال الطلب لا يعني القبول التلقائي. تراجع الإدارة المعلومات والوثائق قبل اعتماد أي ملف أو إجراء مطابقة.",
       "en": "No. Submitting an application does not mean automatic acceptance. The administration reviews the information and documents before approving a profile or arranging a match.",
