@@ -8,7 +8,7 @@ document.querySelectorAll("form[data-rafiq-intake]").forEach(form=>{
  form.addEventListener("submit",async ev=>{
   ev.preventDefault();if(!form.reportValidity())return;
   const submit=form.querySelector('button[type="submit"]');const original=submit.textContent;
-  const data=new FormData(form);const fields=Array.from(form.querySelectorAll('input[type="file"][data-doc-category]'));
+  const data=new FormData(form);if(form.dataset.role!=="institution")data.set("role",form.dataset.role);const fields=Array.from(form.querySelectorAll('input[type="file"][data-doc-category]'));
   let count=0;
   for(const input of fields){for(const f of Array.from(input.files||[])){if(!allowed.has(f.type)||f.size>maxSize){message(form,"الملف «"+f.name+"» غير مقبول. استخدم PDF أو JPG أو PNG، وبحجم لا يتجاوز 8MB.", "error");return;}data.append("files",f);data.append("document_category",input.dataset.docCategory);count++;}}
   if(count>8){message(form,"يمكن إرفاق 8 ملفات كحد أقصى.","error");return;}
