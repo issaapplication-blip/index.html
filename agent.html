@@ -43,9 +43,7 @@
 const SUPABASE_URL='https://qmuxaehrahfsnabyjens.supabase.co',KEY='sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD',db=supabase.createClient(SUPABASE_URL,KEY),$=id=>document.getElementById(id); async function boot(){const {data:{session}}=await db.auth.getSession(); if(session){$('auth').hidden=true;$('chat').hidden=false;return true} return false} $('login').onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value}); if(error){$('authMsg').textContent='تعذر الدخول. تحقق من البيانات أو أنشئ حسابًا من صفحة التسجيل.';return} location.reload()};
 function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;$('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight}
 boot().then(ok=>{if(ok)add('مرحبًا بك في رفيق 👋\nأنا مساعد رفيق. أخبرني ماذا تحتاج: رعاية منزلية، تمريض، علاج فيزيائي، تسجيل مقدم خدمة، أو سؤال عام عن المنصة.','a');});
-/* conversation state so the agent collects missing details one by one.
-   absorb() is shared with the WhatsApp worker (js/rafiq-agent.js) so the
-   website and WhatsApp always read a conversation the same way. */
+/* Conversation state for the RAFIQ website assistant only. WhatsApp is not connected to this agent. */
 let ctx={};
 const absorb=function(t){ctx=RAFIQ_AGENT.extract(t,ctx);return ctx};
 
