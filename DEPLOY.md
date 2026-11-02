@@ -1,272 +1,44 @@
-# RAFIQ | رفيق — دليل التشغيل والإطلاق
+# RAFIQ | رفيق — Safe deployment and release notes
 
-منصة رعاية منزلية وخدمات صحية في لبنان.
-الموقع: **https://rafiq-o6qd.onrender.com**
+## Production hosting
 
----
+- Current public site: https://index-html.issaapplication.workers.dev/
+- Hosting target: Cloudflare Workers, service `index-html`.
+- Frontend repository: https://github.com/issaapplication-blip/index.html
+- Do not use Render for build, hosting, fallback, restart, or deployment.
+- Do not deploy this draft branch or merge it into `main` without the owner's explicit approval.
 
-## 1) ما الذي يعمل الآن (متحقَّق منه بالاختبار)
+## Current release blocker
 
-| المجال | الحالة | كيف تم التحقق |
-|---|---|---|
-| 27 صفحة HTML | ✅ 200 | طلب مباشر لكل صفحة |
-| 14 أصل (شعار، أيقونات، JS) | ✅ 200 | طلب مباشر + نوع المحتوى |
-| الشعار `assets/rafig-logo.png` | ✅ 512×512 في كل الصفحات | `naturalWidth` في المتصفح |
-| لا تمرير أفقي على أي مقاس | ✅ | قياس `scrollWidth` مقابل `viewport` |
-| لا أخطاء JavaScript | ✅ 0 | console على 7 صفحات |
-|GSee / FAQ Schema | ✅ FAQPage (10 أسئلة) + MedicalBusiness | قراءة `application/ld+json` |
-| sitemap / robots | ✅ 21 رابط + استبعاد الإداري | فحص الملفات |
-| PWA | ✅ manifest + sw v68 + 3 أيقونات | تسجيل Service Worker |
-| الوكيل (المتصفح) | ✅ **27/27** اختبار | `live/_test/agent-tests.html` |
-| الوكيل (واتساب) | ✅ نفس brain | `auto-reply.mjs` يستورد نفس الملفات |
-| استقبال الطلب (نموذج) | ✅ يصل Supabase | اختبار حقيقي |
-| **التسجيل بالبريد** | 🔴 **محجوب** | `429 email rate limit exceeded` |
+The Cloudflare preview builds for PR #15 failed repeatedly on 2 November 2026. The latest recorded failure is for commit `215c059bc5cb6e531ce035c922f906319cd52dbc`.
 
----
+Open Cloudflare Dashboard → Workers & Pages → `index-html` → Builds, select the failed build, and inspect the build log. The log is account-protected and is not available through this repository. Do not guess a build command or change build settings until the exact failure is known.
 
-## 2) 🔴 العائق الوحيد المتبقي: التسجيل محجوب
+## Supabase integration
 
-Supabase أوقف إنشاء الحسابات:
+- Existing project: `qmuxaehrahfsnabyjens`
+- Project URL: https://qmuxaehrahfsnabyjens.supabase.co
+- Do not create another project.
+- Do not apply migrations, change RLS, rotate secrets, or weaken authentication as part of a frontend release.
+- Never commit service-role keys, bot tokens, Meta secrets, or other credentials.
+- Keep private documents in the existing private Storage bucket; never expose signed URLs or applicant data in public pages.
 
-```
-POST /auth/v1/signup  ->  429  "email rate limit exceeded"
-```
+## Messaging safety
 
-**السبب:** المصادقة بالبريد مفعّلة مع «تأكيد البريد»، والباقة المجانية تضع حداً
-بسيطاً على عدد رسائل البريد الإلكتروني المرسلة.
+- The automated RAFIQ agent is for the website and Telegram only.
+- WhatsApp is inbound-only and may relay messages to the Telegram manager group.
+- Never enable WhatsApp auto-replies, polling workers, or outbound WhatsApp API calls.
+- Do not register or replace a real Telegram webhook during preview testing.
+- Use mocked Telegram and WhatsApp providers for tests. Do not message real customers or users.
 
-**الحل — دقيقة واحدة في لوحة Supabase:**
+## Release checklist
 
-```
-Supabase Dashboard
-  -> Authentication
-  -> Sign In / Providers
-  -> Email
-  -> Confirm email        ❌  أطفئه
-  -> Save
-```
+1. Inspect and resolve the Cloudflare build failure using the actual build log.
+2. Review the frontend and backend pull requests separately.
+3. Confirm the website form endpoints are connected to the intended backend and existing Supabase functions.
+4. Run offline tests for forms, the assistant, links, languages, and mobile layouts.
+5. Verify Supabase tables, RPCs, RLS, Edge Function versions, JWT settings, and Storage policies using read-only checks.
+6. Confirm that no passport document category is requested or accepted.
+7. Obtain explicit approval before merging or deploying.
 
-بعد الإطفاء لا تُرسَل أي رسالة تأكيد، فيرتفع الحد ولا يُحظر التسجيل.
-هذا آمن هنا لأن **كل طلب يراجعه المدير قبل القبول** — لا يوجد وصول بلا مراجعة.
-
-> إن أُريد إبقاء التأكيد: ارفع باقة Supabase، أو انتظر إعادة ضبط الحد.
-
-حتى يُحل ذلك، يعرض الموقع رسالة واضحة مع زر واتساب البديل (مُفعَّل ومُختبَر).
-
----
-
-## 3) خطوات النشر
-
-### الطريقة أ — GitHub (3 دقائق)
-
-1. أنشئ رمزاً: <https://github.com/settings/tokens/new>
-   - Note: `RAFIQ` · Expiration: `30 days` · Scope: **`repo`**
-2. انسخ الرمز.
-3. **زر الفأرة الأيمن** على `PUBLISH.bat` ← **تشغيل كمسؤول** ← اسم المستخدم + الرمز.
-4. Render يعيد النشر تلقائياً (GitHub → Build).
-
-### الطريقة ب — رفع ZIP (5 دقائق)
-
-`RAFIQ-FINAL.zip` جاهز. في **Render → Shell**:
-
-```bash
-cd /opt/render/project/src
-unzip -o /tmp/RAFIQ-FINAL.zip -d /opt/render/project/src
-# أو: ارفع الملف من Files ثم:
-ls -la
-```
-
-ثم **Restart** من لوحة Render.
-
-### بعد النشر — تحقّق (دقيقة)
-
-```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/dashboard.html   # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/barcode.html     # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/js/rafiq-kb.js  # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/assets/rafig-logo.png # 200
-```
-
-إن بقيت `404`، فالخادم المُشغَّل على Render يستخدم
-قائمة مسارات ثابتة — راجع `server.js` داخل الخدمة وأضف المسارات المفقودة.
-
-### على الهاتف
-
-الشاشة السوداء القديمة سببها `sw.js` مكسور مخزَّن في الذاكرة المؤقتة.
-بعد النشر:
-
-1. Chrome ← `rafiq-o6qd.onrender.com` ← ⚙️ ← **حذف بيانات الموقع**.
-2. احذف التطبيق المثبَّت إن وُجد، ثم أعد فتح الموقع.
-3. ⋮ ← **تثبيت التطبيق / إضافة إلى الشاشة الرئيسية**.
-
----
-
-## 4) قواعد Supabase — شغّلها مرة واحدة
-
-في **Supabase → SQL Editor**، شغّل بالترتيب:
-
-```
-supabase/migrations/20260927_barcode_and_commission.sql
-supabase/migrations/20260927_barcode_and_commission_rls.sql
-supabase/migrations/20260927_manager_dashboard.sql
-supabase/migrations/20260927_manager_barcode.sql
-supabase/migrations/20260927_privacy_gate.sql
-supabase/migrations/20260927_public_visibility.sql
-```
-
-كلها **إضافة فقط** — لا تحذف جدولاً ولا بيانات.
-لوحة المراجعة تعمل قبلها بفضل الإحصاءات الاحتياطية.
-
----
-
-## 5) الوكيل
-
-### طبقاته
-
-```
-1. guard      قواعد السلامة          — دائماً
-2. RAFIQ_KB   15 جواباً مُراجَعاً     — دائماً، فوري، بلا إنترنت
-3. OpenAI     ذكاء أعمق               — فقط عند وجود مفتاح
-```
-
-الطبقة 2 وحدها تجيب على كل السيناريوهات. وOpenAI تحسين لا شرط.
-إن تعطّل، الوكيل **لا يسكت أبداً**.
-
-### أين تُفتح الطبقة 3
-
-**Supabase → Edge Functions → rafiq-agent → Secrets:**
-
-| الاسم | مطلوب؟ | القيمة |
-|---|---|---|
-| `OPENAI_API_KEY` | اختياري | `sk-…` |
-| `OPENAI_MODEL` | اختياري | `gpt-4o-mini` |
-
-ثم **Deploy** الدالة `supabase/functions/rafiq-agent/index.ts`.
-
-### ما لا يفعله الوكيل أبداً
-
-- لا يشخّص ولا يصف دواءً ولا يغيّر علاجاً
-- لا يخترع سعراً ولا خصماً ولا وقتاً متاحاً
-- لا يوافق على مقدم خدمة ولا يوقّع عقداً
-- لا يتعامل مع أموال ولا يذكر الرقم المالي
-- لا يعطي رقم هاتف لمقدم خدمة
-- الحالات الطارئة → إسعاف 112 + المدير
-- كل ما عداه → المدير على **81 506 299**
-
-### الاختبار
-
-```
-http://127.0.0.1/_test/agent-tests.html     # 27/27
-```
-
----
-
-## 6) واتساب — الرد التلقائي 24/7
-
-```bash
-npm i
-KAPSO_API_KEY=…  KAPSO_PHONE_NUMBER_ID=1324609540731383  node auto-reply.mjs
-```
-
-| المتغيّر | مطلوب؟ |
-|---|---|
-| `KAPSO_API_KEY` | ✅ |
-| `KAPSO_PHONE_NUMBER_ID` | ✅ `1324609540731383` |
-| `OPENAI_API_KEY` | اختياري |
-| `POLL_MS` | اختياري، افتراضياً 20000 |
-
-> ⚠️ **مفاتيح Kapso الحالية مكشوفة.** احذفها وأنشئ جديدة قبل التشغيل.
-> الرقم المالي `{{FINANCIAL_NUMBER}}` للتحويلات فقط — محجوب في الكود ولا يُرسل إليه شيء.
-
----
-
-## 7) أشياء يجب تغييرها قبل الإطلاق
-
-| # | الأمر | لماذا |
-|---|---|---|
-| 1 | إطفاء «Confirm email» في Supabase | التسجيل محجوب الآن بـ 429 |
-| 2 | تدوير مفاتيح Kapso | مكشوفة في المحادثة |
-| 3 | `supabase/config.toml`: `verify_jwt = false` للدالة | يمنع خطأ 401 على نداءات المتصفح |
-| 4 | إدراج الأرقام على `index.html` و`app.html` | الرقم الأول للطلب مفقود |
-| 5 | تسمية Display Name لرقم Meta | يجب أن تكون `RAFIQ \| رفيق` |
-| 6 | إكمال التحقق التجاري في Meta | البند 6 من 7 |
-
-### `supabase/config.toml`
-
-```toml
-[functions.rafiq-agent]
-verify_jwt = false
-```
-
----
-
-## 8) بنية الملفات
-
-```
-/                      الصفحة الرئيسية (server.js يخدم "/" من home.html)
-index.html             يحوّل تلقائياً إلى "/" — لا يربطه أي رابط داخلي
-faq.html               الأسئلة الشائعة + FAQ Schema
-app.html               التسجيل والطلب (عائلات + مهنيون)
-agent.html             مساعد رفيق
-dashboard.html         لوحة المراجعة (مدير)
-admin.html             دخول المدير
-barcode.html           بطاقة مقدم الخدمة
-services.html regions.html guide*.html elderly-care.html …
-js/rafiq-kb.js         قاعدة المعرفة — 15 جواباً
-js/rafiq-agent.js      طبقة السلامة + استخراج البيانات + OpenAI
-js/rafiq-welcome.js    رسائل ترحيب يومية (4 أدوار)
-auto-reply.mjs         عامل واتساب
-supabase/functions/    دالة الوكيل على الخادم
-supabase/migrations/   7 ترحيلات — شغّلها مرة واحدة
-_test/agent-tests.html 27 اختباراً للوكيل  (لا يُنشر)
-```
-
----
-
-## 9) الأرقام
-
-| | |
-|---|---|
-| استقبال العملاء / المدير | **+961 81 506 299** |
-| التحويلات المالية فقط | **ليس في هذا المستودع إطلاقاً** — انظر «زرع الأرقام الخاصة» |
-
-CV احترافي: ‎$25‎ / Cover Letter ‎$10‎ / الاثنان ‎$35‎ (بدل ‎$35‎/‎$16‎/‎$51‎)
-لغة إضافية ‎+$20‎. الدفع عبر **Whish Money** فقط.
-
----
-
-## 10) زرع الأرقام الخاصة
-
-المستودع **عام**. لذلك لا يحتوي أي رقم مالي، ولا يوجد في الكود
-قائمة أرقام ممنوعة — المنع مبني على قاعدة معكوسة:
-
-> **رقم المراسلات `81 506 299` هو الرقم الوحيد الذي يجوز للوكيل نطقه.
-> أي رقم آخر يُحذف من كل رد قبل الإرسال.**
-
-### أ) منع الرقم المالي من الدخول إلى قاعدة البيانات
-
-بعد تشغيل `supabase/migrations/20260927_privacy_gate.sql`،
-نفّذ مرة واحدة في **Supabase → SQL Editor** (استبدل `XXXXXXX` بالأرقام):
-
-```sql
-update public.platform_settings
-   set value = 'XXXXXXX'
- where key = 'blocked_phone_digits';
-```
-
-الجدول `platform_settings` محمي بـ RLS: **لا يقرأه إلا المدير**، ولا يوجد فيه أي سرّ آخر.
-
-### ب) الرقم المالي في لوحة المدير
-
-ليس في الكود. اضغط على العبارة `يُضبط من لوحة المدير` في تبويب العمولات، فيُطلب منك الرقم ويُحفظ في `localStorage` على جهازك فقط — **لا يُرفع إلى أي خادم ولا يُنشر**.
-
-### ج) أرقام واتساب الممنوعة
-
-عند تشغيل `auto-reply.mjs` على Render، اضبط:
-
-```
-RAFIQ_BLOCKED_NUMBERS=<الأرقام الخاصة مفصولة بفاصلة>
-KAPSO_PHONE_NUMBER=1324609540731383
-```
-
-`auto-reply.mjs` يرفض إرسال أي رسالة إلى رقم في هذه القائمة أو إلى رقم المنصة نفسه.
+A successful local test or GitHub test run is not proof that the production Worker or Supabase deployment is ready.
