@@ -69,7 +69,7 @@ async function send(){
         const r=await fetch(SUPABASE_URL+'/functions/v1/rafiq-agent',{
           method:'POST',
           headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},
-          signal:ctl.signal,body:JSON.stringify({message:v,ctx:ctx,locale:'ar'})
+          signal:ctl.signal,body:JSON.stringify({message:v,ctx:ctx,locale:(document.documentElement.lang||localStorage.getItem('rafiq.lang')||'ar').slice(0,2)})
         });
         clearTimeout(to);
         if(r.ok){
