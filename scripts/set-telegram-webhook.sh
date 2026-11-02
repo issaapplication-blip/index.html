@@ -11,3 +11,6 @@ import json, os
 print(json.dumps({"url":"https://qmuxaehrahfsnabyjens.supabase.co/functions/v1/telegram-webhook","secret_token":os.environ["TELEGRAM_WEBHOOK_SECRET"],"allowed_updates":["message","callback_query"],"drop_pending_updates":False}))
 PY
 curl --fail-with-body --silent --show-error -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook" -H 'Content-Type: application/json' --data-binary @"$PAYLOAD" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps({"ok":d.get("ok"),"description":d.get("description"),"result":d.get("result")},ensure_ascii=False,indent=2)); sys.exit(0 if d.get("ok") else 1)'
+
+# Read back the webhook configuration without displaying the bot token or secret.
+curl --fail-with-body --silent --show-error "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getWebhookInfo" | python3 -c 'import json,sys; d=json.load(sys.stdin); r=d.get("result",{}); print(json.dumps({"ok":d.get("ok"),"url":r.get("url"),"has_custom_certificate":r.get("has_custom_certificate"),"pending_update_count":r.get("pending_update_count"),"allowed_updates":r.get("allowed_updates"),"last_error_date":r.get("last_error_date"),"last_error_message":r.get("last_error_message")},ensure_ascii=False,indent=2)); sys.exit(0 if d.get("ok") else 1)'
