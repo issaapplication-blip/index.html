@@ -172,7 +172,8 @@
         "الممرضين",
         "الممرضات",
         "nurses apply",
-        "infirmiers"
+        "infirmiers",
+        "ممرض"
       ],
       "ar": "يمكن للممرضين والممرضات تقديم طلب انضمام مع المؤهلات والترخيص المهني الساري عند انطباقه. يخضع كل ملف لمراجعة الإدارة.",
       "en": "Nurses may apply with their qualifications and, where applicable, a valid professional licence. Every profile is reviewed by the administration.",
@@ -258,7 +259,9 @@
         "متى تردون",
         "مدة الرد",
         "when will you reply",
-        "délai de réponse"
+        "délai de réponse",
+        "متى ترد الإدارة",
+        "متى ترد"
       ],
       "ar": "تراجع الإدارة الطلبات بحسب ترتيب ورودها واكتمال المعلومات. لا أستطيع تأكيد وقت محدد للرد؛ عند الحاجة يمكنك التواصل مع الإدارة عبر القنوات الرسمية.",
       "en": "The administration reviews requests in the order received and according to the completeness of the information. I cannot promise a specific response time; you can contact the team through the official channels.",
@@ -305,7 +308,8 @@
         "التواصل معكم",
         "رقم التواصل",
         "contact you",
-        "contacter"
+        "contacter",
+        "أتواصل معكم"
       ],
       "ar": "يمكنك التواصل مع الإدارة عبر واتساب الرسمي: +961 81 506 299، أو عبر قنوات رفيق الرسمية على Telegram وWhatsApp.",
       "en": "You can contact the administration through the official WhatsApp number: +961 81 506 299, or through RAFIQ’s official Telegram and WhatsApp channels.",
@@ -370,7 +374,8 @@
         "price",
         "cost",
         "prix",
-        "coût"
+        "coût",
+        "كم سعر"
       ],
       "ar": "لا أعتمد سعراً من المحادثة ولا أستطيع تأكيد تكلفة نهائية. تختلف التفاصيل بحسب نوع الخدمة والمدة والمنطقة، وتوضحها الإدارة بعد مراجعة الطلب.",
       "en": "I cannot quote or confirm a final price in chat. Details depend on the service, duration and area; the administration will clarify them after reviewing the request.",
