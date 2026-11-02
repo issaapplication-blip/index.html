@@ -1,0 +1,583 @@
+{
+  "version": 1,
+  "timezone": "Asia/Beirut",
+  "selection": "beirut-calendar-day-number modulo message-count",
+  "pages": {
+    "home": [
+      {
+        "ar": "أهلاً بكم في رفيق؛ مساحة تجمع العائلة بالرعاية والاهتمام.",
+        "en": "Welcome to RAFIQ, where families connect with care and attention.",
+        "fr": "Bienvenue chez RAFIQ, où les familles trouvent écoute et accompagnement."
+      },
+      {
+        "ar": "يسعدنا وجودكم؛ نرافق خطواتكم نحو خيارات رعاية أوضح.",
+        "en": "We are glad you are here; we help make care options clearer.",
+        "fr": "Heureux de vous accueillir ; nous vous aidons à mieux comprendre les options de soins."
+      },
+      {
+        "ar": "في رفيق، تبدأ الخدمة الجيدة بالإنصات والاحترام.",
+        "en": "At RAFIQ, good service begins with listening and respect.",
+        "fr": "Chez RAFIQ, un bon service commence par l’écoute et le respect."
+      },
+      {
+        "ar": "مرحباً بكم؛ لكل عائلة احتياجاتها، ولكل طلب اهتمامه.",
+        "en": "Welcome; every family has its own needs, and every request deserves attention.",
+        "fr": "Bienvenue ; chaque famille a ses besoins et chaque demande mérite de l’attention."
+      },
+      {
+        "ar": "نؤمن أن الرعاية الإنسانية تبدأ بكلمة طيبة وتواصل واضح.",
+        "en": "We believe compassionate care starts with kindness and clear communication.",
+        "fr": "Nous croyons qu’un accompagnement humain commence par la bienveillance et une communication claire."
+      },
+      {
+        "ar": "رفيق يرحب بكم، ويضع كرامة الإنسان في مقدمة الاهتمام.",
+        "en": "RAFIQ welcomes you and places human dignity at the heart of its work.",
+        "fr": "RAFIQ vous accueille et place la dignité humaine au cœur de son engagement."
+      },
+      {
+        "ar": "خطوة هادئة ومعلومة واضحة؛ أهلاً بكم في رفيق.",
+        "en": "A thoughtful step and clear information; welcome to RAFIQ.",
+        "fr": "Un pas réfléchi et une information claire ; bienvenue chez RAFIQ."
+      },
+      {
+        "ar": "نسعد بزيارتكم؛ اكتشفوا خدماتنا وتعرّفوا إلى طريقة العمل.",
+        "en": "Thank you for visiting; explore our services and how we work.",
+        "fr": "Merci de votre visite ; découvrez nos services et notre fonctionnement."
+      },
+      {
+        "ar": "نستقبل أسئلتكم وطلباتكم باهتمام واحترام.",
+        "en": "Your questions and requests are welcome and treated with care.",
+        "fr": "Vos questions et demandes sont accueillies avec attention et respect."
+      },
+      {
+        "ar": "معاً نبحث عن خيارات مناسبة تراعي ظروف كل عائلة.",
+        "en": "Together, we explore options that respect each family’s circumstances.",
+        "fr": "Ensemble, nous explorons des solutions adaptées à la situation de chaque famille."
+      },
+      {
+        "ar": "أهلاً بكم في منصة رعاية تنطلق من لبنان وتخدم العائلات.",
+        "en": "Welcome to a care platform rooted in Lebanon and serving families.",
+        "fr": "Bienvenue sur une plateforme de soins née au Liban et au service des familles."
+      },
+      {
+        "ar": "الوضوح والثقة والاحترام؛ مبادئ نحرص عليها في كل تواصل.",
+        "en": "Clarity, trust and respect guide every interaction.",
+        "fr": "La clarté, la confiance et le respect guident chaque échange."
+      },
+      {
+        "ar": "نقدّر وقتكم؛ تصفحوا بهدوء واختاروا ما يناسب احتياجكم.",
+        "en": "We value your time; browse at your pace and choose what suits your needs.",
+        "fr": "Nous respectons votre temps ; parcourez nos services à votre rythme."
+      },
+      {
+        "ar": "وجودكم يسعدنا؛ رفيق هنا ليسهّل الوصول إلى خدمات الرعاية.",
+        "en": "We are glad you are here; RAFIQ helps you access care services.",
+        "fr": "Votre présence nous réjouit ; RAFIQ facilite l’accès aux services d’accompagnement."
+      }
+    ],
+    "nurses": [
+      {
+        "ar": "أهلاً بالممرضين والممرضات؛ خبرتكم المهنية محل تقدير.",
+        "en": "Welcome, nurses; your professional experience is valued.",
+        "fr": "Bienvenue aux infirmiers et infirmières ; votre expérience professionnelle est appréciée."
+      },
+      {
+        "ar": "رعايتكم تبدأ بالعلم، ويكتمل أثرها بالرحمة والاحترام.",
+        "en": "Your care begins with knowledge and is supported by compassion and respect.",
+        "fr": "Vos soins reposent sur le savoir, la compassion et le respect."
+      },
+      {
+        "ar": "نرحب بالكفاءات التمريضية التي تضع سلامة المريض وكرامته أولاً.",
+        "en": "We welcome nursing professionals who put patient safety and dignity first.",
+        "fr": "Nous accueillons les professionnels infirmiers qui privilégient la sécurité et la dignité du patient."
+      },
+      {
+        "ar": "مسيرتكم المهنية تستحق مساحة واضحة للتعريف بخبرتكم.",
+        "en": "Your professional journey deserves a clear space to present your experience.",
+        "fr": "Votre parcours professionnel mérite un espace clair pour présenter votre expérience."
+      },
+      {
+        "ar": "أهلاً بكم؛ نثمّن الدقة والمسؤولية في العمل التمريضي.",
+        "en": "Welcome; we value precision and responsibility in nursing.",
+        "fr": "Bienvenue ; nous valorisons la précision et le sens des responsabilités en soins infirmiers."
+      },
+      {
+        "ar": "خبرتكم في التمريض جزء مهم من منظومة الرعاية المنزلية.",
+        "en": "Your nursing experience is an important part of home-care services.",
+        "fr": "Votre expérience infirmière contribue aux services de soins à domicile."
+      },
+      {
+        "ar": "نستقبل طلباتكم المهنية باحترام، وتخضع الملفات للمراجعة.",
+        "en": "We receive your professional applications respectfully; all files are reviewed.",
+        "fr": "Vos candidatures sont accueillies avec respect et chaque dossier est examiné."
+      },
+      {
+        "ar": "المهنية تبدأ بالتزام المعايير والتواصل الإنساني.",
+        "en": "Professionalism combines standards with humane communication.",
+        "fr": "Le professionnalisme associe le respect des normes à une communication humaine."
+      },
+      {
+        "ar": "نرحب بتخصصاتكم وخبراتكم الموثقة في مجال التمريض.",
+        "en": "We welcome your documented nursing specialties and experience.",
+        "fr": "Nous accueillons vos spécialités et expériences infirmières documentées."
+      },
+      {
+        "ar": "لكل ممرض وممرضة قصة خبرة؛ شاركونا مسيرتكم المهنية.",
+        "en": "Every nurse has a story of experience; share your professional journey.",
+        "fr": "Chaque infirmier a un parcours ; présentez-nous votre expérience."
+      },
+      {
+        "ar": "سلامة المريض مسؤولية تبدأ بالمعرفة والانتباه للتفاصيل.",
+        "en": "Patient safety begins with knowledge and attention to detail.",
+        "fr": "La sécurité du patient commence par le savoir et l’attention aux détails."
+      },
+      {
+        "ar": "أهلاً بالكفاءات التي تحترم خصوصية المرضى وحقوقهم.",
+        "en": "Welcome to professionals who respect patients’ privacy and rights.",
+        "fr": "Bienvenue aux professionnels qui respectent la vie privée et les droits des patients."
+      },
+      {
+        "ar": "نقدّر العمل التمريضي المنظم والتوثيق المهني الواضح.",
+        "en": "We value organized nursing practice and clear professional documentation.",
+        "fr": "Nous valorisons une pratique infirmière organisée et une documentation claire."
+      },
+      {
+        "ar": "يسعدنا استقبال طلب انضمامكم إلى شبكة رفيق التمريضية.",
+        "en": "We are pleased to receive your application to join RAFIQ’s nursing network.",
+        "fr": "Nous sommes heureux de recevoir votre candidature au réseau infirmier RAFIQ."
+      }
+    ],
+    "caregivers": [
+      {
+        "ar": "أهلاً بمقدمي الرعاية؛ اللطف والاحترام أساس التعامل اليومي.",
+        "en": "Welcome, caregivers; kindness and respect matter every day.",
+        "fr": "Bienvenue aux aidants ; la bienveillance et le respect comptent chaque jour."
+      },
+      {
+        "ar": "نقدّر من يرافق كبار السن بصبر ويحفظ كرامتهم.",
+        "en": "We value those who support older adults with patience and dignity.",
+        "fr": "Nous apprécions celles et ceux qui accompagnent les aînés avec patience et dignité."
+      },
+      {
+        "ar": "الرعاية المنزلية مسؤولية إنسانية تتطلب أمانة وانتباهًا.",
+        "en": "Home care is a human responsibility requiring trust and attentiveness.",
+        "fr": "L’aide à domicile est une responsabilité humaine qui demande fiabilité et attention."
+      },
+      {
+        "ar": "خبرتكم في المرافقة اليومية تستحق أن تُعرض بوضوح.",
+        "en": "Your daily-care experience deserves to be presented clearly.",
+        "fr": "Votre expérience de l’accompagnement quotidien mérite d’être présentée clairement."
+      },
+      {
+        "ar": "نرحب بمن يحترم خصوصية الأسرة وعاداتها وحدودها.",
+        "en": "We welcome caregivers who respect each family’s privacy, habits and boundaries.",
+        "fr": "Nous accueillons les aidants qui respectent l’intimité, les habitudes et les limites de chaque famille."
+      },
+      {
+        "ar": "الإنصات والصبر يصنعان فرقاً في تفاصيل الرعاية.",
+        "en": "Listening and patience matter in the details of care.",
+        "fr": "L’écoute et la patience font la différence dans les gestes du quotidien."
+      },
+      {
+        "ar": "أهلاً بكم؛ نثمّن الالتزام بالمواعيد والتواصل المسؤول.",
+        "en": "Welcome; we value punctuality and responsible communication.",
+        "fr": "Bienvenue ; nous valorisons la ponctualité et une communication responsable."
+      },
+      {
+        "ar": "لكل شخص احتياجاته؛ والرعاية الجيدة تحترم فرديته.",
+        "en": "Every person has individual needs; good care respects them.",
+        "fr": "Chaque personne a ses besoins ; un accompagnement de qualité respecte son individualité."
+      },
+      {
+        "ar": "نستقبل طلبات مقدمي الرعاية ونراجع الخبرات والمعلومات.",
+        "en": "We welcome caregiver applications and review experience and information.",
+        "fr": "Nous accueillons les candidatures des aidants et examinons les expériences et informations."
+      },
+      {
+        "ar": "الاهتمام الحقيقي يظهر في الاحترام وحفظ الخصوصية.",
+        "en": "Genuine care is shown through respect and privacy.",
+        "fr": "L’attention véritable se manifeste par le respect et la confidentialité."
+      },
+      {
+        "ar": "نرحب بخبرات رعاية المسنين والمرضى والأشخاص ذوي الإعاقة.",
+        "en": "We welcome experience supporting older adults, patients and people with disabilities.",
+        "fr": "Nous accueillons les expériences auprès des aînés, des patients et des personnes en situation de handicap."
+      },
+      {
+        "ar": "المرافقة الجيدة تعني حضوراً مسؤولاً وتواصلاً واضحاً.",
+        "en": "Good support means being reliable and communicating clearly.",
+        "fr": "Un bon accompagnement repose sur une présence fiable et une communication claire."
+      },
+      {
+        "ar": "نقدّر كل من يتعامل مع الأسرة بصدق وتفهّم.",
+        "en": "We value caregivers who treat families with honesty and understanding.",
+        "fr": "Nous apprécions les aidants qui agissent avec honnêteté et compréhension envers les familles."
+      },
+      {
+        "ar": "يسعدنا التعرف إلى خبرتكم ورغبتكم في تقديم رعاية محترمة.",
+        "en": "We are glad to learn about your experience and commitment to respectful care.",
+        "fr": "Nous serons heureux de découvrir votre expérience et votre engagement pour un accompagnement respectueux."
+      }
+    ],
+    "physio": [
+      {
+        "ar": "أهلاً بالمعالجين الفيزيائيين؛ نثمّن علمكم وخبرتكم المهنية.",
+        "en": "Welcome, physiotherapists; we value your knowledge and professional experience.",
+        "fr": "Bienvenue aux kinésithérapeutes ; nous valorisons votre savoir et votre expérience."
+      },
+      {
+        "ar": "التأهيل الحركي يحتاج معرفة دقيقة واحتراماً لوتيرة كل شخص.",
+        "en": "Rehabilitation requires sound knowledge and respect for each person’s pace.",
+        "fr": "La rééducation demande des connaissances précises et le respect du rythme de chacun."
+      },
+      {
+        "ar": "نرحب بالكفاءات التي تضع التقييم المهني وسلامة المراجع أولاً.",
+        "en": "We welcome professionals who prioritize sound assessment and client safety.",
+        "fr": "Nous accueillons les professionnels qui privilégient l’évaluation rigoureuse et la sécurité."
+      },
+      {
+        "ar": "خبرتكم في الحركة والتأهيل تستحق مساحة للتعريف بها.",
+        "en": "Your rehabilitation experience deserves a space to be presented.",
+        "fr": "Votre expérience en rééducation mérite un espace de présentation."
+      },
+      {
+        "ar": "أهلاً بكم؛ نقدر التواصل الواضح مع المريض وأسرته.",
+        "en": "Welcome; we value clear communication with patients and families.",
+        "fr": "Bienvenue ; nous valorisons une communication claire avec les patients et leurs familles."
+      },
+      {
+        "ar": "المهنية في العلاج الفيزيائي تبدأ بالتقييم وتحترم حدود الحالة.",
+        "en": "Professional physiotherapy begins with assessment and respects each person’s limits.",
+        "fr": "Le professionnalisme en kinésithérapie commence par l’évaluation et respecte les limites de chacun."
+      },
+      {
+        "ar": "نستقبل ملفات المعالجين المؤهلين ونراجع بياناتهم المهنية.",
+        "en": "We welcome qualified physiotherapists and review their professional details.",
+        "fr": "Nous accueillons les kinésithérapeutes qualifiés et examinons leurs informations professionnelles."
+      },
+      {
+        "ar": "كل خطة تأهيل ينبغي أن تراعي احتياجات الشخص وظروفه.",
+        "en": "Every rehabilitation plan should consider the person’s needs and circumstances.",
+        "fr": "Chaque programme de rééducation doit tenir compte des besoins et de la situation de la personne."
+      },
+      {
+        "ar": "نقدّر الالتزام بالمعايير المهنية والتوثيق المسؤول.",
+        "en": "We value professional standards and responsible documentation.",
+        "fr": "Nous valorisons les normes professionnelles et une documentation rigoureuse."
+      },
+      {
+        "ar": "أهلاً بمن يرافق رحلة الحركة بصبر واحترام.",
+        "en": "Welcome to those who support mobility with patience and respect.",
+        "fr": "Bienvenue à celles et ceux qui accompagnent la mobilité avec patience et respect."
+      },
+      {
+        "ar": "التعاون مع الأسرة جزء من التواصل المهني المتوازن.",
+        "en": "Working with families is part of balanced professional communication.",
+        "fr": "La collaboration avec la famille fait partie d’une communication professionnelle équilibrée."
+      },
+      {
+        "ar": "نرحب باختصاصات التأهيل المختلفة ضمن إطار مهني واضح.",
+        "en": "We welcome different rehabilitation specialties within a clear professional framework.",
+        "fr": "Nous accueillons diverses spécialités de rééducation dans un cadre professionnel clair."
+      },
+      {
+        "ar": "سلامة المراجع وخصوصيته أساس كل تعامل مهني.",
+        "en": "Client safety and privacy are essential in every professional interaction.",
+        "fr": "La sécurité et la confidentialité du patient sont essentielles."
+      },
+      {
+        "ar": "يسعدنا استقبال طلب انضمامكم إلى شبكة رفيق للعلاج الفيزيائي.",
+        "en": "We are pleased to receive your application to join RAFIQ’s physiotherapy network.",
+        "fr": "Nous sommes heureux de recevoir votre candidature au réseau de kinésithérapie RAFIQ."
+      }
+    ],
+    "ads": [
+      {
+        "ar": "أهلاً بالمؤسسات والشركاء؛ نرحب بتواصلكم المهني.",
+        "en": "Welcome, organizations and partners; we value your professional inquiries.",
+        "fr": "Bienvenue aux établissements et partenaires ; vos demandes professionnelles sont les bienvenues."
+      },
+      {
+        "ar": "الشراكة الجيدة تبدأ بالوضوح والثقة المتبادلة.",
+        "en": "A good partnership begins with clarity and mutual trust.",
+        "fr": "Un bon partenariat commence par la clarté et la confiance mutuelle."
+      },
+      {
+        "ar": "نرحب بالمختبرات ومراكز الأشعة وموردي المعدات الطبية.",
+        "en": "We welcome laboratories, imaging centers and medical-equipment suppliers.",
+        "fr": "Nous accueillons les laboratoires, centres d’imagerie et fournisseurs de matériel médical."
+      },
+      {
+        "ar": "يسعدنا التعرف إلى خدمات مؤسستكم وطبيعة نشاطها.",
+        "en": "We are glad to learn about your organization and its services.",
+        "fr": "Nous serons heureux de découvrir votre établissement et ses services."
+      },
+      {
+        "ar": "نبحث عن تعاون مهني يحترم احتياجات العائلات وخصوصيتها.",
+        "en": "We seek professional cooperation that respects families’ needs and privacy.",
+        "fr": "Nous recherchons une coopération professionnelle respectueuse des besoins et de la vie privée des familles."
+      },
+      {
+        "ar": "أهلاً بكم؛ نراجع طلبات الإعلان والشراكة بعناية.",
+        "en": "Welcome; advertising and partnership requests are reviewed carefully.",
+        "fr": "Bienvenue ; les demandes de publicité et de partenariat sont examinées avec attention."
+      },
+      {
+        "ar": "المعلومة الدقيقة تساعد العائلات على اتخاذ قرار واعٍ.",
+        "en": "Accurate information helps families make informed decisions.",
+        "fr": "Une information exacte aide les familles à prendre des décisions éclairées."
+      },
+      {
+        "ar": "نقدّر المؤسسات التي تلتزم بالشفافية وجودة التواصل.",
+        "en": "We value organizations committed to transparency and clear communication.",
+        "fr": "Nous valorisons les établissements attachés à la transparence et à une communication de qualité."
+      },
+      {
+        "ar": "قدّموا معلومات واضحة عن خدماتكم ومجالات عملكم.",
+        "en": "Please provide clear information about your services and areas of work.",
+        "fr": "Présentez clairement vos services et vos domaines d’activité."
+      },
+      {
+        "ar": "التعاون المسؤول يضع المستفيد في صلب الاهتمام.",
+        "en": "Responsible cooperation keeps service users at the center.",
+        "fr": "Une coopération responsable place les bénéficiaires au cœur des priorités."
+      },
+      {
+        "ar": "نرحب بمقترحات الإعلان التي تناسب طبيعة منصة رفيق.",
+        "en": "We welcome advertising proposals suited to RAFIQ’s platform.",
+        "fr": "Nous accueillons les propositions publicitaires adaptées à la plateforme RAFIQ."
+      },
+      {
+        "ar": "كل طلب شراكة يخضع للمراجعة قبل اعتماده.",
+        "en": "Every partnership request is reviewed before approval.",
+        "fr": "Chaque demande de partenariat est examinée avant validation."
+      },
+      {
+        "ar": "نثمّن الالتزام بالمعايير والتراخيص المهنية ذات الصلة.",
+        "en": "We value compliance with relevant standards and professional licenses.",
+        "fr": "Nous valorisons le respect des normes et autorisations professionnelles applicables."
+      },
+      {
+        "ar": "يسعدنا بدء حوار مهني يوضح فرص التعاون الممكنة.",
+        "en": "We welcome a professional conversation about possible cooperation.",
+        "fr": "Nous serons heureux d’échanger sur les possibilités de collaboration."
+      }
+    ],
+    "doctors": [
+      {
+        "ar": "أهلاً بالأطباء؛ نثمّن خبرتكم والتزامكم المهني.",
+        "en": "Welcome, doctors; we value your expertise and professionalism.",
+        "fr": "Bienvenue aux médecins ; nous valorisons votre expertise et votre professionnalisme."
+      },
+      {
+        "ar": "نرحب بالأطباء من مختلف الاختصاصات ضمن إطار مهني واضح.",
+        "en": "We welcome doctors across specialties within a clear professional framework.",
+        "fr": "Nous accueillons les médecins de toutes spécialités dans un cadre professionnel clair."
+      },
+      {
+        "ar": "خصوصية المريض واحترام قراره أساس التواصل المهني.",
+        "en": "Patient privacy and respect for their decisions are fundamental.",
+        "fr": "La confidentialité du patient et le respect de ses décisions sont fondamentaux."
+      },
+      {
+        "ar": "خبرتكم الطبية تستحق عرضاً دقيقاً ومسؤولاً.",
+        "en": "Your medical experience deserves accurate and responsible presentation.",
+        "fr": "Votre expérience médicale mérite une présentation précise et responsable."
+      },
+      {
+        "ar": "أهلاً بكم؛ نراجع ملفات الأطباء والتحقق من بياناتهم المهنية.",
+        "en": "Welcome; doctor profiles and professional details are reviewed and verified.",
+        "fr": "Bienvenue ; les dossiers des médecins et leurs informations professionnelles sont examinés et vérifiés."
+      },
+      {
+        "ar": "التواصل الواضح مع العائلة يدعم تجربة رعاية أكثر تنظيماً.",
+        "en": "Clear communication with families supports a more organized care experience.",
+        "fr": "Une communication claire avec les familles favorise un accompagnement mieux organisé."
+      },
+      {
+        "ar": "نرحب بالمؤهلات والتراخيص المهنية السارية ذات الصلة.",
+        "en": "We welcome relevant qualifications and valid professional licenses.",
+        "fr": "Nous accueillons les diplômes et autorisations professionnelles valides pertinents."
+      },
+      {
+        "ar": "المسؤولية الطبية تبدأ بالدقة واحترام حدود الاختصاص.",
+        "en": "Medical responsibility begins with accuracy and respect for professional scope.",
+        "fr": "La responsabilité médicale commence par la précision et le respect du champ de compétence."
+      },
+      {
+        "ar": "نقدّر الأطباء الذين يجمعون بين العلم والإنصات.",
+        "en": "We value doctors who combine knowledge with attentive listening.",
+        "fr": "Nous apprécions les médecins qui associent savoir et écoute."
+      },
+      {
+        "ar": "يسعدنا التعرف إلى اختصاصكم وخبرتكم ومجالات عملكم.",
+        "en": "We are glad to learn about your specialty, experience and practice areas.",
+        "fr": "Nous serons heureux de découvrir votre spécialité, votre expérience et vos domaines d’exercice."
+      },
+      {
+        "ar": "نحترم وقتكم؛ قدّموا بياناتكم المهنية بوضوح.",
+        "en": "We respect your time; please share your professional details clearly.",
+        "fr": "Nous respectons votre temps ; veuillez présenter clairement vos informations professionnelles."
+      },
+      {
+        "ar": "نستقبل طلبات الانضمام ونراجعها وفق المعلومات المقدمة.",
+        "en": "We receive membership applications and review them based on the information provided.",
+        "fr": "Nous recevons les demandes d’adhésion et les examinons selon les informations fournies."
+      },
+      {
+        "ar": "التعاون المهني الناجح يقوم على الثقة والشفافية.",
+        "en": "Successful professional cooperation is built on trust and transparency.",
+        "fr": "Une coopération professionnelle réussie repose sur la confiance et la transparence."
+      },
+      {
+        "ar": "أهلاً بكم في شبكة رفيق؛ نقدر مساهمتكم المهنية.",
+        "en": "Welcome to RAFIQ’s network; your professional contribution is appreciated.",
+        "fr": "Bienvenue dans le réseau RAFIQ ; votre contribution professionnelle est appréciée."
+      }
+    ],
+    "family": [
+      {
+        "ar": "أهلاً بكم؛ نعرف أن اختيار الرعاية لأحد أفراد الأسرة قرار مهم.",
+        "en": "Welcome; choosing care for a family member is an important decision.",
+        "fr": "Bienvenue ; choisir un accompagnement pour un proche est une décision importante."
+      },
+      {
+        "ar": "شاركوا احتياجكم بهدوء، وسنراجع الطلب وفق المعلومات المتاحة.",
+        "en": "Tell us what you need; we will review the request based on the information provided.",
+        "fr": "Expliquez-nous vos besoins ; nous examinerons la demande selon les informations fournies."
+      },
+      {
+        "ar": "خصوصية عائلتكم ومعلوماتكم محل احترام.",
+        "en": "Your family’s privacy and information are treated with respect.",
+        "fr": "La confidentialité de votre famille et de vos informations est respectée."
+      },
+      {
+        "ar": "لكل حالة ظروفها؛ نحرص على فهم التفاصيل قبل المتابعة.",
+        "en": "Every situation is different; we seek to understand the details before follow-up.",
+        "fr": "Chaque situation est différente ; nous cherchons à comprendre les détails avant le suivi."
+      },
+      {
+        "ar": "أهلاً بكم؛ اكتبوا المعلومات الضرورية بوضوح قدر الإمكان.",
+        "en": "Welcome; please provide the necessary information as clearly as possible.",
+        "fr": "Bienvenue ; veuillez fournir les informations nécessaires aussi clairement que possible."
+      },
+      {
+        "ar": "نستقبل طلبات الرعاية باهتمام، وتراجعها الإدارة قبل التواصل.",
+        "en": "Care requests are received with care and reviewed by the administration before contact.",
+        "fr": "Les demandes sont accueillies avec attention et examinées par l’administration avant tout contact."
+      },
+      {
+        "ar": "سلامة وكرامة من تحبون تستحقان اهتماماً واحتراماً.",
+        "en": "The safety and dignity of your loved ones deserve care and respect.",
+        "fr": "La sécurité et la dignité de vos proches méritent attention et respect."
+      },
+      {
+        "ar": "لا تترددوا في توضيح أوقات الرعاية والاحتياجات اليومية.",
+        "en": "Feel free to explain care times and daily needs.",
+        "fr": "N’hésitez pas à préciser les horaires et les besoins quotidiens."
+      },
+      {
+        "ar": "نقدّر ثقتكم؛ لا نشارك بيانات الطلب مع الجمهور.",
+        "en": "We appreciate your trust; request details are not shared publicly.",
+        "fr": "Nous apprécions votre confiance ; les détails de la demande ne sont pas rendus publics."
+      },
+      {
+        "ar": "الخطوة الأولى هي طلب واضح، ثم مراجعة منظمة من فريق رفيق.",
+        "en": "The first step is a clear request, followed by an organized RAFIQ review.",
+        "fr": "La première étape est une demande claire, suivie d’un examen organisé par RAFIQ."
+      },
+      {
+        "ar": "نرحب بأسئلتكم حول طريقة تقديم الطلب ومراجعته.",
+        "en": "Your questions about submitting and reviewing a request are welcome.",
+        "fr": "Vos questions sur le dépôt et l’examen d’une demande sont les bienvenues."
+      },
+      {
+        "ar": "نحرص على التواصل باحترام ودون وعود غير مؤكدة.",
+        "en": "We aim to communicate respectfully and avoid promises we cannot confirm.",
+        "fr": "Nous veillons à communiquer avec respect, sans promesses incertaines."
+      },
+      {
+        "ar": "أهلاً بكم؛ اختاروا التفاصيل التي تساعدنا على فهم احتياجكم.",
+        "en": "Welcome; share the details that help us understand your needs.",
+        "fr": "Bienvenue ; partagez les détails qui nous aident à comprendre vos besoins."
+      },
+      {
+        "ar": "رفيق يستقبل طلبكم بعناية ويحيله للمراجعة الإدارية.",
+        "en": "RAFIQ receives your request carefully and forwards it for administrative review.",
+        "fr": "RAFIQ reçoit votre demande avec attention et la transmet à l’examen administratif."
+      }
+    ],
+    "members": [
+      {
+        "ar": "أهلاً بكم في صفحة الانتساب إلى رفيق؛ يسعدنا اهتمامكم.",
+        "en": "Welcome to RAFIQ membership; we appreciate your interest.",
+        "fr": "Bienvenue sur la page d’adhésion RAFIQ ; merci de votre intérêt."
+      },
+      {
+        "ar": "نرحب بمن يرغب في التعرف إلى مزايا الانتساب وشروطه.",
+        "en": "We welcome anyone interested in learning about membership benefits and terms.",
+        "fr": "Nous accueillons toute personne souhaitant découvrir les avantages et conditions d’adhésion."
+      },
+      {
+        "ar": "الوضوح في المعلومات يساعد على تقديم طلب انتساب مناسب.",
+        "en": "Clear information helps you submit an appropriate membership request.",
+        "fr": "Des informations claires facilitent une demande d’adhésion adaptée."
+      },
+      {
+        "ar": "أهلاً بكم؛ راجعوا التفاصيل قبل إرسال طلبكم.",
+        "en": "Welcome; please review the details before submitting your request.",
+        "fr": "Bienvenue ; veuillez consulter les détails avant d’envoyer votre demande."
+      },
+      {
+        "ar": "نقدّر ثقتكم واهتمامكم بالانضمام إلى مجتمع رفيق.",
+        "en": "We value your trust and interest in joining the RAFIQ community.",
+        "fr": "Nous apprécions votre confiance et votre intérêt pour rejoindre la communauté RAFIQ."
+      },
+      {
+        "ar": "تُراجع طلبات الانتساب قبل اعتمادها وفق الشروط المعلنة.",
+        "en": "Membership applications are reviewed against the stated terms before approval.",
+        "fr": "Les demandes d’adhésion sont examinées selon les conditions annoncées avant validation."
+      },
+      {
+        "ar": "نسعى إلى عرض المزايا المعتمدة بمعلومات واضحة ودقيقة.",
+        "en": "We aim to present approved benefits clearly and accurately.",
+        "fr": "Nous nous efforçons de présenter les avantages approuvés de manière claire et exacte."
+      },
+      {
+        "ar": "أهلاً بكم؛ اسألوا عن أي بند يحتاج إلى توضيح.",
+        "en": "Welcome; feel free to ask about any term that needs clarification.",
+        "fr": "Bienvenue ; n’hésitez pas à demander des précisions sur tout point."
+      },
+      {
+        "ar": "بياناتكم الشخصية تبقى ضمن إجراءات مراجعة الطلب.",
+        "en": "Your personal details remain within the request-review process.",
+        "fr": "Vos informations personnelles restent dans le cadre de l’examen de la demande."
+      },
+      {
+        "ar": "الانتساب يبدأ بمعلومات صحيحة وتواصل مسؤول.",
+        "en": "Membership begins with accurate information and responsible communication.",
+        "fr": "L’adhésion commence par des informations exactes et une communication responsable."
+      },
+      {
+        "ar": "نرحب بطلبكم، وسنراجع المعلومات المقدمة بعناية.",
+        "en": "Your application is welcome, and the submitted information will be reviewed carefully.",
+        "fr": "Votre demande est la bienvenue et les informations fournies seront examinées avec attention."
+      },
+      {
+        "ar": "تعرّفوا إلى ما هو متاح حالياً وما يزال قيد الإعداد.",
+        "en": "Learn what is currently available and what is still being prepared.",
+        "fr": "Découvrez ce qui est disponible actuellement et ce qui est encore en préparation."
+      },
+      {
+        "ar": "نحرص على ألا نعرض ميزة قبل اعتمادها وتأكيد تفاصيلها.",
+        "en": "We do not present a benefit before it is approved and its details confirmed.",
+        "fr": "Nous ne présentons aucun avantage avant son approbation et la confirmation de ses détails."
+      },
+      {
+        "ar": "يسعدنا اهتمامكم؛ نتطلع إلى تواصل واضح ومحترم.",
+        "en": "We appreciate your interest and look forward to clear, respectful communication.",
+        "fr": "Merci de votre intérêt ; nous souhaitons des échanges clairs et respectueux."
+      }
+    ]
+  }
+}

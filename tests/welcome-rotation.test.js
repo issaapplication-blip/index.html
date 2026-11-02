@@ -1,0 +1,14 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {indexForDate,beirutDayNumber}=require("../js/welcome-rotation.js");
+const messages=14;
+const sameDayA=new Date("2026-11-02T00:00:00Z");
+const sameDayB=new Date("2026-11-02T20:00:00Z");
+assert.equal(beirutDayNumber(sameDayA),beirutDayNumber(sameDayB));
+assert.equal(indexForDate(sameDayA,messages),indexForDate(sameDayB,messages),"same Beirut calendar day must keep the same message");
+const before=new Date("2026-11-01T21:59:59Z");
+const after=new Date("2026-11-01T22:00:00Z");
+assert.notEqual(beirutDayNumber(before),beirutDayNumber(after),"Beirut midnight changes the day number");
+assert.notEqual(indexForDate(before,messages),indexForDate(after,messages),"message index changes at Beirut midnight for a 14-message set");
+assert.throws(()=>indexForDate(new Date(),0),RangeError);
+console.log("PASS: stable within a Beirut day; rotates at Beirut midnight; validates message count.");

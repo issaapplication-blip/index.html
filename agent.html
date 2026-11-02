@@ -39,58 +39,31 @@
 </section>
 <section class="card"><div id="auth"><label>البريد الإلكتروني<input id="email" type="email" autocomplete="email"></label><label>كلمة المرور<input id="password" type="password" autocomplete="current-password"></label><div class="actions"><button id="login" class="btn">دخول</button><a class="btn alt" href="./app.html">إنشاء حساب / التسجيل</a><button class="btn alt" type="button" data-rafiq-install data-i18n="home.install">📲 تثبيت التطبيق</button></div><div id="authMsg" class="small" style="margin-top:8px"></div></div><div id="chat" class="chat" hidden></div><div class="composer"><textarea id="input" maxlength="1500" placeholder="اكتب سؤالك هنا..."></textarea><button id="send" class="btn">إرسال</button></div><div class="actions" style="margin-top:10px"><button class="btn alt q">أريد مقدم رعاية</button><button class="btn alt q">أريد ممرض/ة</button><button class="btn alt q">أريد علاج فيزيائي</button><button class="btn alt q">أريد تقديم طلب</button></div></section><p data-rafiq-install-hint class="small" hidden style="margin:12px auto 0;max-width:560px;text-align:center"></p>
 <section class="card"><div class="notice">للطلبات العاجلة أو الحالات التي تحتاج قرارًا من الإدارة، يتولى المدير المراجعة والموافقة قبل أي إجراء حساس.</div><div class="actions" style="margin-top:10px"><a class="btn" href="./app.html">التسجيل وتقديم الطلب</a><a class="btn alt"  href="./faq.html" data-i18n="nav.faq">الأسئلة الشائعة</a><a class="btn alt" href="https://wa.me/96181506299" target="_blank" rel="noopener">واتساب RAFIQ</a><a class="btn alt"  href="./" data-i18n="nav.homePage">الصفحة الرئيسية</a></div></section>
-</main><script src="./js/rafiq-kb.js"></script><script src="./js/rafiq-agent.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+</main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 const SUPABASE_URL='https://qmuxaehrahfsnabyjens.supabase.co',KEY='sb_publishable_AYoQSOTwTF1w3RT6CglKmA_WVcYUVlD',db=supabase.createClient(SUPABASE_URL,KEY),$=id=>document.getElementById(id); async function boot(){const {data:{session}}=await db.auth.getSession(); if(session){$('auth').hidden=true;$('chat').hidden=false;return true} return false} $('login').onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value}); if(error){$('authMsg').textContent='تعذر الدخول. تحقق من البيانات أو أنشئ حسابًا من صفحة التسجيل.';return} location.reload()};
 function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;$('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight}
 boot().then(ok=>{if(ok)add('مرحبًا بك في رفيق 👋\nأنا مساعد رفيق. أخبرني ماذا تحتاج: رعاية منزلية، تمريض، علاج فيزيائي، تسجيل مقدم خدمة، أو سؤال عام عن المنصة.','a');});
-/* conversation state so the agent collects missing details one by one.
-   absorb() is shared with the WhatsApp worker (js/rafiq-agent.js) so the
-   website and WhatsApp always read a conversation the same way. */
-let ctx={};
-const absorb=function(t){ctx=RAFIQ_AGENT.extract(t,ctx);return ctx};
-
 async function send(){
   const v=$('input').value.trim();if(!v)return;
   add(v,'u');$('input').value='';
-  absorb(v);
   try{
-    /* 3-layer answer, so the assistant is never silent:
-       1) RAFIQ_AGENT  = safety guard + local KB  (always instant)
-       2) Supabase fn  = server agent            (only if 1 is thin)
-       3) fallback     = hand-off message                                */
-    let reply = RAFIQ_AGENT.answerSync(v, ctx);
-    /* The local brain is authoritative: it handles the intake one field at a
-       time. The remote agent may only answer when the local brain has nothing
-       specific to say - otherwise a generic greeting would overwrite a real,
-       contextual question. */
-    if(reply===RAFIQ_AGENT.HANDOFF){
-      /* the remote agent is enrichment only - the local answer already went out */
-      try{
-        const ctl=new AbortController();
-        const to=setTimeout(function(){ctl.abort()},2500);
-        const r=await fetch(SUPABASE_URL+'/functions/v1/rafiq-agent',{
-          method:'POST',
-          headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},
-          signal:ctl.signal,body:JSON.stringify({message:v,ctx:ctx,locale:'ar'})
-        });
-        clearTimeout(to);
-        if(r.ok){
-          const j=await r.json();
-          const remote=j&&j.reply?RAFIQ_AGENT.clean(j.reply):null;
-          if(remote&&remote.length>String(reply).length) reply=remote;
-        }
-      }catch(_){}
-    }
-    add(reply||RAFIQ_AGENT.HANDOFF,'a');
-    if(RAFIQ_KB.nextField(ctx)===null && !$('chat').querySelector('.btn.newreq')){
-      const b=document.createElement('button');
-      b.className='btn alt newreq';b.style.marginTop='8px';b.textContent='طلب جديد';
-      b.onclick=function(){ctx={};b.remove();};
-      $('chat').lastChild.appendChild(b);
-    }
+    const ctl=new AbortController();
+    const timeout=setTimeout(function(){ctl.abort();},8000);
+    const locale=(document.documentElement.lang||localStorage.getItem('rafiq.lang')||'ar').slice(0,2);
+    const r=await fetch(SUPABASE_URL+'/functions/v1/rafiq-agent',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY},
+      signal:ctl.signal,
+      body:JSON.stringify({message:v,locale:locale})
+    });
+    clearTimeout(timeout);
+    if(!r.ok)throw new Error('assistant unavailable');
+    const j=await r.json();
+    if(!j||!j.ok||!j.reply)throw new Error('assistant returned no reply');
+    add(j.reply,'a');
   }catch(e){
-    add('تعذر الاتصال بالمساعد حاليا. يمكنك تقديم الطلب مباشرة أو التواصل عبر واتساب RAFIQ.','a');
-  }finally{ $('input').focus() }
+    add('تعذّر الوصول إلى المساعد حالياً. لا أريد إعطاءك معلومة غير مؤكدة. يمكنك تقديم طلبك عبر النموذج أو التواصل مع إدارة رفيق عبر القنوات الرسمية.','a');
+  }finally{$('input').focus();}
 }
 $('send').onclick=send;$('input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});document.querySelectorAll('.q').forEach(b=>b.onclick=()=>{$('input').value=b.textContent;send()});
 </script><script>
@@ -112,4 +85,4 @@ document.addEventListener("DOMContentLoaded",function(){
 <!-- language engine: one button, five languages -->
 <script src="./i18n.js?v=72"></script>
 <script src="./js/locales/ar.js?v=72"></script>
-<script>RAFIQ_I18N.start();</script></body></html>
+<script>RAFIQ_I18N.start();</script><script src="./js/site-header.js?v=1" defer></script></body></html>

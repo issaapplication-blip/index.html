@@ -181,7 +181,7 @@ const RAFIQ_AGENT = (function () {
     return local || HANDOFF;
   }
 
-  /** Instant, no network — used for the first paint, for WhatsApp, and offline. */
+  /** Instant, no network — used by the RAFIQ website interface and offline fallback only. */
   function answerSync(text, ctx) {
     const g = guard(String(text || ''));
     if (g) return g;

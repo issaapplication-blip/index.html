@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#087f58">
+<meta name="description" content="أنشئ سيرة ذاتية ورسالة تقديم مجاناً بتنسيق نصي واضح ومتوافق مع أنظمة ATS.">
+<title>إنشاء CV ورسالة تقديم مجاناً | RAFIQ</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f8f6;color:#17372d;font-family:Arial,Tahoma,sans-serif;line-height:1.7}main{max-width:900px;margin:auto;padding:18px}.panel{background:#fff;border:1px solid #e0ebe5;border-radius:18px;padding:22px;margin:14px 0;box-shadow:0 6px 22px #0000000d}h1,h2{color:#087f58;margin-top:0}label{display:block;font-weight:700;margin:12px 0}input,textarea{display:block;width:100%;margin-top:5px;border:1px solid #cbdcd2;border-radius:10px;padding:12px;font:inherit;background:#fff;color:#17372d}textarea{min-height:90px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.btn{border:0;border-radius:11px;padding:12px 18px;background:#087f58;color:#fff;font-weight:800;font:inherit;cursor:pointer}.secondary{background:#eaf2ef;color:#087f58}.actions{display:flex;gap:10px;flex-wrap:wrap}.muted{color:#62746b;font-size:13px}.preview{background:#fff;border:1px solid #dbe5df;border-radius:12px;padding:26px;color:#111;direction:ltr;text-align:left}.preview h1,.preview h2{color:#111}.preview h1{font-size:24px;border-bottom:2px solid #222;padding-bottom:8px}.preview h2{font-size:16px;border-bottom:1px solid #888;margin:18px 0 6px}.preview p{margin:4px 0;white-space:pre-wrap}.letter{break-before:page;page-break-before:always}.preview[hidden],#resultPanel[hidden]{display:none}
+@media(max-width:600px){main{padding:8px}.panel{padding:15px}.grid{grid-template-columns:1fr}.actions .btn{width:100%}}
+@media print{@page{size:A4;margin:17mm}body{background:#fff;color:#111;font-size:10.5pt}main{max-width:none;padding:0}.no-print,.form-panel,.page-title,.muted{display:none!important}.panel{border:0;box-shadow:none;padding:0;margin:0}.preview{border:0;padding:0}.preview h1{font-size:20pt}.preview h2{font-size:11pt;break-after:avoid}.letter{break-before:page;page-break-before:always}}
+</style></head>
+<body><main>
+<header class="panel page-title"><a href="./index.html" style="color:#087f58;font-weight:800;text-decoration:none">← العودة إلى RAFIQ | رفيق</a><h1 style="margin:12px 0 4px">أنشئ سيرتك الذاتية ورسالة التقديم مجاناً</h1><p>املأ الحقول ثم أنشئ نسخة قابلة للطباعة والحفظ بصيغة PDF من متصفحك.</p><p class="muted">لا تُرسل البيانات إلى خادم أو جهة خارجية. تنسيق نصي بعمود واحد، دون صور أو جداول، لتسهيل قراءته بواسطة أنظمة ATS.</p></header>
+<section class="panel form-panel"><h2>معلوماتك المهنية</h2><form id="cvForm">
+<div class="grid">
+<label>الاسم الكامل *<input id="fullName" maxlength="120" autocomplete="name" required></label>
+<label>المسمى الوظيفي المستهدف<input id="targetRole" maxlength="120" placeholder="مثال: مقدم رعاية"></label>
+<label>البريد الإلكتروني أو الهاتف *<input id="contact" maxlength="180" autocomplete="email" required></label>
+<label>الموقع الجغرافي<input id="location" maxlength="120" placeholder="المدينة، البلد"></label>
+</div>
+<label>الخبرة العملية *<textarea id="experience" maxlength="4000" required placeholder="الوظائف السابقة والسنوات والمسؤوليات والإنجازات."></textarea></label>
+<label>المهارات *<textarea id="skills" maxlength="2500" required placeholder="اكتب المهارات، كل مهارة في سطر أو افصل بينها بفواصل."></textarea></label>
+<label>اللغات ومستوى كل لغة<textarea id="languages" maxlength="1200" placeholder="العربية: اللغة الأم؛ الإنجليزية: أساسي..."></textarea></label>
+<label>التعليم والشهادات (اختياري)<textarea id="education" maxlength="2000"></textarea></label>
+<label>جهة العمل أو مسؤول التوظيف (اختياري)<input id="employer" maxlength="160"></label>
+<div class="actions"><button class="btn" type="submit">إنشاء المعاينة</button><button class="btn secondary" type="reset">مسح الحقول</button></div>
+</form></section>
+<section class="panel" id="resultPanel" hidden><div class="actions no-print"><button class="btn" id="printBtn" type="button">🖨️ حفظ CV ورسالة التقديم PDF</button><button class="btn secondary" id="editBtn" type="button">تعديل البيانات</button></div><p class="muted no-print">في نافذة الطباعة اختر Save as PDF / حفظ كملف PDF. يحتوي الملف على السيرة الذاتية ثم رسالة التقديم في صفحة مستقلة.</p><div class="preview" id="preview" aria-live="polite"></div></section>
+<footer class="panel muted">RAFIQ | رفيق — أداة مجانية مستقلة. راجع بياناتك قبل إرسال المستند إلى جهة العمل.</footer>
+</main>
+<script>
+(function(){
+ const el=id=>document.getElementById(id);
+ const clean=v=>String(v||"").trim();
+ const esc=v=>clean(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ const parts=v=>clean(v).split(/\n+/).map(x=>x.trim()).filter(Boolean);
+ const section=(heading,value)=>value?'<h2>'+heading+'</h2>'+parts(value).map(x=>'<p>'+esc(x)+'</p>').join(""):"";
+ el("cvForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  const d={name:clean(el("fullName").value),role:clean(el("targetRole").value)||"Professional",contact:clean(el("contact").value),location:clean(el("location").value),experience:clean(el("experience").value),skills:clean(el("skills").value),languages:clean(el("languages").value),education:clean(el("education").value),employer:clean(el("employer").value)||"Hiring Manager"};
+  if(!d.name||!d.contact||!d.experience||!d.skills){alert("يرجى تعبئة الاسم ووسيلة التواصل والخبرة والمهارات.");return;}
+  const date=new Intl.DateTimeFormat("en-GB",{year:"numeric",month:"long"}).format(new Date());
+  el("preview").innerHTML='<article><h1>'+esc(d.name)+'</h1><p><strong>'+esc(d.role)+'</strong></p><p>'+esc(d.contact)+(d.location?' | '+esc(d.location):'')+'</p>'+section("PROFESSIONAL EXPERIENCE",d.experience)+section("SKILLS",d.skills)+section("LANGUAGES",d.languages)+section("EDUCATION & CERTIFICATIONS",d.education)+'</article>'+
+  '<article class="letter"><h1>Cover Letter</h1><p>'+esc(d.name)+'</p><p>'+esc(d.contact)+(d.location?' | '+esc(d.location):'')+'</p><p>'+esc(date)+'</p><p>'+esc(d.employer)+'</p><p>Dear Hiring Manager,</p><p>I am writing to express my interest in the '+esc(d.role)+' position. My professional experience and practical skills have prepared me to contribute responsibly and reliably to your team.</p><p>'+parts(d.experience).map(esc).join(" ")+'</p><p>I would welcome the opportunity to discuss how my background and skills match your requirements. Thank you for your time and consideration.</p><p>Sincerely,<br>'+esc(d.name)+'</p></article>';
+  el("resultPanel").hidden=false;el("resultPanel").scrollIntoView({behavior:"smooth",block:"start"});
+ });
+ el("printBtn").addEventListener("click",()=>window.print());
+ el("editBtn").addEventListener("click",()=>el("cvForm").scrollIntoView({behavior:"smooth"}));
+ el("cvForm").addEventListener("reset",()=>{el("resultPanel").hidden=true;el("preview").innerHTML="";});
+})();
+</script><script src="./i18n.js?v=74"></script><script src="./js/locales/ar.js?v=74"></script><script>RAFIQ_I18N.start();</script><script src="./js/site-header.js?v=1" defer></script></body></html>

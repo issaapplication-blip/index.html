@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "default_locale": "ar",
+  "supported_locales": [
+    "ar",
+    "en",
+    "fr"
+  ],
+  "fallback_answer": {
+    "id": 30,
+    "keys": [
+      "لا تعرف",
+      "سؤال آخر",
+      "unknown question",
+      "autre question"
+    ],
+    "ar": "لا أعرف الإجابة المؤكدة عن ذلك. سأحيل استفسارك إلى إدارة رفيق لمراجعته. يمكنك أيضاً استخدام قنوات التواصل الرسمية.",
+    "en": "I don’t know the confirmed answer to that. I’ll refer your question to RAFIQ’s administration for review. You can also use the official contact channels.",
+    "fr": "Je ne connais pas la réponse confirmée à cette question. Je transmets votre demande à l’administration de RAFIQ pour examen. Vous pouvez également utiliser les canaux officiels."
+  },
+  "faqs": [
+    {
+      "id": 1,
+      "keys": [
+        "مرحبا",
+        "السلام عليكم",
+        "hello",
+        "hi",
+        "bonjour",
+        "salut"
+      ],
+      "ar": "أهلاً بك في رفيق 🌿 كيف يمكننا مساعدتك؟",
+      "en": "Welcome to RAFIQ 🌿 How can we help you?",
+      "fr": "Bienvenue chez RAFIQ 🌿 Comment pouvons-nous vous aider ?"
+    },
+    {
+      "id": 2,
+      "keys": [
+        "ما خدمات",
+        "الخدمات",
+        "what services",
+        "services",
+        "quels services"
+      ],
+      "ar": "الخدمات الأساسية: رعاية كبار السن والمرضى في المنزل، التمريض المنزلي، والعلاج الفيزيائي المنزلي. بعض الخدمات المساندة قيد الإضافة.",
+      "en": "Core services include home care for older adults and patients, home nursing, and home physiotherapy. Some supporting services are still being added.",
+      "fr": "Les services principaux comprennent l’aide à domicile aux personnes âgées et aux patients, les soins infirmiers à domicile et la kinésithérapie à domicile. Certains services complémentaires sont en préparation."
+    },
+    {
+      "id": 3,
+      "keys": [
+        "رعاية كبار السن",
+        "elderly care",
+        "personnes âgées",
+        "لكبار السن"
+      ],
+      "ar": "تنظم رفيق طلبات الرعاية المنزلية لكبار السن، مثل المساعدة في الاحتياجات اليومية والمرافقة. تُراجع الإدارة الطلب قبل أي مطابقة.",
+      "en": "RAFIQ coordinates home-care requests for older adults, including daily-living support and companionship. The administration reviews each request before matching.",
+      "fr": "RAFIQ organise les demandes d’aide à domicile pour les personnes âgées, notamment l’aide quotidienne et l’accompagnement. L’administration examine chaque demande avant toute mise en relation."
+    },
+    {
+      "id": 4,
+      "keys": [
+        "رعاية المرضى",
+        "patient care",
+        "soins aux patients",
+        "ترعون المرضى"
+      ],
+      "ar": "يمكن تقديم طلب رعاية منزلية للمريض وفق احتياجات الأسرة وتعليمات الطبيب. رفيق لا تقدم تشخيصاً أو علاجاً طبياً.",
+      "en": "You can submit a home-care request for a patient based on the family’s needs and the treating clinician’s instructions. RAFIQ does not diagnose or provide medical treatment.",
+      "fr": "Vous pouvez demander un accompagnement à domicile selon les besoins de la famille et les consignes du professionnel de santé. RAFIQ ne pose pas de diagnostic et ne dispense pas de traitement médical."
+    },
+    {
+      "id": 5,
+      "keys": [
+        "تمريض منزلي",
+        "ممرض",
+        "nursing",
+        "nurse",
+        "soins infirmiers"
+      ],
+      "ar": "التمريض المنزلي يُقدَّم عبر ممرضين مؤهلين، وتُراجع المؤهلات والتراخيص المهنية قبل اعتماد الملف.",
+      "en": "Home nursing is provided by qualified nurses. Qualifications and professional licences are reviewed before a profile is approved.",
+      "fr": "Les soins infirmiers à domicile sont assurés par des infirmiers qualifiés. Les diplômes et autorisations professionnelles sont examinés avant validation du dossier."
+    },
+    {
+      "id": 6,
+      "keys": [
+        "علاج فيزيائي",
+        "العلاج الفيزيائي",
+        "physiotherapy",
+        "kinésithérapie",
+        "علاجا فيزيائيا"
+      ],
+      "ar": "تنظم رفيق طلبات العلاج الفيزيائي المنزلي وإعادة التأهيل الحركي، وفق التقييم المهني وتوصيات الفريق المعالج.",
+      "en": "RAFIQ coordinates home physiotherapy and mobility rehabilitation requests, subject to professional assessment and the treating team’s recommendations.",
+      "fr": "RAFIQ organise les demandes de kinésithérapie et de rééducation à domicile, selon l’évaluation professionnelle et les recommandations de l’équipe soignante."
+    },
+    {
+      "id": 7,
+      "keys": [
+        "مختبر",
+        "تحاليل",
+        "laboratory",
+        "lab test",
+        "laboratoire"
+      ],
+      "ar": "خدمات المختبرات والتحاليل قيد الإضافة إلى المنصة. انتظرونا قريبًا.",
+      "en": "Laboratory and testing services are being added to the platform. Coming soon.",
+      "fr": "Les services de laboratoire et d’analyses sont en cours d’ajout. Bientôt disponibles."
+    },
+    {
+      "id": 8,
+      "keys": [
+        "أشعة",
+        "تصوير طبي",
+        "radiology",
+        "imaging",
+        "imagerie"
+      ],
+      "ar": "خدمات التصوير الطبي قيد الإضافة إلى المنصة. انتظرونا قريبًا.",
+      "en": "Medical imaging services are being added to the platform. Coming soon.",
+      "fr": "Les services d’imagerie médicale sont en cours d’ajout. Bientôt disponibles."
+    },
+    {
+      "id": 9,
+      "keys": [
+        "معدات طبية",
+        "medical equipment",
+        "matériel médical"
+      ],
+      "ar": "خدمات المعدات الطبية قيد الإضافة إلى المنصة. انتظرونا قريبًا.",
+      "en": "Medical-equipment services are being added to the platform. Coming soon.",
+      "fr": "Les services de matériel médical sont en cours d’ajout. Bientôt disponibles."
+    },
+    {
+      "id": 10,
+      "keys": [
+        "طبيب أسنان",
+        "أسنان",
+        "dentist",
+        "dentiste"
+      ],
+      "ar": "خدمات أطباء الأسنان قيد الإضافة إلى المنصة. انتظرونا قريبًا.",
+      "en": "Dental services are being added to the platform. Coming soon.",
+      "fr": "Les services dentaires sont en cours d’ajout. Bientôt disponibles."
+    },
+    {
+      "id": 11,
+      "keys": [
+        "من يستطيع التقديم",
+        "من يمكنه التقديم",
+        "who can apply",
+        "qui peut postuler"
+      ],
+      "ar": "يمكن لمقدمي الرعاية والممرضين والمعالجين الفيزيائيين والأطباء تقديم ملفاتهم بحسب الاختصاص والشروط المهنية. كما يمكن للعائلات تقديم طلب رعاية.",
+      "en": "Caregivers, nurses, physiotherapists and doctors may submit profiles according to their specialty and professional requirements. Families may also submit care requests.",
+      "fr": "Les aidants, infirmiers, kinésithérapeutes et médecins peuvent soumettre leur dossier selon leur spécialité et les exigences professionnelles. Les familles peuvent également demander un accompagnement."
+    },
+    {
+      "id": 12,
+      "keys": [
+        "مقدم رعاية",
+        "مقدمي الرعاية",
+        "caregiver",
+        "aidant"
+      ],
+      "ar": "نرحب بمقدمي الرعاية ذوي الخبرة في رعاية كبار السن والمرضى. تُراجع الخبرة والمعلومات والوثائق قبل اعتماد الملف.",
+      "en": "We welcome caregivers experienced in supporting older adults and patients. Experience, information and documents are reviewed before approval.",
+      "fr": "Nous accueillons les aidants expérimentés auprès des personnes âgées et des patients. L’expérience, les informations et les documents sont examinés avant validation."
+    },
+    {
+      "id": 13,
+      "keys": [
+        "الممرضين",
+        "الممرضات",
+        "nurses apply",
+        "infirmiers",
+        "ممرض",
+        "كيف أنضم"
+      ],
+      "ar": "يمكن للممرضين والممرضات تقديم طلب انضمام مع المؤهلات والترخيص المهني الساري عند انطباقه. يخضع كل ملف لمراجعة الإدارة.",
+      "en": "Nurses may apply with their qualifications and, where applicable, a valid professional licence. Every profile is reviewed by the administration.",
+      "fr": "Les infirmiers et infirmières peuvent candidater avec leurs diplômes et, le cas échéant, une autorisation professionnelle valide. Chaque dossier est examiné par l’administration."
+    },
+    {
+      "id": 14,
+      "keys": [
+        "معالج فيزيائي",
+        "physiotherapist",
+        "kinésithérapeute",
+        "أستطيع التسجيل"
+      ],
+      "ar": "يمكن للمعالجين الفيزيائيين تقديم ملفاتهم مع المؤهلات والترخيص المهني والتخصص ومناطق العمل.",
+      "en": "Physiotherapists may submit profiles with their qualifications, professional licence, specialty and service areas.",
+      "fr": "Les kinésithérapeutes peuvent soumettre leur dossier avec leurs diplômes, autorisation professionnelle, spécialité et zones d’intervention."
+    },
+    {
+      "id": 15,
+      "keys": [
+        "كيف أقدم",
+        "كيف اتقدم",
+        "how do i apply",
+        "comment postuler"
+      ],
+      "ar": "افتح صفحة اختصاصك من الموقع، واملأ نموذج التقديم بالمعلومات الصحيحة وأرفق المستندات المطلوبة. ترسل الطلبات إلى الإدارة للمراجعة.",
+      "en": "Open your specialty page on the website, complete the application form with accurate information, and attach the requested documents. Applications are sent to the administration for review.",
+      "fr": "Ouvrez la page de votre spécialité sur le site, remplissez le formulaire avec des informations exactes et joignez les documents demandés. Les candidatures sont transmises à l’administration pour examen."
+    },
+    {
+      "id": 16,
+      "keys": [
+        "ما المستندات",
+        "المستندات المطلوبة",
+        "documents required",
+        "quels documents"
+      ],
+      "ar": "تختلف المستندات حسب الاختصاص. قد تشمل إثبات المؤهل والترخيص المهني والسيرة الذاتية أو ما يثبت الخبرة. لا ترسل أصول المستندات أو جواز السفر.",
+      "en": "Documents depend on the specialty and may include qualifications, professional licences, a CV or proof of experience. Do not send original documents or a passport.",
+      "fr": "Les documents dépendent de la spécialité et peuvent inclure diplômes, autorisations professionnelles, CV ou justificatifs d’expérience. N’envoyez ni originaux ni passeport."
+    },
+    {
+      "id": 17,
+      "keys": [
+        "هل التقديم مجاني",
+        "هل يوجد رسوم",
+        "رسوم التقديم",
+        "is it free",
+        "application fee",
+        "frais de candidature"
+      ],
+      "ar": "نعم، تقديم طلب الرعاية أو طلب الانضمام إلى شبكة مقدمي الخدمة مجاني. لا تطلب رفيق رسوماً لمجرد تقديم الطلب.",
+      "en": "Yes. Submitting a care request or applying to join the provider network is free. RAFIQ does not charge a fee just to submit an application.",
+      "fr": "Oui. La demande de soins et la candidature au réseau de prestataires sont gratuites. RAFIQ ne facture pas de frais pour le simple dépôt d’une demande."
+    },
+    {
+      "id": 18,
+      "keys": [
+        "رسوم شهرية",
+        "اشتراك",
+        "monthly fee",
+        "subscription",
+        "abonnement"
+      ],
+      "ar": "لا توجد رسوم على مجرد تقديم طلب الرعاية أو طلب الانضمام. أي خدمة اختيارية مدفوعة تُوضح شروطها وسعرها بشكل منفصل قبل طلبها.",
+      "en": "There is no fee simply to submit a care request or provider application. Any optional paid service has its terms and price stated separately before you request it.",
+      "fr": "Aucun frais n’est demandé pour déposer une demande de soins ou une candidature. Toute prestation facultative payante est présentée séparément avec ses conditions et son prix avant la demande."
+    },
+    {
+      "id": 19,
+      "keys": [
+        "طلب رعاية",
+        "أريد رعاية",
+        "request care",
+        "demande de soins"
+      ],
+      "ar": "للطلب العائلي، افتح صفحة «طلب رعاية لأهلي» أو نموذج الطلب في الموقع، وأدخل بيانات التواصل والمنطقة ونوع المساعدة المطلوبة.",
+      "en": "For a family request, open the “Request care for my family” page or the website request form and provide contact details, area and the type of support needed.",
+      "fr": "Pour une demande familiale, ouvrez la page « Demander des soins pour ma famille » ou le formulaire du site et indiquez vos coordonnées, votre région et l’aide souhaitée."
+    },
+    {
+      "id": 20,
+      "keys": [
+        "متى تردون",
+        "مدة الرد",
+        "when will you reply",
+        "délai de réponse",
+        "متى ترد الإدارة",
+        "متى ترد"
+      ],
+      "ar": "تراجع الإدارة الطلبات بحسب ترتيب ورودها واكتمال المعلومات. لا أستطيع تأكيد وقت محدد للرد؛ عند الحاجة يمكنك التواصل مع الإدارة عبر القنوات الرسمية.",
+      "en": "The administration reviews requests in the order received and according to the completeness of the information. I cannot promise a specific response time; you can contact the team through the official channels.",
+      "fr": "L’administration examine les demandes selon leur ordre d’arrivée et la complétude des informations. Je ne peux pas garantir un délai précis ; vous pouvez contacter l’équipe via les canaux officiels."
+    },
+    {
+      "id": 21,
+      "keys": [
+        "هل تقبلون تلقائيا",
+        "هل يتم القبول",
+        "approval",
+        "acceptation",
+        "القبول تلقائي"
+      ],
+      "ar": "لا. إرسال الطلب لا يعني القبول التلقائي. تراجع الإدارة المعلومات والوثائق قبل اعتماد أي ملف أو إجراء مطابقة.",
+      "en": "No. Submitting an application does not mean automatic acceptance. The administration reviews the information and documents before approving a profile or arranging a match.",
+      "fr": "Non. Le dépôt d’une candidature ne signifie pas une acceptation automatique. L’administration examine les informations et documents avant de valider un profil ou une mise en relation."
+    },
+    {
+      "id": 22,
+      "keys": [
+        "الخصوصية",
+        "بياناتي",
+        "privacy",
+        "confidentialité"
+      ],
+      "ar": "تُستخدم البيانات المقدمة لمراجعة الطلب والتواصل بشأنه، ولا ينبغي عرض المستندات أو بيانات الاتصال للعامة. لا ترسل معلومات غير ضرورية.",
+      "en": "Submitted information is used to review the request and follow up. Documents and contact details should not be publicly displayed. Do not send unnecessary information.",
+      "fr": "Les informations fournies servent à examiner la demande et à en assurer le suivi. Les documents et coordonnées ne doivent pas être rendus publics. N’envoyez pas d’informations inutiles."
+    },
+    {
+      "id": 23,
+      "keys": [
+        "جواز السفر",
+        "passport",
+        "passeport"
+      ],
+      "ar": "لا تطلب رفيق جواز السفر لتقديم الطلب. أرسل فقط المستندات المهنية المطلوبة للاختصاص، ولا ترسل أصول الوثائق.",
+      "en": "RAFIQ does not require a passport to submit an application. Send only the professional documents required for your specialty, and never send originals.",
+      "fr": "RAFIQ ne demande pas de passeport pour déposer une candidature. Envoyez uniquement les documents professionnels requis et jamais les originaux."
+    },
+    {
+      "id": 24,
+      "keys": [
+        "التواصل معكم",
+        "رقم التواصل",
+        "contact you",
+        "contacter",
+        "أتواصل معكم"
+      ],
+      "ar": "يمكنك التواصل مع الإدارة عبر واتساب الرسمي: +961 81 506 299، أو عبر قنوات رفيق الرسمية على Telegram وWhatsApp.",
+      "en": "You can contact the administration through the official WhatsApp number: +961 81 506 299, or through RAFIQ’s official Telegram and WhatsApp channels.",
+      "fr": "Vous pouvez contacter l’administration via le numéro WhatsApp officiel : +961 81 506 299, ou via les canaux officiels Telegram et WhatsApp de RAFIQ."
+    },
+    {
+      "id": 25,
+      "keys": [
+        "قناة واتساب",
+        "whatsapp channel",
+        "chaîne whatsapp"
+      ],
+      "ar": "قناة واتساب الرسمية: https://whatsapp.com/channel/0029Vb90gxSC6Zvj6gjLWs1K",
+      "en": "Official WhatsApp channel: https://whatsapp.com/channel/0029Vb90gxSC6Zvj6gjLWs1K",
+      "fr": "Chaîne WhatsApp officielle : https://whatsapp.com/channel/0029Vb90gxSC6Zvj6gjLWs1K"
+    },
+    {
+      "id": 26,
+      "keys": [
+        "قناة تيليجرام",
+        "قناة telegram",
+        "telegram channel",
+        "chaîne telegram"
+      ],
+      "ar": "قناة Telegram الرسمية: https://t.me/+a7CDblNyGKw1Yjg8",
+      "en": "Official Telegram channel: https://t.me/+a7CDblNyGKw1Yjg8",
+      "fr": "Canal Telegram officiel : https://t.me/+a7CDblNyGKw1Yjg8"
+    },
+    {
+      "id": 27,
+      "keys": [
+        "هل تقدمون نصائح طبية",
+        "تشخيص",
+        "جرعة دواء",
+        "medical advice",
+        "diagnosis",
+        "conseil médical"
+      ],
+      "ar": "لا يقدم وكيل رفيق تشخيصاً أو وصفات أو جرعات أو تعديلاً للعلاج. استشر الطبيب أو المختص المعالج.",
+      "en": "RAFIQ’s assistant does not diagnose, prescribe, recommend dosages or change treatment. Please consult the treating clinician.",
+      "fr": "L’assistant RAFIQ ne pose pas de diagnostic, ne prescrit pas, ne recommande pas de dosage et ne modifie pas un traitement. Consultez le professionnel de santé qui vous suit."
+    },
+    {
+      "id": 28,
+      "keys": [
+        "حالة طارئة",
+        "لا يتنفس",
+        "نزيف شديد",
+        "emergency",
+        "ne respire pas",
+        "urgence"
+      ],
+      "ar": "إذا كانت الحالة خطرة أو طارئة، اتصل بخدمات الطوارئ المحلية فوراً أو توجّه إلى أقرب قسم طوارئ. لا تنتظر رد المنصة.",
+      "en": "If the situation is dangerous or urgent, contact local emergency services immediately or go to the nearest emergency department. Do not wait for the platform to reply.",
+      "fr": "En cas de danger ou d’urgence, contactez immédiatement les services d’urgence locaux ou rendez-vous au service d’urgence le plus proche. N’attendez pas la réponse de la plateforme."
+    },
+    {
+      "id": 29,
+      "keys": [
+        "كم السعر",
+        "كم التكلفة",
+        "price",
+        "cost",
+        "prix",
+        "coût",
+        "كم سعر"
+      ],
+      "ar": "لا أعتمد سعراً من المحادثة ولا أستطيع تأكيد تكلفة نهائية. تختلف التفاصيل بحسب نوع الخدمة والمدة والمنطقة، وتوضحها الإدارة بعد مراجعة الطلب.",
+      "en": "I cannot quote or confirm a final price in chat. Details depend on the service, duration and area; the administration will clarify them after reviewing the request.",
+      "fr": "Je ne peux pas annoncer ni confirmer un prix définitif dans cette conversation. Les détails dépendent du service, de la durée et de la région ; l’administration les précisera après examen."
+    }
+  ]
+}
