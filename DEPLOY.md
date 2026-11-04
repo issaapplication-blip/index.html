@@ -1,7 +1,7 @@
 # RAFIQ | رفيق — دليل التشغيل والإطلاق
 
 منصة رعاية منزلية وخدمات صحية في لبنان.
-الموقع: **https://rafiq-o6qd.onrender.com**
+الموقع: **https://index-html.issaapplication.workers.dev**
 
 ---
 
@@ -81,10 +81,10 @@ ls -la
 ### بعد النشر — تحقّق (دقيقة)
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/dashboard.html   # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/barcode.html     # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/js/rafiq-kb.js  # 200
-curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/assets/rafig-logo.png # 200
+curl -s -o /dev/null -w "%{http_code}\n" https://index-html.issaapplication.workers.dev/dashboard.html   # 200
+curl -s -o /dev/null -w "%{http_code}\n" https://index-html.issaapplication.workers.dev/barcode.html     # 200
+curl -s -o /dev/null -w "%{http_code}\n" https://index-html.issaapplication.workers.dev/js/rafiq-kb.js  # 200
+curl -s -o /dev/null -w "%{http_code}\n" https://index-html.issaapplication.workers.dev/assets/rafig-logo.png # 200
 ```
 
 إن بقيت `404`، فالخادم المُشغَّل على Render يستخدم
@@ -95,7 +95,7 @@ curl -s -o /dev/null -w "%{http_code}\n" https://rafiq-o6qd.onrender.com/assets/
 الشاشة السوداء القديمة سببها `sw.js` مكسور مخزَّن في الذاكرة المؤقتة.
 بعد النشر:
 
-1. Chrome ← `rafiq-o6qd.onrender.com` ← ⚙️ ← **حذف بيانات الموقع**.
+1. Chrome ← `index-html.issaapplication.workers.dev` ← ⚙️ ← **حذف بيانات الموقع**.
 2. احذف التطبيق المثبَّت إن وُجد، ثم أعد فتح الموقع.
 3. ⋮ ← **تثبيت التطبيق / إضافة إلى الشاشة الرئيسية**.
 
