@@ -22,7 +22,7 @@
     { "src": "/assets/rafig-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ],
   "shortcuts": [
-    { "name": "طلب رعاية منزلية", "url": "/app.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] },
+    { "name": "معلومات RAFIQ", "url": "/agent.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] },
     { "name": "الأسئلة الشائعة", "url": "/faq.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] },
     { "name": "الوكيل المساعد", "url": "/agent.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] }
   ]
