@@ -2,7 +2,7 @@
   "id": "/",
   "name": "RAFIQ | رفيق",
   "short_name": "رفيق",
-  "description": "نصل بالحب والأمان لرعاية العائلة — رعاية منزلية وخدمات صحية في لبنان",
+  "description": "دليل المراكز والخدمات الطبية المتعاقدة في لبنان مع خدمة CV وCover Letter",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "/",
@@ -22,8 +22,8 @@
     { "src": "/assets/rafig-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ],
   "shortcuts": [
-    { "name": "طلب رعاية منزلية", "url": "/app.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] },
-    { "name": "الأسئلة الشائعة", "url": "/faq.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] },
-    { "name": "الوكيل المساعد", "url": "/agent.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] }
+    { "name": "إعلانات المراكز", "url": "/announcements.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] },
+    { "name": "خدمة CV وCover Letter", "url": "/caregivers.html#cv-service", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] },
+    { "name": "الأسئلة الشائعة", "url": "/faq.html", "icons": [{ "src": "/assets/rafig-logo.png", "sizes": "192x192" }] }
   ]
 }
