@@ -1,0 +1,41 @@
+name: RAFIQ public-site boundary audit
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure retired application surfaces are absent
+        run: |
+          set -euo pipefail
+          for file in app.html agent.html admin.html dashboard.html barcode.html render.yaml rafiq-deploy.zip auto-reply.mjs KAPSO-TEMPLATE.txt PASTE-IN-KAPSO.txt PASTE-THIS-IN-KAPSO.txt js/rafiq-agent.js js/rafiq-n8n.js js/rafiq-kb.js; do
+            test ! -e "$file" || { echo "Retired file still exists: $file"; exit 1; }
+          done
+      - name: Ensure public HTML has no request forms or external messaging hooks
+        run: |
+          set -euo pipefail
+          if grep -RniE '<form|app\.html|agent\.html|wa\.me/|t\.me/|whatsapp\.com' --include='*.html' .; then
+            echo "A public form or external messaging link remains."
+            exit 1
+          fi
+      - name: Validate PWA and announcements
+        run: |
+          set -euo pipefail
+          python -m json.tool manifest.webmanifest >/dev/null
+          test -f announcements.html
+          test -f caregivers.html
+          grep -q 'CV + Cover Letter' caregivers.html
+          grep -q '/announcements.html' manifest.webmanifest
+          ! grep -qE 'app\.html|agent\.html|barcode\.html' manifest.webmanifest
+          ! grep -qE 'app\.html|agent\.html|barcode\.html|rafiq-agent|rafiq-kb' sw.js
+          grep -q 'announcements.html' sw.js
+          grep -q 'announcements.html' sitemap.xml
