@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /app.html
+Disallow: /agent.html
 Disallow: /dashboard.html
 Disallow: /review.html
 Disallow: /barcode.html
