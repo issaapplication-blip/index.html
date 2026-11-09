@@ -30,6 +30,6 @@
 </div>
 <p class="note"><strong>الدفع المسبق عبر Whish Money فقط.</strong> لا ترسل ملفات CV أو Cover Letter أو مستندات شخصية قبل تأكيد الدفع من إدارة RAFIQ. لا تشارك كلمة مرور Whish أو رمز OTP.</p>
 <p>تبدأ الخدمة بعد تأكيد الدفع واستلام المعلومات اللازمة لإعداد الملف. لا تُضاف أي خبرة أو شهادة أو مؤهل غير صحيح.</p>
-<div class="actions"><a class="btn" href="mailto:issaapplication@gmail.com?subject=RAFIQ%20CV%20and%20Cover%20Letter%20Service&body=Name%3A%0APhone%3A%0AArea%3A%0AService%3A%0AWhish%20payment%20reference%3A%0A">✉️ مراسلة RAFIQ لطلب الخدمة</a></div>
+<div class="actions"><button class="btn" type="button" id="copyCvRequest">📋 نسخ رسالة طلب الخدمة</button></div><p id="copyStatus" class="note" role="status" aria-live="polite"></p>
 </section>
-</main></body></html>
+</main><script>document.getElementById("copyCvRequest").addEventListener("click",async()=>{const message="مرحبًا، أرغب في طلب خدمة إعداد CV وCover Letter من RAFIQ.\nنوع الخدمة: \nعدد اللغات الإضافية: \nأرجو تزويدي بخطوات الدفع المسبق عبر Whish Money.\nلن أرسل أي ملفات قبل تأكيد الدفع.";const status=document.getElementById("copyStatus");try{await navigator.clipboard.writeText(message);status.textContent="تم نسخ رسالة الطلب. يمكنك إرسالها عبر قناة التواصل التي تختارها بشكل مستقل.";}catch{status.textContent="تعذر النسخ تلقائيًا على هذا الجهاز. يرجى كتابة طلب الخدمة يدويًا."}});</script></body></html>
