@@ -110,6 +110,6 @@ for name in ["index.html", "services.html", "regions.html", "about.html", "faq.h
             errors.append(f"active page {name} links to retired page {old}")
 
 if errors:
-    print("\\n".join("ERROR: " + item for item in errors))
+    print("\n".join("ERROR: " + item for item in errors))
     sys.exit(1)
 print(f"RAFIQ static-site checks passed: {len(ACTIVE)} active pages, {len(LEGACY_REDIRECTS)} legacy redirects, manifest, sitemap, PWA cache and local links.")
