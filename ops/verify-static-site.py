@@ -6,7 +6,7 @@ import json
 import sys
 import xml.etree.ElementTree as ET
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[1]
 ACTIVE = ["index.html", "services.html", "regions.html", "announcements.html", "about.html", "faq.html", "caregivers.html", "404.html"]
 LEGACY_REDIRECTS = {
     "elderly-care.html": "services.html",
@@ -84,8 +84,8 @@ try:
     for loc in locs:
         if any(old in loc for old in LEGACY_REDIRECTS):
             errors.append(f"retired URL remains in sitemap: {loc}")
-    if not any(loc.rstrip("/").endswith("workers.dev") for loc in locs):
-        errors.append("sitemap has no canonical homepage")
+    if "https://issaapplication-blip.github.io/index.html/" not in locs:
+        errors.append("sitemap has no verified GitHub Pages canonical homepage")
 except Exception as exc:
     errors.append(f"invalid sitemap.xml: {exc}")
 
