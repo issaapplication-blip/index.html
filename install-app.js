@@ -2,6 +2,8 @@
 (function () {
   'use strict';
   var deferredPrompt = null;
+  var installerScriptUrl = document.currentScript && document.currentScript.src;
+  var appBaseUrl = installerScriptUrl ? new URL(".", installerScriptUrl) : new URL("./", window.location.href);
 
   function qsAll(selector) { return document.querySelectorAll(selector); }
   function standalone() {
@@ -80,7 +82,7 @@
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function(){
-      navigator.serviceWorker.register('/sw.js?v=75', {updateViaCache:'none'})
+      navigator.serviceWorker.register(new URL('sw.js?v=76', appBaseUrl).toString(), {scope: appBaseUrl.pathname, updateViaCache:'none'})
         .then(function(reg){ if (reg.update) reg.update(); })
         .catch(function(){});
     });
