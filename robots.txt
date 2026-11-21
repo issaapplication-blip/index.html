@@ -15,4 +15,4 @@ Disallow: /docs/
 Disallow: /_tools/
 
 
-Sitemap: https://index-html.issaapplication.workers.dev/sitemap.xml
+Sitemap: https://issaapplication-blip.github.io/index.html/sitemap.xml
