@@ -80,7 +80,7 @@
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function(){
-      navigator.serviceWorker.register('/sw.js?v=73', {updateViaCache:'none'})
+      navigator.serviceWorker.register('/sw.js?v=75', {updateViaCache:'none'})
         .then(function(reg){ if (reg.update) reg.update(); })
         .catch(function(){});
     });
